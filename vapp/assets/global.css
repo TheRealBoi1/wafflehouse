@@ -1,0 +1,40 @@
+.page-container {
+  max-width: 1250px;
+}
+
+.waffle-text {
+  font-family: Kavoon, serif;
+  font-style: normal;
+  font-weight: normal;
+  text-align: center;
+  color: #FFFFFF;
+}
+
+.waffle-text-border-black {
+  font-family: Kavoon, serif;
+  font-style: normal;
+  font-weight: normal;
+  text-align: center;
+  color: #FFFFFF;
+  text-shadow:
+    2px  2px 0 #000000,
+    -2px -2px 0 #000000,
+    2px -2px 0 #000000,
+    -2px  2px 0 #000000,
+    2px  2px 0 #000000;
+}
+
+.waffle-text-border {
+  font-family: Kavoon, serif;
+  font-style: normal;
+  font-weight: normal;
+  text-align: center;
+  color: #FFFFFF;
+  text-shadow:
+    3px  3px 0 #00A3FF,
+    -3px -3px 0 #00A3FF,
+    3px -3px 0 #00A3FF,
+    -3px  3px 0 #00A3FF,
+    3px  3px 0 #00A3FF;
+}
+

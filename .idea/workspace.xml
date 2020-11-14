@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="3cd41b40-5513-4840-87c0-a2355f305846" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ComposerSettings">
+    <execution />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaScript File" />
+        <option value="Solidity Contract" />
+        <option value="TypeScript File" />
+        <option value="Vue Single File Component" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1ir4JbbMMtNfK1RqHdGgdqlKCf2" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="javascript.nodejs.core.library.configured.version" value="12.18.3" />
+    <property name="javascript.nodejs.core.library.typings.version" value="12.19.1" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="ts.external.directory.path" value="C:\Program Files\JetBrains\PhpStorm 2020.2.1\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
+    <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="3cd41b40-5513-4840-87c0-a2355f305846" name="Default Changelist" comment="" />
+      <created>1602652307033</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1602652307033</updated>
+      <workItem from="1602652308693" duration="11289000" />
+      <workItem from="1602687202627" duration="51000" />
+      <workItem from="1602723782429" duration="980000" />
+      <workItem from="1603565547075" duration="12516000" />
+      <workItem from="1603700416636" duration="5970000" />
+      <workItem from="1603838543243" duration="6567000" />
+      <workItem from="1604454744497" duration="22481000" />
+      <workItem from="1604965484890" duration="4000" />
+      <workItem from="1605076273963" duration="18767000" />
+      <workItem from="1605157674600" duration="15411000" />
+      <workItem from="1605300435474" duration="38515000" />
+    </task>
+    <task id="LOCAL-00001" summary="Implemented waffle display">
+      <created>1602652763796</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1602652763796</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Contracts first push">
+      <created>1602656135508</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1602656135508</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Waffle display adjustments + contracts structure change">
+      <created>1603668168686</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1603668168686</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Contract basic waffle and vote system">
+      <created>1605076368379</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1605076368379</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Implemented design of every page, contract waffle creation, customization and voting system">
+      <created>1605319024565</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1605319024565</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Slight mobile adaptations, drizzle plug-in, first contract calls">
+      <created>1605359194107</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1605359194107</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Implemented waffle display" />
+    <MESSAGE value="Contracts first push" />
+    <MESSAGE value="Waffle display adjustments + contracts structure change" />
+    <MESSAGE value="Contract basic waffle and vote system" />
+    <MESSAGE value="Implemented design of every page, contract waffle creation, customization and voting system" />
+    <MESSAGE value="Slight mobile adaptations, drizzle plug-in, first contract calls" />
+    <option name="LAST_COMMIT_MESSAGE" value="Slight mobile adaptations, drizzle plug-in, first contract calls" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="1304" y="178" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1602665321261">
+      <screen x="0" y="0" width="2560" height="1040" />
+    </state>
+    <state x="1304" y="178" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.2560.1040@0.0.2560.1040" timestamp="1602665321261" />
+    <state x="1650" y="266" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1605353403581">
+      <screen x="0" y="0" width="2560" height="1040" />
+    </state>
+    <state x="1650" y="266" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.2560.1040@0.0.2560.1040" timestamp="1605353403581" />
+    <state x="1455" y="88" key="CommitChangelistDialog2" timestamp="1605359192597">
+      <screen x="0" y="0" width="2560" height="1040" />
+    </state>
+    <state x="1455" y="88" key="CommitChangelistDialog2/0.0.2560.1040@0.0.2560.1040" timestamp="1605359192597" />
+    <state x="1517" y="274" key="FileChooserDialogImpl" timestamp="1602738760433">
+      <screen x="0" y="0" width="2560" height="1040" />
+    </state>
+    <state x="1517" y="274" key="FileChooserDialogImpl/0.0.2560.1040@0.0.2560.1040" timestamp="1602738760433" />
+    <state width="1234" height="279" key="GridCell.Tab.0.bottom" timestamp="1603700405274">
+      <screen x="0" y="0" width="2560" height="1040" />
+    </state>
+    <state width="1234" height="279" key="GridCell.Tab.0.bottom/0.0.2560.1040@0.0.2560.1040" timestamp="1603700405274" />
+    <state width="1234" height="279" key="GridCell.Tab.0.center" timestamp="1603700405274">
+      <screen x="0" y="0" width="2560" height="1040" />
+    </state>
+    <state width="1234" height="279" key="GridCell.Tab.0.center/0.0.2560.1040@0.0.2560.1040" timestamp="1603700405274" />
+    <state width="1234" height="279" key="GridCell.Tab.0.left" timestamp="1603700405273">
+      <screen x="0" y="0" width="2560" height="1040" />
+    </state>
+    <state width="1234" height="279" key="GridCell.Tab.0.left/0.0.2560.1040@0.0.2560.1040" timestamp="1603700405273" />
+    <state width="1234" height="279" key="GridCell.Tab.0.right" timestamp="1603700405274">
+      <screen x="0" y="0" width="2560" height="1040" />
+    </state>
+    <state width="1234" height="279" key="GridCell.Tab.0.right/0.0.2560.1040@0.0.2560.1040" timestamp="1603700405274" />
+    <state x="1512" y="252" key="Vcs.Push.Dialog.v2" timestamp="1605359354785">
+      <screen x="0" y="0" width="2560" height="1040" />
+    </state>
+    <state x="1512" y="252" key="Vcs.Push.Dialog.v2/0.0.2560.1040@0.0.2560.1040" timestamp="1605359354785" />
+    <state x="1373" y="100" width="1094" height="847" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1603660120837">
+      <screen x="0" y="0" width="2560" height="1040" />
+    </state>
+    <state x="1373" y="100" width="1094" height="847" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.0.2560.1040@0.0.2560.1040" timestamp="1603660120837" />
+    <state x="1737" y="437" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1605083520225">
+      <screen x="0" y="0" width="2560" height="1040" />
+    </state>
+    <state x="1737" y="437" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.2560.1040@0.0.2560.1040" timestamp="1605083520225" />
+    <state x="1625" y="256" width="587" height="534" key="find.popup" timestamp="1605351448419">
+      <screen x="0" y="0" width="2560" height="1040" />
+    </state>
+    <state x="1625" y="256" width="587" height="534" key="find.popup/0.0.2560.1040@0.0.2560.1040" timestamp="1605351448419" />
+    <state x="1587" y="244" key="run.anything.popup" timestamp="1605356240561">
+      <screen x="0" y="0" width="2560" height="1040" />
+    </state>
+    <state x="1587" y="244" key="run.anything.popup/0.0.2560.1040@0.0.2560.1040" timestamp="1605356240561" />
+    <state x="1583" y="230" width="672" height="678" key="search.everywhere.popup" timestamp="1605357886190">
+      <screen x="0" y="0" width="2560" height="1040" />
+    </state>
+    <state x="1583" y="230" width="672" height="678" key="search.everywhere.popup/0.0.2560.1040@0.0.2560.1040" timestamp="1605357886190" />
+  </component>
+</project>
