@@ -23,48 +23,66 @@ export default {
           description: 'This is just plain and simply wrong and yet you will vote for it anyways',
           layers: [
             {
-              toppingType: WaffleToppingType.Bacon,
-              baseType: WaffleBaseType.Blueberry
+              toppingId: WaffleToppingType.Bacon,
+              baseId: WaffleBaseType.Blueberry
             },
             {
-              toppingType: WaffleToppingType.MMS,
-              baseType: WaffleBaseType.CoffeeLiqueur
+              toppingId: WaffleToppingType.MMS,
+              baseId: WaffleBaseType.CoffeeLiqueur
             },
             {
-              toppingType: WaffleToppingType.Sprinkles,
-              baseType: WaffleBaseType.Butter
+              toppingId: WaffleToppingType.Sprinkles,
+              baseId: WaffleBaseType.Butter
             },
             {
-              toppingType: WaffleToppingType.AppleCrumble,
-              baseType: WaffleBaseType.BrownSugar
+              toppingId: WaffleToppingType.AppleCrumble,
+              baseId: WaffleBaseType.BrownSugar
             },
             {
-              toppingType: WaffleToppingType.ChocolateXDFace,
-              baseType: WaffleBaseType.GreekYogurt
+              toppingId: WaffleToppingType.ChocolateXDFace,
+              baseId: WaffleBaseType.GreekYogurt
             }
           ],
-          favorite: true
+          favorite: false
         }
       })
     },
 
-    createWaffle () {
+    createWaffle ({ dispatch }: any) {
       const activeAccount = this.$web3.currentProvider.selectedAddress
-      this.$drizzle.contracts.WaffleMaker.methods.createWaffle().send({ from: activeAccount })
+      dispatch('transactions/dispatchTransaction', {
+        label: 'Creating Waffle',
+        transaction: this.$drizzle.contracts.WaffleMaker.methods.createWaffle().send({ from: activeAccount })
+      }, { root: true })
     },
 
-    voteWaffle (_, waffleId) {
+    voteWaffle ({ dispatch }: any, waffleId) {
       const activeAccount = this.$web3.currentProvider.selectedAddress
-      this.$drizzle.contracts.WaffleMaker.methods.voteWaffle(waffleId).send({ from: activeAccount })
+      dispatch('transactions/dispatchTransaction', {
+        label: 'Voting',
+        transaction: this.$drizzle.contracts.WaffleMaker.methods.voteWaffle(waffleId).send({ from: activeAccount })
+      }, { root: true })
     },
 
     setWaffleFavorite (_, { waffleId, value }) {
       const favorites = loadFavorites()
       const waffleFavoriteIndex = favorites.indexOf(waffleId)
-      if (value && waffleFavoriteIndex !== -1) {
+
+      const updateStoreWaffleFavorite = (value: boolean) => {
+        Waffle.update({
+          where: waffleId,
+          data: {
+            favorite: value
+          }
+        })
+      }
+
+      if (value && waffleFavoriteIndex === -1) {
         favorites.push(waffleId)
-      } else if (!value && waffleFavoriteIndex === -1) {
+        updateStoreWaffleFavorite(true)
+      } else if (!value && waffleFavoriteIndex !== -1) {
         favorites.splice(waffleFavoriteIndex, 1)
+        updateStoreWaffleFavorite(false)
       }
       saveFavorites(favorites)
     }

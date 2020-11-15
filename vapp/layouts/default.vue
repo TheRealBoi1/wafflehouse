@@ -1,6 +1,7 @@
 <template>
   <v-app dark class="app-container">
-    <waffle-viewer />
+    <transaction-dialog />
+    <waffle-viewer-dialog />
     <toolbar />
     <v-main>
       <nuxt />
@@ -11,12 +12,14 @@
 <script>
 import { mapGetters } from 'vuex'
 
+import WaffleViewerDialog from '@/components/WaffleViewerDialog'
+import TransactionDialog from '@/components/TransactionDialog'
 import Toolbar from '~/components/layout/toolbar/Toolbar'
-import WaffleViewer from '~/components/WaffleViewer'
 
 export default {
   components: {
-    WaffleViewer,
+    WaffleViewerDialog,
+    TransactionDialog,
     Toolbar
   },
   middleware: 'accountConnected',

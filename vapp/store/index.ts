@@ -19,8 +19,6 @@ export const actions = {
     this.$web3 = new Web3(provider)
     this.$drizzle = new Drizzle(drizzleConfig(provider))
     dispatch('accounts/refreshAccounts', null, { root: true })
-
-    this.$web3ETH = new Web3('https://mainnet.infura.io/v3/8f316b7022c74f6b8262dfca7ba47101')
   }
 }
 

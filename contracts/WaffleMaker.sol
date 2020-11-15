@@ -14,8 +14,8 @@ contract WaffleMaker {
     }
 
     struct WaffleLayer {
-        uint base;
-        uint topping;
+        uint baseId;
+        uint toppingId;
         bool customized;
     }
 
@@ -25,8 +25,8 @@ contract WaffleMaker {
         uint actionStart; // Saves the Unix timestamp at which the either bake or customization worked
         string name;
         string description;
-        uint plate;
-        uint extra;
+        uint plateId;
+        uint extraId;
         mapping(uint => WaffleLayer) layers;
         uint layersCount;
     }
@@ -75,8 +75,8 @@ contract WaffleMaker {
             actionStart: block.timestamp,
             name: "",
             description: "",
-            plate: 0,
-            extra: 0,
+            plateId: 0,
+            extraId: 0,
             layersCount: 0
         }));
         addWaffleLayer(waffles.length - 1);
@@ -97,19 +97,19 @@ contract WaffleMaker {
         addWaffleLayer(waffleId);
     }
 
-    function customizeWaffleLayer(uint waffleId, uint base, uint topping, uint plate, uint extra) public {
+    function customizeWaffleLayer(uint waffleId, uint baseId, uint toppingId, uint plateId, uint extraId) public {
         require(!competitionHasEnded(), "You cannot modify a waffle after competition has ended");
         require(waffleExists(waffleId), "This waffle doesn't exist");
         require(accountOwnsWaffle(msg.sender, waffleId), "You can't bake a layer for a waffle you do not own");
         require(!lastWaffleLayerIsCustomized(waffleId), "You can't add a new layer if the last waffle layer hasn't been customized");
 
         if(waffles[waffleId].layersCount <= 1) {
-            waffles[waffleId].plate = plate;
-            waffles[waffleId].extra = extra;
+            waffles[waffleId].plateId = plateId;
+            waffles[waffleId].extraId = extraId;
         }
         uint lastLayerIndex = waffles[waffleId].layersCount - 1;
-        waffles[waffleId].layers[lastLayerIndex].base = base;
-        waffles[waffleId].layers[lastLayerIndex].topping = topping;
+        waffles[waffleId].layers[lastLayerIndex].baseId = baseId;
+        waffles[waffleId].layers[lastLayerIndex].toppingId = toppingId;
         waffles[waffleId].layers[lastLayerIndex].customized = true;
         waffles[waffleId].actionStart = block.timestamp;
 
@@ -151,7 +151,7 @@ contract WaffleMaker {
     }
 
     // ******************** VIEW FUNCTIONS ***********************
-    function getWaffleInfo(uint waffleId) public view returns (address owner, string memory name, string memory description, uint votes, uint plate, uint extra, WaffleLayer[] memory layers) {
+    function getWaffleInfo(uint waffleId) public view returns (address owner, string memory name, string memory description, uint votes, uint plateId, uint extraId, WaffleLayer[] memory layers) {
         require(waffleId < waffles.length, "This waffle doesn't exist");
 
         Waffle memory waffle = waffles[waffleId];
@@ -159,7 +159,7 @@ contract WaffleMaker {
         for (uint i = 0; i < waffle.layersCount; i++) {
             waffleLayers[i] = waffles[waffleId].layers[i];
         }
-        return (waffle.owner, waffle.name, waffle.description, waffle.votes, waffle.plate, waffle.extra, waffleLayers);
+        return (waffle.owner, waffle.name, waffle.description, waffle.votes, waffle.plateId, waffle.extraId, waffleLayers);
     }
 
     /**

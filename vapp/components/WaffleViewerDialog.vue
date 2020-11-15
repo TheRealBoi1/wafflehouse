@@ -13,8 +13,13 @@
             <waffle-display :width="displayWidth" :expanded="expanded" :waffle="viewedWaffle" />
           </v-col>
           <v-col cols="12" md="5" order="1" order-md="2">
-            <v-row class="waffle-text-border-black viewed-waffle-title">
+            <v-row class="vh-center waffle-text-border-black viewed-waffle-title">
               {{ viewedWaffle.name }}
+              <v-btn class="ml-2" icon @click="setWaffleFavorite(viewedWaffle.id, !viewedWaffle.favorite)">
+                <v-icon size="35">
+                  {{ viewedWaffle.favorite ? 'mdi-star' : 'mdi-star-outline' }}
+                </v-icon>
+              </v-btn>
             </v-row>
             <v-row class="mb-3">
               {{ viewedWaffle.description }}
@@ -54,7 +59,7 @@ import Waffle from '~/database/Waffle'
 import WaffleDisplay from '~/components/WaffleDisplay'
 
 export default {
-  name: 'WaffleViewer',
+  name: 'WaffleViewerDialog',
   components: {
     WaffleDisplay
   },
@@ -89,6 +94,10 @@ export default {
     }
   },
   methods: {
+    setWaffleFavorite (waffleId, value) {
+      Waffle.dispatch('setWaffleFavorite', { waffleId, value })
+    },
+
     voteWaffle () {
       Waffle.dispatch('voteWaffle', this.viewedWaffleId)
     },

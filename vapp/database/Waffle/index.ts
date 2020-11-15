@@ -6,6 +6,8 @@ import plateList, { WafflePlateType } from '~/lists/waffle-plates'
 export default class Waffle extends Model {
   static entity = 'waffles'
 
+  plateId: WafflePlateType;
+
   static fields () {
     return {
       id: this.number(-1),
@@ -13,7 +15,7 @@ export default class Waffle extends Model {
       name: this.string(''),
       description: this.string(''),
       votes: this.number(0),
-      plateType: this.number(WafflePlateType.Empty),
+      plateId: this.number(WafflePlateType.Empty),
       favorite: this.boolean(false),
 
       layers: this.hasMany(WaffleLayer, 'waffleId')
@@ -21,6 +23,6 @@ export default class Waffle extends Model {
   }
 
   get plate () {
-    return plateList[this.plateType]
+    return plateList[this.plateId]
   }
 };

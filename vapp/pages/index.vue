@@ -44,7 +44,7 @@
                 May the most delicious waffle win!
               </div>
               <div>
-                <v-img contain :src="require('~/static/home/faq/yflink-syrup.png')" />
+                <img :src="require('~/static/home/faq/yflink-syrup.png')" alt="yfl syrup">
               </div>
             </v-row>
             <v-row class="vh-center mt-12">
@@ -59,7 +59,7 @@
                 The top 3 winners will also receive super-rare exclusive NFTs with original art as part of the contest!
               </div>
               <div class="mt-5">
-                <v-img contain :src="require('~/static/home/faq/syrups.png')" />
+                <img :src="require('~/static/home/faq/syrups.png')" alt="syrups">
               </div>
             </v-row>
             <v-row class="vh-center mt-12">
@@ -76,14 +76,14 @@
                 So - make the most attractive waffle, be voted as the leader, and make sure others BURN their waffles to improve your chances of winning!
               </div>
               <div>
-                <v-img contain :src="require('~/static/home/faq/harmony-syrup.png')" />
+                <img :src="require('~/static/home/faq/harmony-syrup.png')" alt="harmony-syrup">
               </div>
             </v-row>
           </v-col>
           <v-col cols="12" md="6">
             <v-row class="vh-center">
               <div v-if="$vuetify.breakpoint.mdAndUp">
-                <v-img max-width="450" :src="require('~/static/home/faq/members.png')" />
+                <img :src="require('~/static/home/faq/members.png')" alt="members">
               </div>
               <div class="waffle-text faq-title mt-4">
                 Prizes?
@@ -98,7 +98,7 @@
                 3) Limited-Edition rare NFT’s created by the BONK team!
               </div>
               <div v-if="$vuetify.breakpoint.smAndDown">
-                <v-img contain height="175px" class="mt-4" :src="require('~/static/home/faq/members.png')" />
+                <img class="mt-4" :src="require('~/static/home/faq/members.png')" alt="members">
               </div>
             </v-row>
             <v-row class="vh-center mt-12">
@@ -121,7 +121,7 @@
                 Build your dream waffle!
               </div>
               <div>
-                <v-img contain :src="require('~/static/home/faq/burn.png')" />
+                <img :src="require('~/static/home/faq/burn.png')" alt="burn">
               </div>
             </v-row>
             <v-row class="vh-center mt-12">
@@ -160,7 +160,7 @@
           </v-btn>
         </v-row>
         <v-row class="vh-center mt-5">
-          <v-img max-width="250" contain :src="require('~/static/waffles/waffle.png')" />
+          <img width="250" :src="require('~/static/waffles/waffle.png')" alt="waffle">
         </v-row>
       </v-col>
     </v-row>

@@ -68,7 +68,7 @@ export default {
   },
   methods: {
     setWaffleFavorite (waffleId, value) {
-      Waffle.dispatch({ waffleId, value })
+      Waffle.dispatch('setWaffleFavorite', { waffleId, value })
     }
   }
 }

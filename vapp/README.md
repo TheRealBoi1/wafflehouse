@@ -1,4 +1,4 @@
-# SWSH_frontend
+# Wafflehouse frontend
 
 ## Build Setup
 

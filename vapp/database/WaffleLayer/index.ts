@@ -6,23 +6,23 @@ import toppingList, { WaffleToppingType } from '~/lists/waffle-toppings'
 export default class WaffleLayer extends Model {
   static entity = 'waffleLayers'
 
-  baseType: WaffleBaseType;
-  toppingType: WaffleToppingType;
+  baseId: WaffleBaseType;
+  toppingId: WaffleToppingType;
 
   static fields () {
     return {
       id: this.uid(),
       waffleId: this.number(-1),
-      baseType: this.number(WaffleBaseType.Empty),
-      toppingType: this.number(WaffleToppingType.Empty)
+      baseId: this.number(WaffleBaseType.Empty),
+      toppingId: this.number(WaffleToppingType.Empty)
     }
   }
 
   get base () {
-    return baseList[this.baseType]
+    return baseList[this.baseId]
   }
 
   get topping () {
-    return toppingList[this.toppingType]
+    return toppingList[this.toppingId]
   }
 };

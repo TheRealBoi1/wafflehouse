@@ -5,7 +5,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3cd41b40-5513-4840-87c0-a2355f305846" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/vapp/components/TransactionDialog.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vapp/store/transactions.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/contracts/WaffleMaker.sol" beforeDir="false" afterPath="$PROJECT_DIR$/contracts/WaffleMaker.sol" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/truffle-config.js" beforeDir="false" afterPath="$PROJECT_DIR$/truffle-config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vapp/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/vapp/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vapp/components/WaffleViewer.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vapp/components/WaffleViewerDialog.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vapp/contracts/Migrations.json" beforeDir="false" afterPath="$PROJECT_DIR$/vapp/contracts/Migrations.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vapp/contracts/WaffleMaker.json" beforeDir="false" afterPath="$PROJECT_DIR$/vapp/contracts/WaffleMaker.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vapp/database/Waffle/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/vapp/database/Waffle/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vapp/database/Waffle/store.ts" beforeDir="false" afterPath="$PROJECT_DIR$/vapp/database/Waffle/store.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vapp/database/WaffleLayer/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/vapp/database/WaffleLayer/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vapp/drizzle-config.js" beforeDir="false" afterPath="$PROJECT_DIR$/vapp/drizzle-config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vapp/layouts/default.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vapp/layouts/default.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vapp/pages/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vapp/pages/index.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vapp/pages/vote.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vapp/pages/vote.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vapp/store/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/vapp/store/index.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,8 +36,8 @@
       <list>
         <option value="JavaScript File" />
         <option value="Solidity Contract" />
-        <option value="TypeScript File" />
         <option value="Vue Single File Component" />
+        <option value="TypeScript File" />
       </list>
     </option>
   </component>
@@ -68,6 +84,7 @@
       <workItem from="1605076273963" duration="18767000" />
       <workItem from="1605157674600" duration="15411000" />
       <workItem from="1605300435474" duration="38515000" />
+      <workItem from="1605359610478" duration="13402000" />
     </task>
     <task id="LOCAL-00001" summary="Implemented waffle display">
       <created>1602652763796</created>
@@ -111,7 +128,14 @@
       <option name="project" value="LOCAL" />
       <updated>1605359194107</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="First GitHub commit (last stable private push)">
+      <created>1605359738348</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1605359738348</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -124,7 +148,8 @@
     <MESSAGE value="Contract basic waffle and vote system" />
     <MESSAGE value="Implemented design of every page, contract waffle creation, customization and voting system" />
     <MESSAGE value="Slight mobile adaptations, drizzle plug-in, first contract calls" />
-    <option name="LAST_COMMIT_MESSAGE" value="Slight mobile adaptations, drizzle plug-in, first contract calls" />
+    <MESSAGE value="First GitHub commit (last stable private push)" />
+    <option name="LAST_COMMIT_MESSAGE" value="First GitHub commit (last stable private push)" />
   </component>
   <component name="WindowStateProjectService">
     <state x="1304" y="178" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1602665321261">
@@ -135,10 +160,10 @@
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
     <state x="1650" y="266" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.2560.1040@0.0.2560.1040" timestamp="1605353403581" />
-    <state x="1455" y="88" key="CommitChangelistDialog2" timestamp="1605359192597">
+    <state x="1455" y="88" key="CommitChangelistDialog2" timestamp="1605359735574">
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
-    <state x="1455" y="88" key="CommitChangelistDialog2/0.0.2560.1040@0.0.2560.1040" timestamp="1605359192597" />
+    <state x="1455" y="88" key="CommitChangelistDialog2/0.0.2560.1040@0.0.2560.1040" timestamp="1605359735574" />
     <state x="1517" y="274" key="FileChooserDialogImpl" timestamp="1602738760433">
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
@@ -159,10 +184,10 @@
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
     <state width="1234" height="279" key="GridCell.Tab.0.right/0.0.2560.1040@0.0.2560.1040" timestamp="1603700405274" />
-    <state x="1512" y="252" key="Vcs.Push.Dialog.v2" timestamp="1605359354785">
+    <state x="1512" y="252" key="Vcs.Push.Dialog.v2" timestamp="1605359748532">
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
-    <state x="1512" y="252" key="Vcs.Push.Dialog.v2/0.0.2560.1040@0.0.2560.1040" timestamp="1605359354785" />
+    <state x="1512" y="252" key="Vcs.Push.Dialog.v2/0.0.2560.1040@0.0.2560.1040" timestamp="1605359748532" />
     <state x="1373" y="100" width="1094" height="847" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1603660120837">
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
@@ -171,10 +196,10 @@
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
     <state x="1737" y="437" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.2560.1040@0.0.2560.1040" timestamp="1605083520225" />
-    <state x="1625" y="256" width="587" height="534" key="find.popup" timestamp="1605351448419">
+    <state x="1625" y="256" width="587" height="534" key="find.popup" timestamp="1605406740020">
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
-    <state x="1625" y="256" width="587" height="534" key="find.popup/0.0.2560.1040@0.0.2560.1040" timestamp="1605351448419" />
+    <state x="1625" y="256" width="587" height="534" key="find.popup/0.0.2560.1040@0.0.2560.1040" timestamp="1605406740020" />
     <state x="1587" y="244" key="run.anything.popup" timestamp="1605356240561">
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
