@@ -13,7 +13,7 @@
           {{ transactionLabel }}{{ dotDisplay }}
         </v-col>
       </template>
-      <template class="vh-center" v-else-if="errorLabel">
+      <template v-else-if="errorLabel" class="vh-center">
         <v-col>
           <v-row class="vh-center waffle-text-border dialog-title mb-5">
             Uh oh!

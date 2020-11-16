@@ -7,9 +7,11 @@ export default (provider) => {
       accounts: 1500
     },
     web3: {
+      customProvider: provider,
+      block: false,
       fallback: {
         type: 'ws',
-        url: 'ws://127.0.0.1:8545'
+        url: '127.0.0.1:8545'
       }
     }
   }

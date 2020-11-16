@@ -5,8 +5,9 @@
     transition="fade-transition"
     class="vh-center"
     persistent
+    no-click-animation
   >
-    <v-card v-if="viewedWaffle" class="vh-center pa-3 ma-0" flat>
+    <v-card v-if="viewedWaffle" class="vh-center pa-3 ma-0 overflow-hidden" flat>
       <v-container>
         <v-row class="vh-center pa-3">
           <v-col cols="12" md="7" order="2" order-md="1" class="vh-center mt-4">
@@ -91,6 +92,18 @@ export default {
     },
     canVote () {
       return !this.isOwnWaffle
+    }
+  },
+  watch: {
+    showDialog () {
+      if (this.showDialog && this.viewedWaffleId != null) {
+        Waffle.dispatch('setupCachedCalls', [this.viewedWaffleId])
+      }
+    }
+  },
+  mounted () {
+    if (this.showDialog && this.viewedWaffleId != null) {
+      Waffle.dispatch('setupCachedCalls', [this.viewedWaffleId])
     }
   },
   methods: {

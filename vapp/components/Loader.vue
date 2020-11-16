@@ -1,20 +1,28 @@
 <template>
-  <v-overlay v-show="loading">
+  <v-overlay v-show="isLoading">
     <v-progress-circular indeterminate />
   </v-overlay>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   data: () => ({
-    loading: false
+    pageLoading: false
   }),
+  computed: {
+    ...mapGetters(['isDataLoading']),
+    isLoading () {
+      return this.pageLoading || this.isDataLoading
+    }
+  },
   methods: {
     start () {
-      this.loading = true
+      this.pageLoading = true
     },
     finish () {
-      this.loading = false
+      this.pageLoading = false
     }
   }
 }

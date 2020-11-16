@@ -6,7 +6,14 @@ import plateList, { WafflePlateType } from '~/lists/waffle-plates'
 export default class Waffle extends Model {
   static entity = 'waffles'
 
+  id: number;
+  owner: string;
+  name: string;
+  description: string;
+  votes: number;
+  favorite: boolean;
   plateId: WafflePlateType;
+  dataKey: string;
 
   static fields () {
     return {
@@ -15,10 +22,12 @@ export default class Waffle extends Model {
       name: this.string(''),
       description: this.string(''),
       votes: this.number(0),
-      plateId: this.number(WafflePlateType.Empty),
       favorite: this.boolean(false),
+      plateId: this.number(WafflePlateType.Empty),
 
-      layers: this.hasMany(WaffleLayer, 'waffleId')
+      layers: this.hasMany(WaffleLayer, 'waffleId'),
+
+      dataKey: this.string(null)
     }
   }
 

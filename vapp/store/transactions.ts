@@ -17,7 +17,7 @@ export const mutations = {
 }
 
 export const actions = {
-  dispatchTransaction ({ commit }, { label, transaction }) {
+  dispatchTransaction ({ commit }, { label, transaction, successCallback }) {
     commit('setTransactionLabel', label)
     transaction
       .on('error', () => {
@@ -25,6 +25,9 @@ export const actions = {
       })
       .then(() => {
         commit('setTransactionLabel', null)
+        if (successCallback) {
+          successCallback()
+        }
       })
   },
 

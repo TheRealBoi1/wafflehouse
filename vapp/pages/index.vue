@@ -26,7 +26,7 @@
     <v-row v-if="$vuetify.breakpoint.mdAndUp" class="waffle-text recent-waffles-label vh-center mt-12">
       Recent Waffles
     </v-row>
-    <recent-waffles-display />
+    <!-- <recent-waffles-display /> -->
     <v-row class="faq-title-container waffle-text vh-center py-5">
       FAQ
     </v-row>
@@ -171,6 +171,7 @@
 import RecentWafflesDisplay from '@/components/RecentWafflesDisplay'
 
 export default {
+  name: 'Index',
   middleware: 'accountConnected',
   components: {
     RecentWafflesDisplay

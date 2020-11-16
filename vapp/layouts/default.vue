@@ -1,11 +1,14 @@
 <template>
   <v-app dark class="app-container">
-    <transaction-dialog />
-    <waffle-viewer-dialog />
-    <toolbar />
-    <v-main>
-      <nuxt />
-    </v-main>
+    <connect-dialog :value="!showApp" />
+    <template v-if="showApp">
+      <transaction-dialog />
+      <waffle-viewer-dialog />
+      <toolbar />
+      <v-main>
+        <nuxt />
+      </v-main>
+    </template>
   </v-app>
 </template>
 
@@ -14,23 +17,22 @@ import { mapGetters } from 'vuex'
 
 import WaffleViewerDialog from '@/components/WaffleViewerDialog'
 import TransactionDialog from '@/components/TransactionDialog'
+import ConnectDialog from '@/components/ConnectDialog'
 import Toolbar from '~/components/layout/toolbar/Toolbar'
 
 export default {
+  name: 'Default',
   components: {
+    ConnectDialog,
     WaffleViewerDialog,
     TransactionDialog,
     Toolbar
   },
-  middleware: 'accountConnected',
   computed: {
-    ...mapGetters('accounts', ['isAccountActive'])
-  },
-  watch: {
-    isAccountActive (value) {
-      if (!value) {
-        this.$router.push('/connect')
-      }
+    ...mapGetters('accounts', ['isAccountActive']),
+    ...mapGetters(['isDataLoading']),
+    showApp () {
+      return this.isAccountActive && !this.isDataLoading
     }
   }
 }

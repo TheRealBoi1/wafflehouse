@@ -50,14 +50,11 @@
 </template>
 
 <script lang="ts">
-import { mapGetters } from 'vuex'
 import Waffle from '~/database/Waffle'
 
 export default {
   name: 'Create',
-  computed: {
-    ...mapGetters('accounts', ['isAccountActive', 'activeAccount'])
-  },
+  middleware: 'accountConnected',
   methods: {
     createWaffle () {
       Waffle.dispatch('createWaffle')

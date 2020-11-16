@@ -3,7 +3,7 @@
 }
 
 .waffle-text {
-  font-family: Kavoon, serif;
+  font-family: Kavoon, serif !important;
   font-style: normal;
   font-weight: normal;
   text-align: center;
@@ -11,7 +11,7 @@
 }
 
 .waffle-text-border-black {
-  font-family: Kavoon, serif;
+  font-family: Kavoon, serif !important;
   font-style: normal;
   font-weight: normal;
   text-align: center;
@@ -25,7 +25,7 @@
 }
 
 .waffle-text-border {
-  font-family: Kavoon, serif;
+  font-family: Kavoon, serif !important;
   font-style: normal;
   font-weight: normal;
   text-align: center;

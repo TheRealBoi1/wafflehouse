@@ -1,8 +1,5 @@
 import Waffle from '~/database/Waffle'
 
-import { WaffleToppingType } from '~/lists/waffle-toppings'
-import { WaffleBaseType } from '~/lists/waffle-bases'
-
 const loadFavorites = (): number[] => {
   const favorites = JSON.parse(localStorage.getItem('favorites'))
   return favorites || []
@@ -14,45 +11,66 @@ const saveFavorites = (favorites: number[]) => {
 
 export default {
   actions: {
-    injectWaffles (_: any) {
-      Waffle.insert({
-        data: {
-          id: 1,
-          owner: '0xcBF5693a407d42CF2c31f9C93E28E0fF2593F19c',
-          name: 'The Penetrator',
-          description: 'This is just plain and simply wrong and yet you will vote for it anyways',
-          layers: [
-            {
-              toppingId: WaffleToppingType.Bacon,
-              baseId: WaffleBaseType.Blueberry
-            },
-            {
-              toppingId: WaffleToppingType.MMS,
-              baseId: WaffleBaseType.CoffeeLiqueur
-            },
-            {
-              toppingId: WaffleToppingType.Sprinkles,
-              baseId: WaffleBaseType.Butter
-            },
-            {
-              toppingId: WaffleToppingType.AppleCrumble,
-              baseId: WaffleBaseType.BrownSugar
-            },
-            {
-              toppingId: WaffleToppingType.ChocolateXDFace,
-              baseId: WaffleBaseType.GreekYogurt
+    async setupCachedCalls (_, waffleIds: number[]) {
+      const favorites = loadFavorites()
+      await Promise.all(waffleIds.map(async (waffleId: number) => {
+        const waffleIdNum = Number(waffleId)
+        const waffleExists = Waffle.query().where('id', waffleIdNum).exists()
+        if (!waffleExists) {
+          const results = await Promise.all([
+            this.$drizzle.contracts.WaffleMaker.methods.getWaffleInfo.cacheCall(waffleId),
+            this.$drizzle.contracts.WaffleMaker.methods.getWaffleInfo(waffleId).call()
+          ])
+
+          const dataKey = results[0]
+          const waffleInfo = results[1]
+          const waffleFavorite = favorites.includes(waffleIdNum)
+
+          await Waffle.insertOrUpdate({
+            data: {
+              id: waffleId,
+              favorite: waffleFavorite,
+              dataKey,
+              ...waffleInfo
             }
-          ],
-          favorite: false
+          })
         }
+      }))
+    },
+
+    refreshFromCachedCalls () {
+      const drizzleState = this.$drizzle.store.getState()
+
+      const waffles = Waffle.query().all()
+      waffles.forEach((waffle: Waffle) => {
+        const waffleInfo = drizzleState.contracts.WaffleMaker.getWaffleInfo[waffle.dataKey].value
+        Waffle.update({
+          where: waffle.id,
+          data: {
+            ...waffleInfo
+          }
+        })
       })
+    },
+
+    setupAccountWaffleCachedCalls ({ dispatch, rootGetters }: any) {
+      const ownedWaffleIds = rootGetters['accounts/getOwnedWaffleIds']
+      dispatch('setupCachedCalls', ownedWaffleIds)
+    },
+
+    setupFavoriteWaffleCachedCalls ({ dispatch }: any) {
+      const favorites = loadFavorites()
+      dispatch('setupCachedCalls', favorites)
     },
 
     createWaffle ({ dispatch }: any) {
       const activeAccount = this.$web3.currentProvider.selectedAddress
       dispatch('transactions/dispatchTransaction', {
         label: 'Creating Waffle',
-        transaction: this.$drizzle.contracts.WaffleMaker.methods.createWaffle().send({ from: activeAccount })
+        transaction: this.$drizzle.contracts.WaffleMaker.methods.createWaffle().send({ from: activeAccount }),
+        successCallback: () => {
+          this.$router.push('/my-waffles')
+        }
       }, { root: true })
     },
 
@@ -69,6 +87,8 @@ export default {
       const waffleFavoriteIndex = favorites.indexOf(waffleId)
 
       const updateStoreWaffleFavorite = (value: boolean) => {
+        console.log(waffleId)
+        console.log(typeof waffleId)
         Waffle.update({
           where: waffleId,
           data: {

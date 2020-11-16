@@ -7,6 +7,23 @@ contract WaffleMaker {
     uint constant MAX_VOTES_PER_ACCOUNT = 3;
     uint constant COMPETITION_DURATION = 2592000; // 1 month duration
 
+    // ******************** DATA ***********************
+    // Static data
+    address public admin; // Also the address to which the 10% dev fund is sent to
+    uint competitionStart;
+
+    // Semi static data
+    WaffleItem[] public toppings;
+    WaffleItem[] public bases;
+    WaffleItem[] public plates;
+    WaffleItem[] public extras;
+
+    // Variable data
+    Waffle[] waffles;
+    uint[3] recentWaffles;
+    mapping(address => AccountProfile) profiles;
+    bool competitionConcluded;
+
     // ******************** STRUCTS ***********************
     struct WaffleItem {
         string name;
@@ -38,24 +55,26 @@ contract WaffleMaker {
         uint votedWafflesCount;
     }
 
-    // ******************** DATA ***********************
-    // Static data
-    address public admin; // Also the address to which the 10% dev fund is sent to
-    uint competitionStart;
+    // ******************** MODIFIERS ***********************
+    modifier competitionIsOngoing {
+        uint endTimestamp = competitionStart + COMPETITION_DURATION;
+        require(block.timestamp < endTimestamp, "Competition must be ongoing");
+        _;
+    }
 
-    // Semi static data
-    WaffleItem[] public toppings;
-    WaffleItem[] public bases;
-    WaffleItem[] public plates;
-    WaffleItem[] public extras;
+    modifier competitionHasEnded {
+        uint endTimestamp = competitionStart + COMPETITION_DURATION;
+        require(block.timestamp >= endTimestamp, "Competition must have ended");
+        _;
+    }
 
-    // Variable data
-    Waffle[] waffles;
-    uint[3] recentWaffles;
-    mapping(address => AccountProfile) profiles;
-    bool competitionConcluded;
+    modifier waffleExists(uint waffleId) {
+        require(waffleId < waffles.length, "This waffle doesn't exist");
+        _;
+    }
 
-    constructor() public{
+    // ******************** CONSTRUCTOR ***********************
+    constructor() public {
         admin = msg.sender;
         competitionStart = block.timestamp;
 
@@ -66,9 +85,7 @@ contract WaffleMaker {
     }
 
     // ******************** SEND FUNCTIONS ***********************
-    function createWaffle() public {
-        require(!competitionHasEnded(), "Cannot create a new waffle after competition has ended");
-
+    function createWaffle() external competitionIsOngoing {
         waffles.push(Waffle({
             owner: msg.sender,
             votes: 0,
@@ -88,18 +105,14 @@ contract WaffleMaker {
     *   Add a new layer to the waffleId provided if the waffle is owned by the sender and if last
     *   layer has been customized
     **/
-    function bakeWaffleLayer(uint waffleId) public {
-        require(!competitionHasEnded(), "You cannot modify a waffle after competition has ended");
-        require(waffleExists(waffleId), "This waffle doesn't exist");
+    function bakeWaffleLayer(uint waffleId) external competitionIsOngoing waffleExists(waffleId) {
         require(accountOwnsWaffle(msg.sender, waffleId), "You can't bake a layer for a waffle you do not own");
         require(lastWaffleLayerIsCustomized(waffleId), "You can't add a new layer if the last waffle layer hasn't been customized");
 
         addWaffleLayer(waffleId);
     }
 
-    function customizeWaffleLayer(uint waffleId, uint baseId, uint toppingId, uint plateId, uint extraId) public {
-        require(!competitionHasEnded(), "You cannot modify a waffle after competition has ended");
-        require(waffleExists(waffleId), "This waffle doesn't exist");
+    function customizeWaffleLayer(uint waffleId, uint baseId, uint toppingId, uint plateId, uint extraId) external competitionIsOngoing waffleExists(waffleId) {
         require(accountOwnsWaffle(msg.sender, waffleId), "You can't bake a layer for a waffle you do not own");
         require(!lastWaffleLayerIsCustomized(waffleId), "You can't add a new layer if the last waffle layer hasn't been customized");
 
@@ -118,7 +131,7 @@ contract WaffleMaker {
         recentWaffles[2] = waffleId;
     }
 
-    function addWaffleIngredient(uint waffleId) public {
+    function addWaffleIngredient(uint waffleId) external {
 
     }
 
@@ -127,9 +140,7 @@ contract WaffleMaker {
     *
     *   No more than MAX_VOTES_PER_ACCOUNT votes can be cast per account.
     **/
-    function voteWaffle(uint waffleId) public {
-        require(!competitionHasEnded(), "You cannot cast a vote on a waffle after competition has ended");
-        require(waffleExists(waffleId), "This waffle doesn't exist");
+    function voteWaffle(uint waffleId) external competitionIsOngoing waffleExists(waffleId) {
         require(profiles[msg.sender].ownedWafflesCount > 0, "You must create at least one waffle to vote");
         require(profiles[msg.sender].votedWafflesCount < MAX_VOTES_PER_ACCOUNT, "Max votes on this account exceeded");
         require(!accountOwnsWaffle(msg.sender, waffleId), "You can't vote for your own waffle");
@@ -140,18 +151,22 @@ contract WaffleMaker {
     }
 
     /**
-    *   Call this to conclude the competition and distribute the rewards to the owner
+    *   Concludes the competition and distributes the rewards to the owner
     *   of the waffle with the most votes
+    *
+    *   Can be called by anyone past the competition end timestamp
     **/
-    function concludeCompetition() public {
-        require(competitionHasEnded(), "You cannot end the competition before the end timestamp has been crossed");
+    function concludeCompetition() external competitionHasEnded {
         require(!competitionConcluded, "Competition has already been concluded");
 
         competitionConcluded = true;
     }
 
     // ******************** VIEW FUNCTIONS ***********************
-    function getWaffleInfo(uint waffleId) public view returns (address owner, string memory name, string memory description, uint votes, uint plateId, uint extraId, WaffleLayer[] memory layers) {
+    /**
+    *   Returns the data of the waffle associated to a waffle id
+    **/
+    function getWaffleInfo(uint waffleId) external view waffleExists(waffleId) returns (address owner, string memory name, string memory description, uint votes, uint plateId, uint extraId, WaffleLayer[] memory layers)  {
         require(waffleId < waffles.length, "This waffle doesn't exist");
 
         Waffle memory waffle = waffles[waffleId];
@@ -163,10 +178,26 @@ contract WaffleMaker {
     }
 
     /**
-    *   See the timestamp at which the competition will end and concludeCompetition()
+    *   Returns the profile data associated to an address
+    **/
+    function getProfileInfo(address addr) external view returns (uint[] memory ownedWaffleIds, uint[] memory votedWaffleIds) {
+        uint[] memory profileOwnedWaffles = new uint[](profiles[addr].ownedWafflesCount);
+        for (uint i = 0; i < profiles[addr].ownedWafflesCount; i++) {
+            profileOwnedWaffles[i] = profiles[addr].ownedWaffles[i];
+        }
+
+        uint[] memory profileVotedWaffles = new uint[](profiles[addr].votedWafflesCount);
+        for (uint i = 0; i < profiles[addr].votedWafflesCount; i++) {
+            profileVotedWaffles[i] = profiles[addr].votedWaffles[i];
+        }
+        return (profileOwnedWaffles, profileVotedWaffles);
+    }
+
+    /**
+    *   Returns the timestamp at which the competition will end and concludeCompetition()
     *   can be called by anyone to distribute the reward
     **/
-    function getCompetitionEndTimestamp() public view returns (uint) {
+    function getCompetitionEndTimestamp() external view returns (uint) {
         return competitionStart + COMPETITION_DURATION;
     }
 
@@ -174,10 +205,6 @@ contract WaffleMaker {
     function addWaffleLayer(uint waffleId) internal {
         require(waffles[waffleId].layersCount < MAX_WAFFLE_LAYERS, "You cannot add more layers to this waffle");
         waffles[waffleId].layers[waffles[waffleId].layersCount++] = WaffleLayer(0,0,false);
-    }
-
-    function waffleExists(uint waffleId) internal returns(bool) {
-        return waffleId < waffles.length;
     }
 
     function lastWaffleLayerIsCustomized(uint waffleId) internal returns(bool) {
@@ -200,10 +227,5 @@ contract WaffleMaker {
             }
         }
         return false;
-    }
-
-    function competitionHasEnded() internal returns (bool) {
-        uint endTimestamp = competitionStart + COMPETITION_DURATION;
-        return block.timestamp >= endTimestamp;
     }
 }

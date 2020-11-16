@@ -3,7 +3,27 @@
     <v-row v-if="accountWaffles.length > 0">
       <v-col cols="12" md="9" order="2" order-md="1">
         <v-row v-for="(waffle, index) in accountWaffles" :key="index">
-          <v-card width="100%" class="waffle-container ma-5">
+          <v-card width="100%" class="waffle-container mx-5 mt-5">
+            <v-card class="vh-center fill-both waffle-overlay waffle-text" color="#000000DD">
+              <div class="fill-both">
+                <v-row>
+                  <v-col cols="12" md="9">
+                    <v-row class="vh-center waffle-subtitle mb-2">
+                      {{ waffle.name }}dada
+                    </v-row>
+                    <v-row class="vh-center waffle-title mb-5">
+                      Currently Baking...
+                    </v-row>
+                    <v-row class="vh-center">
+                      Status: Adding Layer
+                    </v-row>
+                    <v-row class="vh-center">
+                      <countdown-timer :end-timestamp="50000000000" />
+                    </v-row>
+                  </v-col>
+                </v-row>
+              </div>
+            </v-card>
             <v-row>
               <v-col class="mt-5 vh-center" cols="12" md="4" order="2" order-md="1">
                 <waffle-display :width="200" :waffle="waffle" viewable />
@@ -43,12 +63,12 @@
                 </v-row>
                 <v-row class="px-5">
                   <v-col cols="6" class="ma-0 pa-0">
-                    <v-card @click="" width="100%" height="65" flat class="vh-center waffle-text option-button left">
+                    <v-card width="100%" height="65" flat class="vh-center waffle-text option-button left">
                       Customize
                     </v-card>
                   </v-col>
                   <v-col cols="6" class="ma-0 pa-0">
-                    <v-card @click="" width="100%" height="65" flat class="vh-center waffle-text option-button right">
+                    <v-card width="100%" height="65" flat class="vh-center waffle-text option-button right">
                       Add Layer
                     </v-card>
                   </v-col>
@@ -66,7 +86,7 @@
           </v-card>
         </v-row>
         <v-row>
-          <v-card to="/create" width="100%" height="125" class="vh-center mx-5 waffle-text create-waffle-button">
+          <v-card to="/create" width="100%" height="125" class="vh-center mx-5 mt-5 waffle-text create-waffle-button">
             Create New Waffle
           </v-card>
         </v-row>
@@ -132,12 +152,14 @@
 </template>
 
 <script>
+import CountdownTimer from '@/components/helper/CountdownTimer'
 import Waffle from '~/database/Waffle'
 import WaffleDisplay from '~/components/WaffleDisplay'
 
 export default {
   name: 'MyWaffles',
-  components: { WaffleDisplay },
+  components: { CountdownTimer, WaffleDisplay },
+  middleware: 'loadAccountWaffles',
   computed: {
     accountWaffles () {
       return Waffle.getters('getActiveAccountWaffles')
@@ -147,8 +169,18 @@ export default {
 </script>
 
 <style scoped>
+  .waffle-overlay {
+    position: absolute;
+    border-radius: 25px;
+    z-index: 500;
+  }
+
   .waffle-title {
     font-size: 32px;
+  }
+
+  .waffle-subtitle {
+    font-size: 22px;
   }
 
   .waffle-container {
