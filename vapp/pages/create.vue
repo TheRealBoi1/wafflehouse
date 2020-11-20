@@ -54,7 +54,6 @@ import Waffle from '~/database/Waffle'
 
 export default {
   name: 'Create',
-  middleware: 'accountConnected',
   methods: {
     createWaffle () {
       Waffle.dispatch('createWaffle')

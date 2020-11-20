@@ -172,7 +172,6 @@ import RecentWafflesDisplay from '@/components/RecentWafflesDisplay'
 
 export default {
   name: 'Index',
-  middleware: 'accountConnected',
   components: {
     RecentWafflesDisplay
   }

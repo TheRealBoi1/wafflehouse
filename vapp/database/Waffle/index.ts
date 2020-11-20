@@ -1,7 +1,6 @@
 import { Model } from '@vuex-orm/core'
 
 import WaffleLayer from '~/database/WaffleLayer'
-import plateList, { WafflePlateType } from '~/lists/waffle-plates'
 
 export default class Waffle extends Model {
   static entity = 'waffles'
@@ -12,7 +11,9 @@ export default class Waffle extends Model {
   description: string;
   votes: number;
   favorite: boolean;
-  plateId: WafflePlateType;
+  extraId: number;
+  plateId: number;
+  actionStart: number;
   dataKey: string;
 
   static fields () {
@@ -23,15 +24,23 @@ export default class Waffle extends Model {
       description: this.string(''),
       votes: this.number(0),
       favorite: this.boolean(false),
-      plateId: this.number(WafflePlateType.Empty),
+      extraId: this.number(0),
+      plateId: this.number(0),
+      actionStart: this.number(0),
 
       layers: this.hasMany(WaffleLayer, 'waffleId'),
+      customizedLayersCount: this.number(0),
 
       dataKey: this.string(null)
     }
   }
 
-  get plate () {
-    return plateList[this.plateId]
+  get actionEnd () {
+    return this.actionStart + 60 * 60 * 24
+  }
+
+  get isActionInProgress () {
+    const currentTimestamp = Math.round((new Date()).getTime() / 1000)
+    return currentTimestamp < this.actionEnd
   }
 };

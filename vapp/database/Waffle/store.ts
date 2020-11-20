@@ -67,10 +67,7 @@ export default {
       const activeAccount = this.$web3.currentProvider.selectedAddress
       dispatch('transactions/dispatchTransaction', {
         label: 'Creating Waffle',
-        transaction: this.$drizzle.contracts.WaffleMaker.methods.createWaffle().send({ from: activeAccount }),
-        successCallback: () => {
-          this.$router.push('/my-waffles')
-        }
+        transaction: this.$drizzle.contracts.WaffleMaker.methods.createWaffle().send({ from: activeAccount })
       }, { root: true })
     },
 
@@ -82,13 +79,19 @@ export default {
       }, { root: true })
     },
 
+    customizeWaffleLayer ({ dispatch }: any, { waffleId, baseId, toppingId, extraId, plateId }) {
+      const activeAccount = this.$web3.currentProvider.selectedAddress
+      dispatch('transactions/dispatchTransaction', {
+        label: 'Customizing Waffle',
+        transaction: this.$drizzle.contracts.WaffleMaker.methods.customizeWaffleLayer(waffleId, baseId, toppingId, extraId, plateId).send({ from: activeAccount })
+      }, { root: true })
+    },
+
     setWaffleFavorite (_, { waffleId, value }) {
       const favorites = loadFavorites()
       const waffleFavoriteIndex = favorites.indexOf(waffleId)
 
       const updateStoreWaffleFavorite = (value: boolean) => {
-        console.log(waffleId)
-        console.log(typeof waffleId)
         Waffle.update({
           where: waffleId,
           data: {

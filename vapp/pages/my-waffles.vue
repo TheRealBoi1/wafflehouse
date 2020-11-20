@@ -4,13 +4,10 @@
       <v-col cols="12" md="9" order="2" order-md="1">
         <v-row v-for="(waffle, index) in accountWaffles" :key="index">
           <v-card width="100%" class="waffle-container mx-5 mt-5">
-            <v-card class="vh-center fill-both waffle-overlay waffle-text" color="#000000DD">
+            <v-card v-if="waffle.isActionInProgress" class="vh-center fill-both waffle-overlay waffle-text" color="#000000DD">
               <div class="fill-both">
                 <v-row>
                   <v-col cols="12" md="9">
-                    <v-row class="vh-center waffle-subtitle mb-2">
-                      {{ waffle.name }}dada
-                    </v-row>
                     <v-row class="vh-center waffle-title mb-5">
                       Currently Baking...
                     </v-row>
@@ -18,7 +15,7 @@
                       Status: Adding Layer
                     </v-row>
                     <v-row class="vh-center">
-                      <countdown-timer :end-timestamp="50000000000" />
+                      <countdown-timer :end-timestamp="waffle.actionEnd" />
                     </v-row>
                   </v-col>
                 </v-row>

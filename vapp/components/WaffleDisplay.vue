@@ -14,7 +14,7 @@
       </span>
     </div>
     <v-img
-      :src="require('~/static/waffles/plates/gold.png')"
+      :src="plate.image"
       :width="width"
       :height="height"
       contain
@@ -27,7 +27,7 @@
           Plate
         </div>
         <div>
-          Golden Plate
+          {{ plate.name }}
         </div>
       </div>
     </v-img>
@@ -43,18 +43,18 @@
       aspect-ratio="2.5"
     >
       <div class="vh-center fill-both">
-        <img class="waffle-item" :src="layer.base.image" alt="base">
-        <img class="waffle-item" :src="layer.topping.image" alt="topping">
+        <img class="waffle-item" :src="base(layer).image" alt="base">
+        <img class="waffle-item" :src="topping(layer).image" alt="topping">
       </div>
       <div class="layer-info" :class="{'expanded': expanded}">
         <div class="layer-info-title">
           Layer {{ index + 1 }}
         </div>
         <div>
-          Topping: {{ layer.topping.name }}
+          Topping: {{ topping(layer).name }}
         </div>
         <div>
-          Base: {{ layer.base.name }}
+          Base: {{ base(layer).name }}
         </div>
       </div>
     </v-img>
@@ -63,6 +63,9 @@
 
 <script lang="ts">
 import Waffle from '~/database/Waffle'
+import baseList from '~/lists/waffle-bases'
+import toppingList from '~/lists/waffle-toppings'
+import plateList from '~/lists/waffle-plates'
 
 const WH_RATIO = 2.5
 const LAYER_OFFSET = -30
@@ -87,9 +90,36 @@ export default {
     expanded: {
       type: Boolean,
       default: false
+    },
+
+    baseId: {
+      type: Number,
+      default: null
+    },
+    toppingId: {
+      type: Number,
+      default: null
+    },
+    plateId: {
+      type: Number,
+      default: null
     }
   },
   computed: {
+    base () {
+      return (layer) => {
+        return baseList[layer.baseId]
+      }
+    },
+    topping () {
+      return (layer) => {
+        return toppingList[layer.toppingId]
+      }
+    },
+    plate () {
+      return plateList[this.waffle.plateId]
+    },
+
     layerCount () {
       return this.waffle.layers.length
     },
@@ -102,7 +132,7 @@ export default {
       return this.expanded ? this.width * 1.5 : this.width
     },
     containerHeight () {
-      const heightRatioAdd = this.expanded ? 0.9 : 0.35
+      const heightRatioAdd = this.expanded ? 0.9 : 0.4
       return this.height + (this.height * heightRatioAdd * (this.layerCount - 1))
     },
 

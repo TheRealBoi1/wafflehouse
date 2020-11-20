@@ -51,7 +51,6 @@ import WaffleDisplay from '@/components/WaffleDisplay'
 
 export default {
   name: 'Vote',
-  middleware: 'accountConnected',
   components: { WaffleDisplay },
   data () {
     return {
