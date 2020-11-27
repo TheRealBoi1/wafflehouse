@@ -8,20 +8,20 @@
         <v-img class="vh-center" :src="require('~/static/home/ticket.png')">
           <v-col>
             <v-row class="waffle-text grand-prize-amount vh-center" :class="{'mobile': $vuetify.breakpoint.smAndDown}">
-              25,047 USD
+              ${{ prizeValue }}
             </v-row>
             <v-row class="waffle-text vh-center">
-              +2500 ONE
+              +{{ onePrize }} ONE
             </v-row>
             <v-row class="waffle-text vh-center">
-              +12 YFL
+              +{{ yflPrize }} YFL
             </v-row>
           </v-col>
         </v-img>
       </v-card>
     </v-row>
     <v-row class="vh-center mb-10">
-      Time Left: 1 Day, 22 Hours, 17 Minutes
+      <span class="mx-2">Time Left:</span><countdown-timer :end-timestamp="competitionEndTimestamp" />
     </v-row>
     <v-row v-if="$vuetify.breakpoint.mdAndUp" class="waffle-text recent-waffles-label vh-center mt-12">
       Recent Waffles
@@ -31,7 +31,7 @@
       FAQ
     </v-row>
     <v-row class="faq-content-container vh-center">
-      <v-container>
+      <v-container class="page-container">
         <v-row>
           <v-col cols="12" md="6">
             <v-row class="vh-center mt-12">
@@ -149,7 +149,7 @@
         </v-row>
         <v-row class="vh-center">
           <v-btn
-            to="/create"
+            to="/waffles/create"
             width="80vw"
             max-width="450px"
             height="100px"
@@ -168,11 +168,30 @@
 </template>
 
 <script>
-import RecentWafflesDisplay from '@/components/RecentWafflesDisplay'
+import { mapActions, mapGetters } from 'vuex'
+import RecentWafflesDisplay from '~/components/RecentWafflesDisplay'
+import CountdownTimer from "~/components/helper/CountdownTimer";
 
 export default {
   name: 'Index',
+  methods: {
+    ...mapActions('competition', ['loadCompetitionData'])
+  },
+  async mounted() {
+    this.$nuxt.$loading.start()
+    await this.loadCompetitionData()
+    this.$nuxt.$loading.finish()
+  },
+  computed: {
+    ...mapGetters('competition', {
+      onePrize: 'getOnePrize',
+      yflPrize: 'getYflPrize',
+      prizeValue: 'getPrizeValue',
+      competitionEndTimestamp: 'getCompetitionEndTimestamp'
+    })
+  },
   components: {
+    CountdownTimer,
     RecentWafflesDisplay
   }
 }

@@ -48,7 +48,7 @@ export default {
 
 <style lang="scss" scoped>
 .dialog-container {
-  background: url(../static/background.png) repeat;
+  background: url(../../static/background.png) repeat;
   border-radius: 5px;
   overflow: hidden;
   animation: ScrollBackground 10s linear infinite;

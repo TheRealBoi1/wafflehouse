@@ -1,96 +1,19 @@
 <template>
-  <v-container>
+  <v-container class="page-container">
     <v-row v-if="accountWaffles.length > 0">
       <v-col cols="12" md="9" order="2" order-md="1">
         <v-row v-for="(waffle, index) in accountWaffles" :key="index">
-          <v-card width="100%" class="waffle-container mx-5 mt-5">
-            <v-card v-if="waffle.isActionInProgress" class="vh-center fill-both waffle-overlay waffle-text" color="#000000DD">
-              <div class="fill-both">
-                <v-row>
-                  <v-col cols="12" md="9">
-                    <v-row class="vh-center waffle-title mb-5">
-                      Currently Baking...
-                    </v-row>
-                    <v-row class="vh-center">
-                      Status: Adding Layer
-                    </v-row>
-                    <v-row class="vh-center">
-                      <countdown-timer :end-timestamp="waffle.actionEnd" />
-                    </v-row>
-                  </v-col>
-                </v-row>
-              </div>
-            </v-card>
-            <v-row>
-              <v-col class="mt-5 vh-center" cols="12" md="4" order="2" order-md="1">
-                <waffle-display :width="200" :waffle="waffle" viewable />
-              </v-col>
-              <v-col cols="12" md="5" order="1" order-md="2">
-                <v-row class="vh-center waffle-text-border-black waffle-title">
-                  {{ waffle.name }}
-                </v-row>
-                <v-row class="px-5">
-                  <v-col cols="6">
-                    <v-row class="vh-center">
-                      Layers: {{ waffle.layers.length }}
-                    </v-row>
-                  </v-col>
-                  <v-col cols="6">
-                    <v-row class="vh-center">
-                      Price: $3.50
-                      <v-tooltip top color="accent" max-width="400">
-                        <template v-slot:activator="{ on, attrs }">
-                          <v-btn
-                            class="mx-2"
-                            icon
-                            height="15"
-                            width="15"
-                            v-bind="attrs"
-                            v-on="on"
-                          >
-                            <v-icon color="grey lighten-1" size="15">
-                              mdi-information
-                            </v-icon>
-                          </v-btn>
-                        </template>
-                        <v-col />
-                      </v-tooltip>
-                    </v-row>
-                  </v-col>
-                </v-row>
-                <v-row class="px-5">
-                  <v-col cols="6" class="ma-0 pa-0">
-                    <v-card width="100%" height="65" flat class="vh-center waffle-text option-button left">
-                      Customize
-                    </v-card>
-                  </v-col>
-                  <v-col cols="6" class="ma-0 pa-0">
-                    <v-card width="100%" height="65" flat class="vh-center waffle-text option-button right">
-                      Add Layer
-                    </v-card>
-                  </v-col>
-                </v-row>
-              </v-col>
-              <v-col cols="12" md="3" :class="{'votes-container': $vuetify.breakpoint.mdAndUp}" order="3" order-md="3">
-                <v-row class="vh-center waffle-text-border-black waffle-title">
-                  Votes
-                </v-row>
-                <v-row class="vh-center waffle-text-border-black votes-value">
-                  {{ waffle.votes }}
-                </v-row>
-              </v-col>
-            </v-row>
-          </v-card>
+          <inventory-waffle :waffle="waffle" />
         </v-row>
         <v-row>
-          <v-card to="/create" width="100%" height="125" class="vh-center mx-5 mt-5 waffle-text create-waffle-button">
+          <v-card to="/waffles/create" width="100%" height="125" class="vh-center mx-5 mt-5 waffle-text create-waffle-button">
             Create New Waffle
           </v-card>
         </v-row>
       </v-col>
-      <v-col cols="12" md="3" order="1" order-md="2">
+      <v-col cols="12" md="3" order="1" order-md="2" class="px-10">
         <v-row class="vh-center">
-          <v-img max-width="250" :src="require('~/static/logos/yflhouse.png')" />
+          <v-img max-width="200" :src="require('~/static/logos/yflhouse.png')" />
         </v-row>
         <v-row class="vh-center waffle-text">
           Current Funds
@@ -133,7 +56,7 @@
         </v-row>
         <v-row class="vh-center mt-10">
           <v-btn
-            to="/create"
+            to="/waffles/create"
             width="80vw"
             max-width="600px"
             height="100px"
@@ -149,15 +72,44 @@
 </template>
 
 <script>
-import CountdownTimer from '@/components/helper/CountdownTimer'
+import { mapGetters } from 'vuex'
+import CountdownTimer from '~/components/helper/CountdownTimer'
 import Waffle from '~/database/Waffle'
 import WaffleDisplay from '~/components/WaffleDisplay'
+import InventoryWaffle from '~/components/InventoryWaffle'
+import { WaffleStatus } from '~/interfaces/enums'
 
 export default {
   name: 'MyWaffles',
-  components: { CountdownTimer, WaffleDisplay },
+  components: {
+    CountdownTimer,
+    WaffleDisplay,
+    InventoryWaffle
+  },
   middleware: 'loadAccountWaffles',
+  data () {
+    return {
+      WaffleStatus
+    }
+  },
+  methods: {
+    publishWaffle (waffleId) {
+      Waffle.dispatch('publishWaffle', waffleId)
+    },
+    bakeWaffleLayer (waffleId) {
+      Waffle.dispatch('bakeWaffleLayer', waffleId)
+    },
+    advanceWaffleCustomizationStep (waffleId) {
+      Waffle.dispatch('advanceWaffleCustomizationStep', waffleId)
+    },
+    customizeWaffle (waffleId) {
+      this.$router.push(`/waffle/${waffleId}/customize`)
+    },
+  },
   computed: {
+    ...mapGetters({
+      now: 'getNow'
+    }),
     accountWaffles () {
       return Waffle.getters('getActiveAccountWaffles')
     }
@@ -172,10 +124,6 @@ export default {
     z-index: 500;
   }
 
-  .waffle-title {
-    font-size: 32px;
-  }
-
   .waffle-subtitle {
     font-size: 22px;
   }
@@ -184,10 +132,6 @@ export default {
     border-radius: 25px;
     border: 6px rgba(255, 255, 255, 0.7) solid;
     background: rgba(30, 188, 223, 0.33);
-  }
-
-  .votes-container {
-    border-left: 5px white solid;
   }
 
   .votes-value {
@@ -208,6 +152,14 @@ export default {
     background: rgba(215, 215, 215, 0.33);
     user-select: none;
     background: radial-gradient(50% 50% at 50% 50%, #4BADC2 0%, #1A6D9B 100%);
+  }
+
+  .option-button.disabled {
+    font-size: 20px;
+    border: 3px rgba(255, 255, 255, 0.7) solid;
+    background: rgba(215, 215, 215, 0.33);
+    user-select: none;
+    background: radial-gradient(50% 50% at 50% 50%, #1a3e46 0%, #0d2f41 100%) !important;
   }
 
   .option-button.left {
@@ -237,5 +189,9 @@ export default {
 
   .make-waffle-button.mobile {
     font-size: 20px !important;
+  }
+
+  .add-ingredient-button {
+    font-size: 10px;
   }
 </style>

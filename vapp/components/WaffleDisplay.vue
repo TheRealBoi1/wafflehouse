@@ -23,12 +23,12 @@
       aspect-ratio="2.5"
     >
       <div class="layer-info fill-height" :class="{'expanded': expanded}">
-        <div class="layer-info-title">
+        <h6>
           Plate
-        </div>
-        <div>
+        </h6>
+        <h5>
           {{ plate.name }}
-        </div>
+        </h5>
       </div>
     </v-img>
     <v-img
@@ -45,27 +45,31 @@
       <div class="vh-center fill-both">
         <img class="waffle-item" :src="base(layer).image" alt="base">
         <img class="waffle-item" :src="topping(layer).image" alt="topping">
+        <img v-if="waffle.status(now) === WaffleStatus.Burned" class="waffle-item" :src="require('~/static/waffles/burned.png')" alt="base">
       </div>
       <div class="layer-info" :class="{'expanded': expanded}">
-        <div class="layer-info-title">
+        <h6>
           Layer {{ index + 1 }}
-        </div>
-        <div>
+        </h6>
+        <h5>
           Topping: {{ topping(layer).name }}
-        </div>
-        <div>
+        </h5>
+        <h5>
           Base: {{ base(layer).name }}
-        </div>
+        </h5>
       </div>
     </v-img>
   </v-card>
 </template>
 
 <script lang="ts">
+import { mapGetters } from 'vuex'
 import Waffle from '~/database/Waffle'
 import baseList from '~/lists/waffle-bases'
 import toppingList from '~/lists/waffle-toppings'
 import plateList from '~/lists/waffle-plates'
+import extraList from '~/lists/waffle-extras'
+import { WaffleStatus } from '~/interfaces/enums'
 
 const WH_RATIO = 2.5
 const LAYER_OFFSET = -30
@@ -73,6 +77,11 @@ const EXPANDED_MULTIPLIER = 2.3
 
 export default {
   name: 'WaffleDisplay',
+  data () {
+    return {
+      WaffleStatus
+    }
+  },
   props: {
     waffle: {
       type: Waffle as Object,
@@ -106,6 +115,10 @@ export default {
     }
   },
   computed: {
+    ...mapGetters({
+      now: 'getNow'
+    }),
+
     base () {
       return (layer) => {
         return baseList[layer.baseId]
@@ -119,6 +132,10 @@ export default {
     plate () {
       return plateList[this.waffle.plateId]
     },
+    extra () {
+      return extraList[this.waffle.extraId]
+    },
+
 
     layerCount () {
       return this.waffle.layers.length
@@ -150,7 +167,7 @@ export default {
   methods: {
     viewWaffle () {
       if (this.viewable) {
-        this.$nuxt.$router.push({ query: { view: this.waffle.id } })
+        this.$nuxt.$router.push({ path: `/waffles/${this.waffle.id}` })
       }
     }
   }
@@ -200,12 +217,12 @@ export default {
     bottom:0;
     transition: all .3s;
     overflow: visible;
-    transform: rotateX(0deg);
   }
 
   .waffle-plate {
     position:absolute;
     bottom:0;
+    user-select: none;
     transition: all .3s;
     overflow: visible;
   }
@@ -219,12 +236,9 @@ export default {
     position: absolute;
     width: 100%;
     height: 100%;
+    user-select: none;
     transition: all .5s;
     transform: rotateX(0deg);
-  }
-
-  .layer-info-title {
-    font-size:15pt;
   }
 
   .layer-info {

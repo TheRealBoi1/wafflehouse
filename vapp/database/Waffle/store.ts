@@ -1,4 +1,5 @@
 import Waffle from '~/database/Waffle'
+import WaffleLayer from "~/database/WaffleLayer";
 
 const loadFavorites = (): number[] => {
   const favorites = JSON.parse(localStorage.getItem('favorites'))
@@ -26,12 +27,29 @@ export default {
           const waffleInfo = results[1]
           const waffleFavorite = favorites.includes(waffleIdNum)
 
+          // layers is an array and is misinterpreted by insertOrUpdate if we don't convert
+          const layers = waffleInfo.layers.map((layer, index) => {
+            return {
+              layerIndex: index,
+              baseId: layer.baseId,
+              toppingId: layer.toppingId
+            }
+          })
+
           await Waffle.insertOrUpdate({
             data: {
               id: waffleId,
               favorite: waffleFavorite,
+              name: waffleInfo.name,
+              description: waffleInfo.description,
+              votes: waffleInfo.votes,
+              extraId: waffleInfo.extraId,
+              plateId: waffleInfo.plateId,
+              published: waffleInfo.published,
+              processEnd: waffleInfo.processEnd,
+              customizationStep: waffleInfo.customizationStep,
               dataKey,
-              ...waffleInfo
+              layers
             }
           })
         }
@@ -41,13 +59,51 @@ export default {
     refreshFromCachedCalls () {
       const drizzleState = this.$drizzle.store.getState()
 
-      const waffles = Waffle.query().all()
-      waffles.forEach((waffle: Waffle) => {
+      const waffles = Waffle.query().withAllRecursive(1).all()
+      waffles.forEach(async (waffle: Waffle) => {
         const waffleInfo = drizzleState.contracts.WaffleMaker.getWaffleInfo[waffle.dataKey].value
-        Waffle.update({
-          where: waffle.id,
+
+        // layers is an array and is misinterpreted by insertOrUpdate if we don't convert
+        const layersData = waffleInfo.layers.map((layer, index) => {
+          return {
+            layerIndex: index,
+            baseId: layer.baseId,
+            toppingId: layer.toppingId
+          }
+        })
+
+        await Waffle.insertOrUpdate({
           data: {
-            ...waffleInfo
+            id: waffle.id,
+            name: waffleInfo.name,
+            description: waffleInfo.description,
+            votes: waffleInfo.votes,
+            extraId: waffleInfo.extraId,
+            plateId: waffleInfo.plateId,
+            published: waffleInfo.published,
+            processEnd: waffleInfo.processEnd,
+            customizationStep: waffleInfo.customizationStep,
+          }
+        })
+
+        layersData.forEach((layerData, index) => {
+          if(index >= waffle.layers.length) {
+            WaffleLayer.insert({
+              data: {
+                waffleId: waffle.id,
+                ...layerData
+              }
+            })
+          } else {
+            WaffleLayer.update({
+              where: (layer) => {
+                return layer.waffleId === waffle.id && layer.layerIndex === layerData.layerIndex
+              },
+              data: {
+                baseId: layerData.baseId,
+                toppingId: layerData.toppingId
+              }
+            })
           }
         })
       })
@@ -71,19 +127,43 @@ export default {
       }, { root: true })
     },
 
+    submitWaffleCustomization ({ dispatch }: any, { waffleId, name, description, baseId, toppingId, extraId, plateId }) {
+      const activeAccount = this.$web3.currentProvider.selectedAddress
+      dispatch('transactions/dispatchTransaction', {
+        label: 'Customizing Waffle',
+        transaction: this.$drizzle.contracts.WaffleMaker.methods.submitWaffleCustomization(waffleId, name, description, baseId, toppingId, extraId, plateId).send({ from: activeAccount })
+      }, { root: true })
+    },
+
+    advanceWaffleCustomizationStep ({ dispatch }: any, waffleId: number) {
+      const activeAccount = this.$web3.currentProvider.selectedAddress
+      dispatch('transactions/dispatchTransaction', {
+        label: 'Adding Ingredient',
+        transaction: this.$drizzle.contracts.WaffleMaker.methods.advanceWaffleCustomizationStep(waffleId).send({ from: activeAccount })
+      }, { root: true })
+    },
+
+    bakeWaffleLayer({ dispatch }: any, waffleId: number) {
+      const activeAccount = this.$web3.currentProvider.selectedAddress
+      dispatch('transactions/dispatchTransaction', {
+        label: 'Adding Waffle Layer',
+        transaction: this.$drizzle.contracts.WaffleMaker.methods.bakeWaffleLayer(waffleId).send({ from: activeAccount })
+      }, { root: true })
+    },
+
+    publishWaffle ({ dispatch }: any, waffleId) {
+      const activeAccount = this.$web3.currentProvider.selectedAddress
+      dispatch('transactions/dispatchTransaction', {
+        label: 'Publishing Waffle',
+        transaction: this.$drizzle.contracts.WaffleMaker.methods.publishWaffle(waffleId).send({ from: activeAccount })
+      }, { root: true })
+    },
+
     voteWaffle ({ dispatch }: any, waffleId) {
       const activeAccount = this.$web3.currentProvider.selectedAddress
       dispatch('transactions/dispatchTransaction', {
         label: 'Voting',
         transaction: this.$drizzle.contracts.WaffleMaker.methods.voteWaffle(waffleId).send({ from: activeAccount })
-      }, { root: true })
-    },
-
-    customizeWaffleLayer ({ dispatch }: any, { waffleId, baseId, toppingId, extraId, plateId }) {
-      const activeAccount = this.$web3.currentProvider.selectedAddress
-      dispatch('transactions/dispatchTransaction', {
-        label: 'Customizing Waffle',
-        transaction: this.$drizzle.contracts.WaffleMaker.methods.customizeWaffleLayer(waffleId, baseId, toppingId, extraId, plateId).send({ from: activeAccount })
       }, { root: true })
     },
 
@@ -115,7 +195,9 @@ export default {
     getActiveAccountWaffles () {
       return Waffle
         .query()
-        .withAllRecursive(1)
+        .with('layers', (query) => {
+          query.orderBy('layerIndex')
+        })
         .all()
     },
 
@@ -123,7 +205,9 @@ export default {
       return (id: number) => {
         return Waffle
           .query()
-          .withAllRecursive(1)
+          .with('layers', (query) => {
+            query.orderBy('layerIndex')
+          })
           .find(id)
       }
     },
@@ -132,7 +216,9 @@ export default {
       return Waffle
         .query()
         .withAllRecursive(1)
-        .where('favorite', true)
+        .with('layers', (query) => {
+          query.orderBy('layerIndex')
+        })
         .all()
     }
   }

@@ -5,10 +5,6 @@ export interface WafflePlateData {
 
 const wafflePlateList: WafflePlateData[] = [
   {
-    name: 'Empty',
-    image: require('~/static/waffles/empty.png')
-  },
-  {
     name: 'Plain Plate',
     image: require('~/static/waffles/plates/plain.png')
   },

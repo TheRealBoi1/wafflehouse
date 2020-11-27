@@ -5,27 +5,49 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3cd41b40-5513-4840-87c0-a2355f305846" name="Default Changelist" comment="Fixed drizzle flow, replace connect wallet page with a dialog, implemented basic waffle loading system, replace some requires with modifiers">
-      <change afterPath="$PROJECT_DIR$/vapp/components/inputs/SelectField.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vapp/static/left-arrow.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vapp/static/right-arrow.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/jsLinters/eslint.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vapp/components/InventoryWaffle.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vapp/components/dialogs/ConfirmDialog.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vapp/components/dialogs/ErrorDialog.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vapp/components/dialogs/ProcessingDialog.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vapp/interfaces/constants.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vapp/interfaces/enums.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vapp/lists/waffle-extras.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vapp/pages/waffles/_id/index.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vapp/static/waffles/toppings/whippedcream.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vapp/store/competition.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vapp/store/dialogs.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/contracts/WaffleMaker.sol" beforeDir="false" afterPath="$PROJECT_DIR$/contracts/WaffleMaker.sol" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vapp/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/vapp/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vapp/assets/alignment.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vapp/assets/global.css" beforeDir="false" afterPath="$PROJECT_DIR$/vapp/assets/global.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vapp/components/ConnectDialog.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vapp/components/dialogs/ConnectDialog.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vapp/components/TransactionDialog.vue" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/vapp/components/WaffleDisplay.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vapp/components/WaffleDisplay.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vapp/components/WaffleViewerDialog.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vapp/components/helper/CountdownTimer.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vapp/components/helper/CountdownTimer.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vapp/components/inputs/SelectField.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vapp/components/inputs/SelectField.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vapp/components/layout/toolbar/Toolbar.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vapp/components/layout/toolbar/Toolbar.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/vapp/contracts/Migrations.json" beforeDir="false" afterPath="$PROJECT_DIR$/vapp/contracts/Migrations.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/vapp/contracts/WaffleMaker.json" beforeDir="false" afterPath="$PROJECT_DIR$/vapp/contracts/WaffleMaker.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/vapp/database/Waffle/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/vapp/database/Waffle/index.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/vapp/database/Waffle/store.ts" beforeDir="false" afterPath="$PROJECT_DIR$/vapp/database/Waffle/store.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/vapp/database/WaffleLayer/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/vapp/database/WaffleLayer/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vapp/lists/waffle-bases.ts" beforeDir="false" afterPath="$PROJECT_DIR$/vapp/lists/waffle-bases.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vapp/database/WaffleLayer/store.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vapp/database/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/vapp/database/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vapp/layouts/default.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vapp/layouts/default.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/vapp/lists/waffle-plates.ts" beforeDir="false" afterPath="$PROJECT_DIR$/vapp/lists/waffle-plates.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vapp/lists/waffle-toppings.ts" beforeDir="false" afterPath="$PROJECT_DIR$/vapp/lists/waffle-toppings.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vapp/pages/create.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vapp/pages/create.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vapp/nuxt.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/vapp/nuxt.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vapp/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/vapp/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vapp/pages/create.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vapp/pages/waffles/create.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/vapp/pages/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vapp/pages/index.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/vapp/pages/my-waffles.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vapp/pages/my-waffles.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/vapp/pages/vote.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vapp/pages/vote.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vapp/pages/waffle/_id/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vapp/pages/waffle/_id/customize.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vapp/static/waffles/bases/whippedcream.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vapp/pages/waffle/_id/customize.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vapp/pages/waffles/_id/customize.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vapp/static/background.png" beforeDir="false" afterPath="$PROJECT_DIR$/vapp/static/background.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vapp/static/home/faq-background.png" beforeDir="false" afterPath="$PROJECT_DIR$/vapp/static/home/faq-background.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vapp/store/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/vapp/store/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vapp/store/transactions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/vapp/store/transactions.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,21 +80,35 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="javascript.nodejs.core.library.configured.version" value="12.18.3" />
     <property name="javascript.nodejs.core.library.typings.version" value="12.19.1" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$USER_HOME$/Pictures/DreamTime/Uncategorized/16122554-40941254606-RUN1-1606064802552-dreamtime.png" />
     <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.standard" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.standard" value="project" />
     <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.standard" value="" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="nodejs.jest.jest_package" value="" />
+    <property name="nodejs_interpreter_path" value="node" />
     <property name="nodejs_package_manager_path" value="npm" />
+    <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
+    <property name="settings.editor.selected.configurable" value="configurable.group.appearance" />
     <property name="ts.external.directory.path" value="C:\Program Files\JetBrains\PhpStorm 2020.2.1\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/vapp/pages/waffles" />
+      <recent name="$PROJECT_DIR$/vapp/components/dialogs" />
       <recent name="C:\Users\ypelletier\Desktop\Projects\WaffleHouse\vapp\components\helper" />
     </key>
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="NodeJSConfigurationType" path-to-node="node">
+      <method v="2" />
+    </configuration>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -96,6 +132,13 @@
       <workItem from="1605359610478" duration="64135000" />
       <workItem from="1605551106030" duration="488000" />
       <workItem from="1605678097640" duration="18186000" />
+      <workItem from="1605978613456" duration="4129000" />
+      <workItem from="1606053158551" duration="5000" />
+      <workItem from="1606053172653" duration="7101000" />
+      <workItem from="1606212006338" duration="26290000" />
+      <workItem from="1606309077433" duration="43448000" />
+      <workItem from="1606482833814" duration="3000" />
+      <workItem from="1606482848626" duration="19237000" />
     </task>
     <task id="LOCAL-00001" summary="Implemented waffle display">
       <created>1602652763796</created>
@@ -180,10 +223,21 @@
     <option name="LAST_COMMIT_MESSAGE" value="Fixed drizzle flow, replace connect wallet page with a dialog, implemented basic waffle loading system, replace some requires with modifiers" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="1304" y="178" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1605420878838">
-      <screen x="0" y="0" width="2560" height="1040" />
+    <state x="1868" y="169" width="719" height="801" key="#ESLint" timestamp="1606518118102">
+      <screen x="1024" y="0" width="2560" height="1080" />
+    </state>
+    <state x="1868" y="169" width="719" height="801" key="#ESLint/1024.0.2560.1080/0.203.1024.768@1024.0.2560.1080" timestamp="1606518118102" />
+    <state x="2180" y="363" width="331" height="312" key="#ESLint/1024.0.2560.1080/0.27.1024.741@1024.0.2560.1080" timestamp="1606152312471" />
+    <state x="2596" y="363" width="321" height="312" key="#ESLint/1440.0.2560.1080/0.153.1440.900@1440.0.2560.1080" timestamp="1605983196561" />
+    <state x="2020" y="283" width="649" height="548" key="#Notifications" timestamp="1606222118240">
+      <screen x="1024" y="0" width="2560" height="1080" />
+    </state>
+    <state x="2020" y="283" width="649" height="548" key="#Notifications/1024.0.2560.1080/0.203.1024.768@1024.0.2560.1080" timestamp="1606222118240" />
+    <state x="1607" y="69" width="1417" height="904" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1606224984558">
+      <screen x="1024" y="0" width="2560" height="1080" />
     </state>
     <state x="1304" y="178" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.2560.1040@0.0.2560.1040" timestamp="1605420878838" />
+    <state x="1607" y="69" width="1417" height="904" key="#com.intellij.execution.impl.EditConfigurationsDialog/1024.0.2560.1080/0.203.1024.768@1024.0.2560.1080" timestamp="1606224984558" />
     <state x="1725" y="235" key="#com.intellij.ide.util.MemberChooser" timestamp="1605429846939">
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
@@ -192,14 +246,20 @@
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
     <state x="1650" y="266" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.2560.1040@0.0.2560.1040" timestamp="1605353403581" />
-    <state x="1063" y="88" key="CommitChangelistDialog2" timestamp="1605551404156">
-      <screen x="0" y="0" width="2560" height="1040" />
+    <state x="2042" y="337" width="605" height="439" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1" timestamp="1606353717629">
+      <screen x="1024" y="0" width="2560" height="1080" />
+    </state>
+    <state x="2042" y="337" width="605" height="439" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/1024.0.2560.1080/0.203.1024.768@1024.0.2560.1080" timestamp="1606353717629" />
+    <state x="1977" y="27" width="1597" height="1053" key="CommitChangelistDialog2" timestamp="1606224911294">
+      <screen x="1024" y="0" width="2560" height="1080" />
     </state>
     <state x="1063" y="88" key="CommitChangelistDialog2/0.0.2560.1040@0.0.2560.1040" timestamp="1605551404156" />
-    <state x="1517" y="274" key="FileChooserDialogImpl" timestamp="1602738760433">
-      <screen x="0" y="0" width="2560" height="1040" />
+    <state x="1977" y="27" width="1597" height="1053" key="CommitChangelistDialog2/1024.0.2560.1080/0.203.1024.768@1024.0.2560.1080" timestamp="1606224911294" />
+    <state x="1771" y="192" width="530" height="655" key="FileChooserDialogImpl" timestamp="1606518113509">
+      <screen x="1024" y="0" width="2560" height="1080" />
     </state>
     <state x="1517" y="274" key="FileChooserDialogImpl/0.0.2560.1040@0.0.2560.1040" timestamp="1602738760433" />
+    <state x="1771" y="192" width="530" height="655" key="FileChooserDialogImpl/1024.0.2560.1080/0.203.1024.768@1024.0.2560.1080" timestamp="1606518113509" />
     <state width="1234" height="279" key="GridCell.Tab.0.bottom" timestamp="1603700405274">
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
@@ -216,6 +276,10 @@
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
     <state width="1234" height="279" key="GridCell.Tab.0.right/0.0.2560.1040@0.0.2560.1040" timestamp="1603700405274" />
+    <state x="1737" y="101" width="1226" height="912" key="SettingsEditor" timestamp="1606225137073">
+      <screen x="1024" y="0" width="2560" height="1080" />
+    </state>
+    <state x="1737" y="101" width="1226" height="912" key="SettingsEditor/1024.0.2560.1080/0.203.1024.768@1024.0.2560.1080" timestamp="1606225137073" />
     <state x="1512" y="252" key="Vcs.Push.Dialog.v2" timestamp="1605359748532">
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
@@ -228,18 +292,26 @@
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
     <state x="1521" y="130" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.2560.1040@0.0.2560.1040" timestamp="1605502360956" />
-    <state x="1737" y="437" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1605712104542">
-      <screen x="0" y="0" width="2560" height="1040" />
+    <state x="2761" y="454" width="466" height="236" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1606332314789">
+      <screen x="1024" y="0" width="2560" height="1080" />
     </state>
     <state x="1737" y="437" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.2560.1040@0.0.2560.1040" timestamp="1605712104542" />
-    <state x="1625" y="243" width="587" height="534" key="find.popup" timestamp="1605701345967">
-      <screen x="0" y="0" width="2560" height="1040" />
+    <state x="2761" y="454" width="466" height="236" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/1024.0.2560.1080/0.203.1024.768@1024.0.2560.1080" timestamp="1606332314789" />
+    <state x="2649" y="206" width="672" height="874" key="find.popup" timestamp="1606504286009">
+      <screen x="1024" y="0" width="2560" height="1080" />
     </state>
     <state x="1625" y="243" width="587" height="534" key="find.popup/0.0.2560.1040@0.0.2560.1040" timestamp="1605701345967" />
-    <state x="1587" y="244" width="672" height="677" key="run.anything.popup" timestamp="1605701884389">
-      <screen x="0" y="0" width="2560" height="1040" />
+    <state x="2649" y="206" width="672" height="874" key="find.popup/1024.0.2560.1080/0.203.1024.768@1024.0.2560.1080" timestamp="1606504286009" />
+    <state x="3065" y="206" width="672" height="874" key="find.popup/1440.0.2560.1080/0.153.1440.900@1440.0.2560.1080" timestamp="1605978985607" />
+    <state x="2195" y="285" width="689" height="474" key="jetbrains.nodejs.interpreters-dialog" timestamp="1606518114548">
+      <screen x="1024" y="0" width="2560" height="1080" />
+    </state>
+    <state x="2195" y="285" width="689" height="474" key="jetbrains.nodejs.interpreters-dialog/1024.0.2560.1080/0.203.1024.768@1024.0.2560.1080" timestamp="1606518114548" />
+    <state x="2611" y="253" width="672" height="704" key="run.anything.popup" timestamp="1606490018524">
+      <screen x="1024" y="0" width="2560" height="1080" />
     </state>
     <state x="1587" y="244" width="672" height="677" key="run.anything.popup/0.0.2560.1040@0.0.2560.1040" timestamp="1605701884389" />
+    <state x="2611" y="253" width="672" height="704" key="run.anything.popup/1024.0.2560.1080/0.203.1024.768@1024.0.2560.1080" timestamp="1606490018523" />
     <state x="1583" y="230" width="672" height="678" key="search.everywhere.popup" timestamp="1605357886190">
       <screen x="0" y="0" width="2560" height="1040" />
     </state>

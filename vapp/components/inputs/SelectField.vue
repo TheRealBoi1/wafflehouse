@@ -1,21 +1,19 @@
 <template>
   <div>
-    <v-col>
-      <v-row class="vh-center waffle-text-border field-title">
-        {{ title }}
-      </v-row>
-      <v-row class="vh-center">
+    <v-row class="vh-center text-center waffle-text-border field-title">
+      {{ title }}
+    </v-row>
+    <v-row class="field-row">
+      <v-col cols="2" class="pa-0 vh-center">
+        <v-img :src="require('~/static/left-arrow.png')" class="arrow-button" @click="cycleLeft" />
+      </v-col>
+      <v-col cols="8" class="vh-center text-center">
         {{ selectedItem.name }}
-      </v-row>
-      <v-row>
-        <v-col cols="6" class="pa-0 ma-0">
-          <v-img :src="require('~/static/left-arrow.png')" class="arrow-button" @click="cycleLeft" />
-        </v-col>
-        <v-col cols="6" class="pa-0 ma-0">
-          <v-img :src="require('~/static/right-arrow.png')" class="arrow-button" @click="cycleRight" />
-        </v-col>
-      </v-row>
-    </v-col>
+      </v-col>
+      <v-col cols="2" class="pa-0 vh-center">
+        <v-img :src="require('~/static/right-arrow.png')" class="arrow-button" @click="cycleRight" />
+      </v-col>
+    </v-row>
   </div>
 </template>
 
@@ -67,6 +65,10 @@ export default {
 </script>
 
 <style scoped>
+.field-row {
+  height: 85px;
+}
+
 .field-title {
   font-size: 24px;
 }

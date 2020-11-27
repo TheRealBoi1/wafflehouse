@@ -3,32 +3,17 @@
     :value="showDialog"
     transition="fade-transition"
     class="vh-center"
-    :overlay-opacity="0.8"
+    :overlay-opacity="0.95"
     persistent
     no-click-animation
   >
-    <v-card class="vh-center" height="80vh" color="#000000DD" flat>
-      <template v-if="transactionLabel">
+    <v-container class="page-container">
+      <v-card class="vh-center" height="80vh" color="#000000DD" flat>
         <v-col class="waffle-text dialog-title">
           {{ transactionLabel }}{{ dotDisplay }}
         </v-col>
-      </template>
-      <template v-else-if="errorLabel" class="vh-center">
-        <v-col>
-          <v-row class="vh-center waffle-text-border dialog-title mb-5">
-            Uh oh!
-          </v-row>
-          <v-row class="vh-center mb-5">
-            {{ errorLabel }}
-          </v-row>
-          <v-row class="vh-center">
-            <v-btn outlined @click="clearError">
-              Back
-            </v-btn>
-          </v-row>
-        </v-col>
-      </template>
-    </v-card>
+      </v-card>
+    </v-container>
   </v-dialog>
 </template>
 
@@ -37,7 +22,7 @@ import { mapGetters, mapActions } from 'vuex'
 import Waffle from '~/database/Waffle'
 
 export default {
-  name: 'WaffleViewerDialog',
+  name: 'ProcessingDialog',
   data () {
     return {
       dotCount: 0
@@ -46,7 +31,6 @@ export default {
   computed: {
     ...mapGetters('transactions', {
       transactionLabel: 'getTransactionLabel',
-      errorLabel: 'getTransactionError'
     }),
 
     dotDisplay () {

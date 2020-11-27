@@ -21,7 +21,7 @@ export const actions = {
     commit('setTransactionLabel', label)
     transaction
       .on('error', () => {
-        commit('setTransactionError', 'Transaction Failed')
+        commit('setTransactionError', 'Transaction has failed or has been cancelled')
       })
       .then(() => {
         commit('setTransactionLabel', null)

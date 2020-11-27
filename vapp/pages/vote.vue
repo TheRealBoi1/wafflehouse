@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container class="page-container">
     <v-col>
       <v-row>
         <v-col cols="12" md="8">

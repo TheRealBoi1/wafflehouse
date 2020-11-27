@@ -12,13 +12,18 @@ export const plugins = [
 
 export const state = () => {
   return {
-    dataLoading: false
+    dataLoading: false,
+    now: 0
   }
 }
 
 export const mutations = {
   setDataLoading (state, value: boolean) {
     state.dataLoading = value
+  },
+
+  setNow (state, value: number) {
+    state.now = value
   }
 }
 
@@ -34,8 +39,11 @@ export const actions = {
 
     const setupDataRefresh = () => {
       setInterval(() => {
+        dispatch('refreshNow')
+      }, 1000)
+      setInterval(() => {
         dispatch('refreshFromCachedCalls')
-      }, 10000)
+      }, 5000)
     }
 
     this.$web3 = new Web3(provider)
@@ -59,12 +67,21 @@ export const actions = {
       dispatch('accounts/refreshFromCachedCalls'),
       Waffle.dispatch('refreshFromCachedCalls')
     ])
+  },
+
+  refreshNow ({ commit }) {
+    const now = Math.round((new Date()).getTime() / 1000)
+    commit('setNow', now)
   }
 }
 
 export const getters = {
   isDataLoading (state) {
     return state.dataLoading
+  },
+
+  getNow (state) {
+    return state.now
   }
 }
 

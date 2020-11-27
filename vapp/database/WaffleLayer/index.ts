@@ -10,6 +10,7 @@ export default class WaffleLayer extends Model {
     return {
       id: this.uid(),
       waffleId: this.number(-1),
+      layerIndex: this.number(-1),
       baseId: this.number(0),
       toppingId: this.number(0)
     }

@@ -32,7 +32,6 @@ export default {
   ** Global CSS
   */
   css: [
-    '~assets/alignment.css',
     '~assets/global.css',
     '~assets/fonts.css'
   ],

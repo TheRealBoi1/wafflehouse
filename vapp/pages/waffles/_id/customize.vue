@@ -1,43 +1,43 @@
 <template>
-  <v-container>
-    <v-col v-if="!loading" class="pa-0 ma-0">
+  <v-container class="page-container">
+    <v-col v-if="!loading">
       <v-row class="vh-center waffle-text-border waffle-time-label">
         It's Waffle Time!
       </v-row>
       <v-row>
         <v-col cols="12" md="6">
-          <v-card class="wafflemaker-container" color="#000000AA" tile>
+          <v-card height="450" class="wafflemaker-container" color="#000000AA" tile>
             <v-card-title class="vh-center wafflemaker-title waffle-text">
               Wafflemaker 9000
             </v-card-title>
-            <v-card-text>
-              <v-row>
+            <v-card-text class="vh-center fill-height">
                 <waffle-display :waffle="modifiedViewedWaffle" />
-              </v-row>
             </v-card-text>
           </v-card>
         </v-col>
         <v-col cols="12" md="6">
+          <v-row v-if="showFullCustomization">
+            <v-text-field label="Name" v-model="name" :counter="MAX_NAME_LENGTH" outlined dense />
+          </v-row>
+          <v-row v-if="showFullCustomization">
+            <v-textarea label="Description" height="75" v-model="description" :counter="MAX_DESCRIPTION_LENGTH" no-resize outlined dense />
+          </v-row>
           <v-row>
-            <v-col cols="6" md="4" order="1">
+            <v-col cols="12" md="6">
               <select-field v-model="baseId" title="Base" :list="baseList" />
             </v-col>
-            <v-col cols="6" md="4" order="2">
+            <v-col cols="12" md="6">
               <select-field v-model="toppingId" title="Topping" :list="toppingList" />
             </v-col>
-            <v-col cols="6" md="4" order="3">
-              <select-field v-model="toppingId" title="Extra" :list="toppingList" />
+            <v-col cols="12" md="6" v-if="showFullCustomization">
+              <select-field v-model="extraId" title="Extra" :list="extraList" />
             </v-col>
-            <v-col cols="12" md="8" order="5" order-md="4">
-              <v-text-field outlined />
-              <v-textarea outlined />
-            </v-col>
-            <v-col cols="6" md="4" order="4" order-md="5">
+            <v-col cols="12" md="6" v-if="showFullCustomization">
               <select-field v-model="plateId" title="Plate" :list="plateList" />
             </v-col>
           </v-row>
           <v-row class="vh-center">
-            <v-btn outlined @click="customizeWaffleLayer">
+            <v-btn :disabled="!canSubmit" outlined @click="submitWaffleCustomization">
               Confirm
             </v-btn>
           </v-row>
@@ -53,7 +53,9 @@ import WaffleDisplay from '~/components/WaffleDisplay.vue'
 import baseList from '~/lists/waffle-bases'
 import toppingList from '~/lists/waffle-toppings'
 import plateList from '~/lists/waffle-plates'
+import extraList from '~/lists/waffle-extras'
 import SelectField from '~/components/inputs/SelectField.vue'
+import { MAX_NAME_LENGTH, MAX_DESCRIPTION_LENGTH } from '~/interfaces/constants'
 
 export default {
   name: 'Customize',
@@ -64,10 +66,15 @@ export default {
       error: '',
 
       viewedWaffle: null,
+      name: '',
+      description: '',
       baseId: 0,
       toppingId: 0,
       extraId: 0,
-      plateId: 0
+      plateId: 0,
+
+      MAX_NAME_LENGTH,
+      MAX_DESCRIPTION_LENGTH
     }
   },
   computed: {
@@ -78,6 +85,7 @@ export default {
       const newWaffle = this.viewedWaffle
       newWaffle.layers[newWaffle.layers.length - 1].baseId = this.baseId
       newWaffle.layers[newWaffle.layers.length - 1].toppingId = this.toppingId
+      newWaffle.extraId = this.extraId
       newWaffle.plateId = this.plateId
       return newWaffle
     },
@@ -89,7 +97,7 @@ export default {
       return toppingList[this.toppingId]
     },
     extra () {
-      return WaffleBaseType[this.baseId]
+      return extraList[this.extraId]
     },
     plate () {
       return plateList[this.plateId]
@@ -102,10 +110,28 @@ export default {
       return toppingList
     },
     extraList () {
-      return baseList
+      return extraList
     },
     plateList () {
       return plateList
+    },
+
+    nameLengthValid () {
+      return this.name.length <= MAX_NAME_LENGTH && this.name.length > 0
+    },
+    descriptionLengthValid () {
+      return this.description.length < MAX_DESCRIPTION_LENGTH
+    },
+    canSubmit () {
+      if(this.showFullCustomization) {
+        return this.nameLengthValid && this.descriptionLengthValid
+      } else {
+        return this.baseId > 0 || this.toppingId > 0
+      }
+    },
+
+    showFullCustomization () {
+      return this.viewedWaffle.layers.length === 1
     }
   },
   async mounted () {
@@ -117,9 +143,11 @@ export default {
     }
   },
   methods: {
-    customizeWaffleLayer () {
-      Waffle.dispatch('customizeWaffleLayer', {
+    submitWaffleCustomization () {
+      Waffle.dispatch('submitWaffleCustomization', {
         waffleId: this.viewedWaffleId,
+        name: this.name,
+        description: this.description,
         baseId: this.baseId,
         toppingId: this.toppingId,
         extraId: this.extraId,
