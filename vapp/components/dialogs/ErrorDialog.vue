@@ -1,27 +1,25 @@
 <template>
   <v-dialog
-    :value="true"
+    :value="showDialog"
     transition="fade-transition"
     class="vh-center"
     persistent
     no-click-animation
     fullscreen
   >
-    <v-card class="vh-center" color="#000000DD" flat>
+    <v-card class="vh-center" color="#000000EE" flat>
       <v-col class="content-wrapper">
         <v-row class="vh-center mb-5 waffle-text-border">
           <h1>
-            Uh oh!
+            {{ title }}
           </h1>
         </v-row>
         <v-row class="vh-center mb-5 text-center">
-          Once you confirm, you’ll send back your unused tokens to your Ethereum wallet.
-          <br><br>
-          You won’t be able to make any more waffles!
+          {{ body }}
         </v-row>
         <v-row class="vh-center">
-          <v-btn outlined width="50%">
-            Understood
+          <v-btn outlined width="50%" @click="confirm">
+            {{ actionLabel }}
           </v-btn>
         </v-row>
       </v-col>
@@ -30,8 +28,47 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from 'vuex'
+import { DialogType } from '~/interfaces/enums'
+
 export default {
-  name: 'ErrorDialog'
+  name: 'ErrorDialog',
+  data () {
+    return {
+      title: null,
+      body: null,
+      action: null,
+      actionLabel: null
+    }
+  },
+  computed: {
+    ...mapGetters('dialogs', {
+      dialogType: 'getDialogType',
+      dialogOptions: 'getDialogOptions'
+    }),
+
+    showDialog () {
+      return this.dialogType === DialogType.Error
+    }
+  },
+  watch: {
+    showDialog (value) {
+      if (value) {
+        this.title = this.dialogOptions.title
+        this.body = this.dialogOptions.body
+        this.action = this.dialogOptions.affirmativeAction
+        this.actionLabel = this.dialogOptions.affirmativeLabel
+      }
+    }
+  },
+  methods: {
+    ...mapActions('dialogs', ['closeDialogs']),
+
+    confirm () {
+      this.closeDialogs()
+      this.action()
+    }
+  }
 }
 </script>
 

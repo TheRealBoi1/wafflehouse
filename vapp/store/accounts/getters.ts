@@ -1,29 +1,31 @@
+import { GetterTree } from 'vuex'
+import { AccountsState } from '~/store/accounts/state'
+import { RootState } from '~/store/state'
+
 const abbreviateAddress: Function = (address: string) => {
   const begin = address.slice(0, 6)
   const end = address.slice(38)
   return `${begin}...${end}`
 }
 
-export default {
-  getActiveAccount (state: any) {
-    return state.activeAccount
+const getters: GetterTree<AccountsState, RootState> = {
+  getActiveAccount ({ activeAccount }) {
+    return activeAccount
   },
-
-  getActiveAccountAbbreviated (state: any) {
-    const activeAccount = state.activeAccount
+  getActiveAccountAbbreviated ({ activeAccount }) {
     return abbreviateAddress(activeAccount)
   },
-
-  isAccountActive (state: any) {
-    const activeAccount = state.activeAccount
+  isAccountActive ({ activeAccount }) {
     return activeAccount != null
   },
 
-  getOwnedWaffleIds (state: any) {
-    return state.ownedWaffleIds
+  getOwnedWaffleIds ({ ownedWaffleIds }) {
+    return ownedWaffleIds
   },
 
-  getVotedWaffleIds (state: any) {
-    return state.votedWaffleIds
+  getVotedWaffleIds ({ votedWaffleIds }) {
+    return votedWaffleIds
   }
 }
+
+export default getters

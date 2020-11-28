@@ -48,13 +48,30 @@
 </template>
 
 <script lang="ts">
+import { mapGetters } from 'vuex'
 import Waffle from '~/database/Waffle'
 
 export default {
   name: 'Create',
+  computed: {
+    ...mapGetters('accounts', {
+      ownedWaffleIds: 'getOwnedWaffleIds'
+    })
+  },
   methods: {
     createWaffle () {
-      Waffle.dispatch('createWaffle')
+      if (this.ownedWaffleIds.length === 0) {
+        this.$store.dispatch('dialogs/displayConfirmation', {
+          title: 'Create new waffle?',
+          body: 'This will begin a 24 hour period baking period and will cost you 0.05 YFL',
+          affirmativeAction: () => {
+            Waffle.dispatch('createWaffle')
+          },
+          affirmativeLabel: 'Create Waffle'
+        })
+      } else {
+        Waffle.dispatch('createWaffle')
+      }
     }
   }
 }

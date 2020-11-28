@@ -73,9 +73,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import CountdownTimer from '~/components/helper/CountdownTimer'
 import Waffle from '~/database/Waffle'
-import WaffleDisplay from '~/components/WaffleDisplay'
 import InventoryWaffle from '~/components/InventoryWaffle'
 import { WaffleStatus } from '~/interfaces/enums'
 
@@ -90,6 +88,14 @@ export default {
       WaffleStatus
     }
   },
+  computed: {
+    ...mapGetters({
+      now: 'getNow'
+    }),
+    accountWaffles () {
+      return Waffle.getters('getActiveAccountWaffles')
+    }
+  },
   methods: {
     publishWaffle (waffleId) {
       Waffle.dispatch('publishWaffle', waffleId)
@@ -102,14 +108,6 @@ export default {
     },
     customizeWaffle (waffleId) {
       this.$router.push(`/waffle/${waffleId}/customize`)
-    }
-  },
-  computed: {
-    ...mapGetters({
-      now: 'getNow'
-    }),
-    accountWaffles () {
-      return Waffle.getters('getActiveAccountWaffles')
     }
   }
 }

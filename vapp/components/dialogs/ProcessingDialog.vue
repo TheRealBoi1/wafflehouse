@@ -10,7 +10,7 @@
     <v-container class="page-container">
       <v-card class="vh-center" height="80vh" color="#000000DD" flat>
         <v-col class="waffle-text dialog-title">
-          {{ transactionLabel }}{{ dotDisplay }}
+          {{ title }}{{ dotDisplay }}
         </v-col>
       </v-card>
     </v-container>
@@ -18,39 +18,42 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex'
-import Waffle from '~/database/Waffle'
+import { mapGetters } from 'vuex'
+import { DialogType } from '~/interfaces/enums'
 
 export default {
   name: 'ProcessingDialog',
   data () {
     return {
+      title: null,
       dotCount: 0
     }
   },
   computed: {
-    ...mapGetters('transactions', {
-      transactionLabel: 'getTransactionLabel'
+    ...mapGetters('dialogs', {
+      dialogType: 'getDialogType',
+      dialogOptions: 'getDialogOptions'
     }),
+
+    showDialog () {
+      return this.dialogType === DialogType.Process
+    },
 
     dotDisplay () {
       return '.'.repeat(this.dotCount)
-    },
-
-    showDialog () {
-      return this.transactionLabel || this.errorLabel
+    }
+  },
+  watch: {
+    showDialog (value) {
+      if (value) {
+        this.title = this.dialogOptions.title
+      }
     }
   },
   mounted () {
     this.mountDotInterval()
   },
   methods: {
-    ...mapActions('transactions', ['clearError']),
-
-    setWaffleFavorite (waffleId, value) {
-      Waffle.dispatch('setWaffleFavorite', { waffleId, value })
-    },
-
     mountDotInterval () {
       setInterval(() => {
         this.dotCount++

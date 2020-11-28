@@ -21,18 +21,6 @@ const waffleBaseList: WaffleBaseData[] = [
     image: require('~/static/waffles/bases/raspberry.png')
   },
   {
-    name: 'Brown Sugar',
-    image: require('~/static/waffles/bases/almondbutter.png') // To change
-  },
-  {
-    name: 'Cinnamon',
-    image: require('~/static/waffles/bases/almondbutter.png') // To change
-  },
-  {
-    name: 'Apple Butter',
-    image: require('~/static/waffles/bases/almondbutter.png') // To change
-  },
-  {
     name: 'Molasses',
     image: require('~/static/waffles/bases/molasses.png')
   },
@@ -47,10 +35,6 @@ const waffleBaseList: WaffleBaseData[] = [
   {
     name: 'Maple Syrup',
     image: require('~/static/waffles/bases/maple.png')
-  },
-  {
-    name: 'Caramel',
-    image: require('~/static/waffles/bases/almondbutter.png') // To change
   },
   {
     name: 'Greek Yogurt',
@@ -77,18 +61,6 @@ const waffleBaseList: WaffleBaseData[] = [
     image: require('~/static/waffles/bases/nutella.png')
   },
   {
-    name: 'Marshmallow Cream',
-    image: require('~/static/waffles/bases/almondbutter.png') // To change
-  },
-  {
-    name: 'Honey',
-    image: require('~/static/waffles/bases/almondbutter.png') // To change
-  },
-  {
-    name: 'Cream Cheese',
-    image: require('~/static/waffles/bases/almondbutter.png') // To change
-  },
-  {
     name: 'Coconut Syrup',
     image: require('~/static/waffles/bases/coconut.png')
   },
@@ -101,20 +73,12 @@ const waffleBaseList: WaffleBaseData[] = [
     image: require('~/static/waffles/bases/meltedcheese.png')
   },
   {
-    name: 'Glazed Sugar',
-    image: require('~/static/waffles/bases/almondbutter.png') // To change
-  },
-  {
     name: 'Coffee Liqueur',
     image: require('~/static/waffles/bases/coffeeliqueur.png')
   },
   {
     name: 'Apple Sauce',
     image: require('~/static/waffles/bases/applesauce.png')
-  },
-  {
-    name: 'Lemon Syrup',
-    image: require('~/static/waffles/bases/almondbutter.png') // To change
   }
 ]
 

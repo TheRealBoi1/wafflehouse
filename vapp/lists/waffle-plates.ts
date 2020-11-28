@@ -26,7 +26,7 @@ const wafflePlateList: WafflePlateData[] = [
   },
   {
     name: 'Purple Plate',
-    image: require('~/static/waffles/plates/purple.png') // To change
+    image: require('~/static/waffles/plates/purple.png')
   },
   {
     name: 'Red Plate',

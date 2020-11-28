@@ -121,48 +121,48 @@ export default {
 
     createWaffle ({ dispatch }: any) {
       const activeAccount = this.$web3.currentProvider.selectedAddress
-      dispatch('transactions/dispatchTransaction', {
-        label: 'Creating Waffle',
+      dispatch('dispatchTransaction', {
+        title: 'Creating Waffle',
         transaction: this.$drizzle.contracts.WaffleMaker.methods.createWaffle().send({ from: activeAccount })
       }, { root: true })
     },
 
     submitWaffleCustomization ({ dispatch }: any, { waffleId, name, description, baseId, toppingId, extraId, plateId }) {
       const activeAccount = this.$web3.currentProvider.selectedAddress
-      dispatch('transactions/dispatchTransaction', {
-        label: 'Customizing Waffle',
+      dispatch('dispatchTransaction', {
+        title: 'Customizing Waffle',
         transaction: this.$drizzle.contracts.WaffleMaker.methods.submitWaffleCustomization(waffleId, name, description, baseId, toppingId, extraId, plateId).send({ from: activeAccount })
       }, { root: true })
     },
 
     advanceWaffleCustomizationStep ({ dispatch }: any, waffleId: number) {
       const activeAccount = this.$web3.currentProvider.selectedAddress
-      dispatch('transactions/dispatchTransaction', {
-        label: 'Adding Ingredient',
+      dispatch('dispatchTransaction', {
+        title: 'Adding Ingredient',
         transaction: this.$drizzle.contracts.WaffleMaker.methods.advanceWaffleCustomizationStep(waffleId).send({ from: activeAccount })
       }, { root: true })
     },
 
     bakeWaffleLayer ({ dispatch }: any, waffleId: number) {
       const activeAccount = this.$web3.currentProvider.selectedAddress
-      dispatch('transactions/dispatchTransaction', {
-        label: 'Adding Waffle Layer',
+      dispatch('dispatchTransaction', {
+        title: 'Adding Waffle Layer',
         transaction: this.$drizzle.contracts.WaffleMaker.methods.bakeWaffleLayer(waffleId).send({ from: activeAccount })
       }, { root: true })
     },
 
     publishWaffle ({ dispatch }: any, waffleId) {
       const activeAccount = this.$web3.currentProvider.selectedAddress
-      dispatch('transactions/dispatchTransaction', {
-        label: 'Publishing Waffle',
+      dispatch('dispatchTransaction', {
+        title: 'Publishing Waffle',
         transaction: this.$drizzle.contracts.WaffleMaker.methods.publishWaffle(waffleId).send({ from: activeAccount })
       }, { root: true })
     },
 
     voteWaffle ({ dispatch }: any, waffleId) {
       const activeAccount = this.$web3.currentProvider.selectedAddress
-      dispatch('transactions/dispatchTransaction', {
-        label: 'Voting',
+      dispatch('dispatchTransaction', {
+        title: 'Voting',
         transaction: this.$drizzle.contracts.WaffleMaker.methods.voteWaffle(waffleId).send({ from: activeAccount })
       }, { root: true })
     },

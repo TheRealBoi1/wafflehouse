@@ -144,20 +144,32 @@ import { WaffleStatus } from '~/interfaces/enums'
 export default {
   name: 'InventoryWaffle',
   components: { CountdownTimer, WaffleDisplay },
-  data () {
-    return {
-      WaffleStatus
-    }
-  },
   props: {
     waffle: {
       type: Waffle as Object,
       required: true
     }
   },
+  data () {
+    return {
+      WaffleStatus
+    }
+  },
+  computed: {
+    ...mapGetters({
+      now: 'getNow'
+    })
+  },
   methods: {
     publishWaffle (waffleId) {
-      Waffle.dispatch('publishWaffle', waffleId)
+      this.$store.dispatch('dialogs/displayConfirmation', {
+        title: 'Publish this waffle?',
+        body: 'Your waffle will be open for voting, but you will no longer be able to do customize it further.',
+        affirmativeAction: () => {
+          Waffle.dispatch('publishWaffle', waffleId)
+        },
+        affirmativeLabel: 'Publish Waffle'
+      })
     },
     bakeWaffleLayer (waffleId) {
       Waffle.dispatch('bakeWaffleLayer', waffleId)
@@ -168,11 +180,6 @@ export default {
     customizeWaffle (waffleId) {
       this.$router.push(`/waffle/${waffleId}/customize`)
     }
-  },
-  computed: {
-    ...mapGetters({
-      now: 'getNow'
-    })
   }
 }
 </script>

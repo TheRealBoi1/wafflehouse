@@ -1,3 +1,11 @@
+export enum DialogType {
+  Closed,
+  Process,
+  Confirm,
+  Spending,
+  Error
+}
+
 export enum WaffleStatus {
   Idle,
   Burned,

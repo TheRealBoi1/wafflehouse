@@ -1,9 +1,13 @@
-export default () => {
+const state = () => {
   return {
-    activeAccount: null,
-    ownedWaffleIds: [],
-    votedWaffleIds: [],
+    activeAccount: null as string,
+    ownedWaffleIds: [] as number[],
+    votedWaffleIds: [] as number[],
 
-    dataKey: null
+    dataKey: null as string
   }
 }
+
+export type AccountsState = ReturnType<typeof state>
+
+export default state

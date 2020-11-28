@@ -21,10 +21,6 @@ const waffleToppingList: WaffleToppingData[] = [
     image: require('~/static/waffles/toppings/bacon.png')
   },
   {
-    name: 'Crushed Peanuts',
-    image: require('~/static/waffles/toppings/chocolatechunks.png') // To change
-  },
-  {
     name: 'Sprinkles',
     image: require('~/static/waffles/toppings/sprinkles.png')
   },
@@ -41,24 +37,12 @@ const waffleToppingList: WaffleToppingData[] = [
     image: require('~/static/waffles/toppings/cherry.png')
   },
   {
-    name: 'Fruit Mix',
-    image: require('~/static/waffles/toppings/chocolatechunks.png') // To change
-  },
-  {
     name: 'Grated Cheese',
     image: require('~/static/waffles/toppings/gratedcheese.png')
   },
   {
     name: 'Hershey Kiss',
     image: require('~/static/waffles/toppings/hersheykiss.png')
-  },
-  {
-    name: 'Pocket Coffee',
-    image: require('~/static/waffles/toppings/chocolatechunks.png') // To change
-  },
-  {
-    name: 'Chocolate Smiley Face',
-    image: require('~/static/waffles/toppings/chocolatechunks.png') // To change
   },
   {
     name: 'Chocolate XD Face',
@@ -83,10 +67,6 @@ const waffleToppingList: WaffleToppingData[] = [
   {
     name: 'Raisins',
     image: require('~/static/waffles/toppings/raisins.png')
-  },
-  {
-    name: 'Apple Crumble',
-    image: require('~/static/waffles/toppings/chocolatechunks.png') // To change
   },
   {
     name: 'M&Ms',

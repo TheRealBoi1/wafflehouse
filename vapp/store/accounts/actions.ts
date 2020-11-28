@@ -1,8 +1,13 @@
-export default {
-  async refreshAccount ({ commit, dispatch }: any) {
+import { ActionTree } from 'vuex'
+import { AccountsState } from '~/store/accounts/state'
+import { RootState } from '~/store/state'
+
+// ************ ACTIONS *************
+const actions: ActionTree<AccountsState, RootState> = {
+  async refreshAccount ({ dispatch, commit }) {
     if (this.$web3 && this.$drizzle) {
       const activeAccount = this.$web3.currentProvider.selectedAddress
-      commit('setActiveAccount', activeAccount)
+      commit('SET_ACTIVE_ACCOUNT', { activeAccount })
 
       await dispatch('setupCachedCalls')
     }
@@ -18,8 +23,11 @@ export default {
       ])
       const dataKey = results[0]
       const profileInfo = results[1]
-      commit('setDataKey', dataKey)
-      commit('setAccountWaffleIds', profileInfo)
+      commit('SET_DATA_KEY', { dataKey })
+      commit('SET_ACCOUNT_WAFFLE_IDS', {
+        ownedWaffleIds: profileInfo.ownedWaffleIds,
+        votedWaffleIds: profileInfo.votedWaffleIds
+      })
     }
     dispatch('refreshFromCachedCalls')
   },
@@ -29,12 +37,14 @@ export default {
     const drizzleState = this.$drizzle.store.getState()
     if (dataKey && drizzleState.contracts.WaffleMaker.getProfileInfo[dataKey]) {
       const profileInfo = drizzleState.contracts.WaffleMaker.getProfileInfo[dataKey].value
-      commit('setAccountWaffleIds', profileInfo)
+      commit('SET_ACCOUNT_WAFFLE_IDS', profileInfo)
     } else {
-      commit('setAccountWaffleIds', {
+      commit('SET_ACCOUNT_WAFFLE_IDS', {
         ownedWaffleIds: [],
         votedWaffleIds: []
       })
     }
   }
 }
+
+export default actions
