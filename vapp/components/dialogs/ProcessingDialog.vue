@@ -30,7 +30,7 @@ export default {
   },
   computed: {
     ...mapGetters('transactions', {
-      transactionLabel: 'getTransactionLabel',
+      transactionLabel: 'getTransactionLabel'
     }),
 
     dotDisplay () {

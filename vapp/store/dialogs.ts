@@ -2,11 +2,9 @@ export const state = () => {
   return {
     confirmLabel: null,
     confirmAction: null,
-    loadingLabel: null,
-    errorLabel: null,
 
-    dataLoading: false,
-    now: 0
+    loadingLabel: null,
+    errorLabel: null
   }
 }
 
@@ -15,7 +13,7 @@ export const mutations = {
     state.confirmLabel = label
     state.confirmAction = null
   },
-  setLoadingLabel (state, loadingLabel) {
+  setProcessingLabel (state, loadingLabel) {
     state.error = error
     state.label = null
   },
@@ -25,9 +23,10 @@ export const mutations = {
 }
 
 export const actions = {
-  confirm ({ commit }, {label, action}) {
+  confirm ({ commit }, { label, action }) {
     commit('setConfirmLabel')
-  }
+  },
+  error ({ commit }, {})
 }
 
 export const getters = {

@@ -82,8 +82,6 @@ import { WaffleStatus } from '~/interfaces/enums'
 export default {
   name: 'MyWaffles',
   components: {
-    CountdownTimer,
-    WaffleDisplay,
     InventoryWaffle
   },
   middleware: 'loadAccountWaffles',
@@ -104,7 +102,7 @@ export default {
     },
     customizeWaffle (waffleId) {
       this.$router.push(`/waffle/${waffleId}/customize`)
-    },
+    }
   },
   computed: {
     ...mapGetters({
@@ -189,9 +187,5 @@ export default {
 
   .make-waffle-button.mobile {
     font-size: 20px !important;
-  }
-
-  .add-ingredient-button {
-    font-size: 10px;
   }
 </style>

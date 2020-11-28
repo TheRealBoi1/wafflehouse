@@ -7,7 +7,7 @@ export const state = () => {
 }
 
 export const mutations = {
-  setCompetitionData (state, {onePrize, yflPrize, competitionEndTimestamp}) {
+  setCompetitionData (state, { onePrize, yflPrize, competitionEndTimestamp }) {
     state.onePrize = onePrize
     state.yflPrize = yflPrize
     state.competitionEndTimestamp = competitionEndTimestamp

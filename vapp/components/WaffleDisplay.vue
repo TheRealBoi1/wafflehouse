@@ -136,7 +136,6 @@ export default {
       return extraList[this.waffle.extraId]
     },
 
-
     layerCount () {
       return this.waffle.layers.length
     },

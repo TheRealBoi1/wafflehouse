@@ -31,15 +31,15 @@ import ToolbarNews from '~/components/layout/toolbar/ToolbarNews'
 
 export default {
   name: 'TopBar',
+  components: {
+    ToolbarButton,
+    ToolbarNews
+  },
   props: {
     hide: {
       type: Boolean,
       default: false
     }
-  },
-  components: {
-    ToolbarButton,
-    ToolbarNews
   }
 }
 </script>

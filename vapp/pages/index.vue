@@ -170,14 +170,14 @@
 <script>
 import { mapActions, mapGetters } from 'vuex'
 import RecentWafflesDisplay from '~/components/RecentWafflesDisplay'
-import CountdownTimer from "~/components/helper/CountdownTimer";
+import CountdownTimer from '~/components/helper/CountdownTimer'
 
 export default {
   name: 'Index',
   methods: {
     ...mapActions('competition', ['loadCompetitionData'])
   },
-  async mounted() {
+  async mounted () {
     this.$nuxt.$loading.start()
     await this.loadCompetitionData()
     this.$nuxt.$loading.finish()

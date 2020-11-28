@@ -1,4 +1,4 @@
-import {Model} from '@vuex-orm/core'
+import { Model } from '@vuex-orm/core'
 
 import WaffleLayer from '~/database/WaffleLayer'
 import {
@@ -7,7 +7,7 @@ import {
   CUSTOMIZE_DURATION,
   MAX_WAFFLE_LAYERS
 } from '~/interfaces/constants'
-import {CustomizationStep, WaffleStatus} from '~/interfaces/enums'
+import { CustomizationStep, WaffleStatus } from '~/interfaces/enums'
 
 export default class Waffle extends Model {
   static entity = 'waffles'
@@ -63,11 +63,11 @@ export default class Waffle extends Model {
   }
 
   status (now) {
-    if(this.customizationStep > CustomizationStep.NOT_CUSTOMIZED && this.customizationStep < CustomizationStep.DONE && now > this.customizationWindowEnd) {
+    if (this.customizationStep > CustomizationStep.NOT_CUSTOMIZED && this.customizationStep < CustomizationStep.DONE && now > this.customizationWindowEnd) {
       return WaffleStatus.Burned
-    } else if(this.customizationStep == CustomizationStep.NOT_CUSTOMIZED){
-      if(now < this.processEnd) {
-        if(this.layers.length == 1) {
+    } else if (this.customizationStep === CustomizationStep.NOT_CUSTOMIZED) {
+      if (now < this.processEnd) {
+        if (this.layers.length === 1) {
           return WaffleStatus.Baking
         } else {
           return WaffleStatus.AddingLayer
@@ -75,25 +75,25 @@ export default class Waffle extends Model {
       } else {
         return WaffleStatus.Idle
       }
-    } else if(this.customizationStep === CustomizationStep.DONE && now < this.processEnd) {
+    } else if (this.customizationStep === CustomizationStep.DONE && now < this.processEnd) {
       return WaffleStatus.Customizing
-    } else if(this.customizationStep > CustomizationStep.NOT_CUSTOMIZED) {
-      if(now < this.customizationWindowStart) {
+    } else if (this.customizationStep > CustomizationStep.NOT_CUSTOMIZED) {
+      if (now < this.customizationWindowStart) {
         return WaffleStatus.Customizing
-      } else if(this.customizationStep === CustomizationStep.PLATE) {
+      } else if (this.customizationStep === CustomizationStep.PLATE) {
         return WaffleStatus.WaitingPlate
-      } else if(this.customizationStep === CustomizationStep.BASE) {
+      } else if (this.customizationStep === CustomizationStep.BASE) {
         return WaffleStatus.WaitingBase
-      } else if(this.customizationStep === CustomizationStep.TOPPING) {
+      } else if (this.customizationStep === CustomizationStep.TOPPING) {
         return WaffleStatus.WaitingTopping
-      } else if(this.customizationStep === CustomizationStep.EXTRA) {
+      } else if (this.customizationStep === CustomizationStep.EXTRA) {
         return WaffleStatus.WaitingExtra
       }
     }
   }
 
   statusLabel (now) {
-    switch(this.status(now)) {
+    switch (this.status(now)) {
       case WaffleStatus.Idle:
         return ''
       case WaffleStatus.Baking:

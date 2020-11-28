@@ -17,7 +17,7 @@
             </v-row>
           </v-col>
           <v-col cols="12" md="4" class="px-5 vh-center">
-            <v-btn @click="advanceWaffleCustomizationStep(waffle.id)" class="add-ingredient-button" :disabled="!waffle.isActionRequired(now)" width="100%" height="125">
+            <v-btn class="add-ingredient-button" :disabled="!waffle.isActionRequired(now)" width="100%" height="125" @click="advanceWaffleCustomizationStep(waffle.id)">
               <v-col>
                 <v-row class="vh-center waffle-text mb-5">
                   <h1>
@@ -71,8 +71,15 @@
         <v-row v-if="waffle.status(now) !== WaffleStatus.Burned && !waffle.published" class="px-5">
           <v-col cols="6" class="ma-0 pa-0">
             <v-tooltip top transition="fade-transition">
-              <template v-slot:activator="{ on, attrs }">
-                <v-card :to="`/waffles/${waffle.id}/customize`" v-on="on" width="100%" height="65" flat class="vh-center waffle-text option-button left">
+              <template v-slot:activator="{ on }">
+                <v-card
+                  :to="`/waffles/${waffle.id}/customize`"
+                  width="100%"
+                  height="65"
+                  flat
+                  class="vh-center waffle-text option-button left"
+                  v-on="on"
+                >
                   Customize
                 </v-card>
               </template>
@@ -81,8 +88,16 @@
           </v-col>
           <v-col cols="6" class="ma-0 pa-0">
             <v-tooltip top transition="fade-transition">
-              <template v-slot:activator="{ on, attrs }">
-                <v-card @click="bakeWaffleLayer(waffle.id)" v-on="on" :disabled="waffle.maxLayersReached" width="100%" height="65" flat class="vh-center waffle-text option-button right">
+              <template v-slot:activator="{ on }">
+                <v-card
+                  :disabled="waffle.maxLayersReached"
+                  width="100%"
+                  height="65"
+                  flat
+                  class="vh-center waffle-text option-button right"
+                  @click="bakeWaffleLayer(waffle.id)"
+                  v-on="on"
+                >
                   Add Layer
                 </v-card>
               </template>
@@ -138,7 +153,7 @@ export default {
     waffle: {
       type: Waffle as Object,
       required: true
-    },
+    }
   },
   methods: {
     publishWaffle (waffleId) {
@@ -152,7 +167,7 @@ export default {
     },
     customizeWaffle (waffleId) {
       this.$router.push(`/waffle/${waffleId}/customize`)
-    },
+    }
   },
   computed: {
     ...mapGetters({
@@ -177,18 +192,6 @@ export default {
   border-radius: 25px;
   border: 6px rgba(255, 255, 255, 0.7) solid;
   background: rgba(30, 188, 223, 0.33);
-}
-
-.votes-value {
-  font-size: 50px;
-}
-
-.create-waffle-button {
-  font-size: 40px;
-  border-radius: 25px;
-  border: 6px rgba(255, 255, 255, 0.7) solid;
-  background: rgba(215, 215, 215, 0.33);
-  user-select: none;
 }
 
 .option-button {
@@ -221,19 +224,6 @@ export default {
   border-bottom-right-radius: 25px;
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
-}
-
-.make-waffle-button {
-  padding: 20px;
-  font-size: 40px;
-  border-radius: 50px;
-  text-shadow: -2px 0 #000000, 0 2px #000000, 2px 0 #000000, 0 -2px #000000;
-  border: 3px white solid;
-  background: radial-gradient(50% 50% at 50% 50%, #4BADC2 0%, #003553 100%);
-}
-
-.make-waffle-button.mobile {
-  font-size: 20px !important;
 }
 
 .add-ingredient-button {

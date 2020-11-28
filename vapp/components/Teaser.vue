@@ -1,9 +1,9 @@
 <template>
   <v-card flat width="100vw" height="100vh" class="pa-0 ma-0 card-container">
     <div>
-      <img v-if="$vuetify.breakpoint.mdAndUp" :src="require('~/static/teaser/curtain-left.png')" class="left-curtain" />
-      <img v-if="$vuetify.breakpoint.lgAndDown && !$vuetify.breakpoint.smAndDown" :src="require('~/static/teaser/curtain-top.png')" class="top-curtain" />
-      <img v-if="$vuetify.breakpoint.mdAndUp" :src="require('~/static/teaser/curtain-right.png')" class="right-curtain" />
+      <img v-if="$vuetify.breakpoint.mdAndUp" :src="require('~/static/teaser/curtain-left.png')" class="left-curtain">
+      <img v-if="$vuetify.breakpoint.lgAndDown && !$vuetify.breakpoint.smAndDown" :src="require('~/static/teaser/curtain-top.png')" class="top-curtain">
+      <img v-if="$vuetify.breakpoint.mdAndUp" :src="require('~/static/teaser/curtain-right.png')" class="right-curtain">
     </div>
     <div class="text-layer">
       <v-img height="15vh" contain :src="require('~/static/teaser/yfl-house-logo.png')" />

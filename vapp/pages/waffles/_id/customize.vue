@@ -11,16 +11,24 @@
               Wafflemaker 9000
             </v-card-title>
             <v-card-text class="vh-center fill-height">
-                <waffle-display :waffle="modifiedViewedWaffle" />
+              <waffle-display :waffle="modifiedViewedWaffle" />
             </v-card-text>
           </v-card>
         </v-col>
         <v-col cols="12" md="6">
           <v-row v-if="showFullCustomization">
-            <v-text-field label="Name" v-model="name" :counter="MAX_NAME_LENGTH" outlined dense />
+            <v-text-field v-model="name" label="Name" :counter="MAX_NAME_LENGTH" outlined dense />
           </v-row>
           <v-row v-if="showFullCustomization">
-            <v-textarea label="Description" height="75" v-model="description" :counter="MAX_DESCRIPTION_LENGTH" no-resize outlined dense />
+            <v-textarea
+              v-model="description"
+              label="Description"
+              height="75"
+              :counter="MAX_DESCRIPTION_LENGTH"
+              no-resize
+              outlined
+              dense
+            />
           </v-row>
           <v-row>
             <v-col cols="12" md="6">
@@ -29,10 +37,10 @@
             <v-col cols="12" md="6">
               <select-field v-model="toppingId" title="Topping" :list="toppingList" />
             </v-col>
-            <v-col cols="12" md="6" v-if="showFullCustomization">
+            <v-col v-if="showFullCustomization" cols="12" md="6">
               <select-field v-model="extraId" title="Extra" :list="extraList" />
             </v-col>
-            <v-col cols="12" md="6" v-if="showFullCustomization">
+            <v-col v-if="showFullCustomization" cols="12" md="6">
               <select-field v-model="plateId" title="Plate" :list="plateList" />
             </v-col>
           </v-row>
@@ -123,7 +131,7 @@ export default {
       return this.description.length < MAX_DESCRIPTION_LENGTH
     },
     canSubmit () {
-      if(this.showFullCustomization) {
+      if (this.showFullCustomization) {
         return this.nameLengthValid && this.descriptionLengthValid
       } else {
         return this.baseId > 0 || this.toppingId > 0

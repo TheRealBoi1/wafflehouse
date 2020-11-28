@@ -1,5 +1,5 @@
 import Waffle from '~/database/Waffle'
-import WaffleLayer from "~/database/WaffleLayer";
+import WaffleLayer from '~/database/WaffleLayer'
 
 const loadFavorites = (): number[] => {
   const favorites = JSON.parse(localStorage.getItem('favorites'))
@@ -82,12 +82,12 @@ export default {
             plateId: waffleInfo.plateId,
             published: waffleInfo.published,
             processEnd: waffleInfo.processEnd,
-            customizationStep: waffleInfo.customizationStep,
+            customizationStep: waffleInfo.customizationStep
           }
         })
 
         layersData.forEach((layerData, index) => {
-          if(index >= waffle.layers.length) {
+          if (index >= waffle.layers.length) {
             WaffleLayer.insert({
               data: {
                 waffleId: waffle.id,
@@ -143,7 +143,7 @@ export default {
       }, { root: true })
     },
 
-    bakeWaffleLayer({ dispatch }: any, waffleId: number) {
+    bakeWaffleLayer ({ dispatch }: any, waffleId: number) {
       const activeAccount = this.$web3.currentProvider.selectedAddress
       dispatch('transactions/dispatchTransaction', {
         label: 'Adding Waffle Layer',
