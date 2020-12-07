@@ -1,0 +1,2 @@
+// mainnet, testnet or development
+APP_ENVIRONMENT='mainnet'

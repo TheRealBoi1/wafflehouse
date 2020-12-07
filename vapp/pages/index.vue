@@ -169,18 +169,12 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
-import RecentWafflesDisplay from '~/components/RecentWafflesDisplay'
 import CountdownTimer from '~/components/helper/CountdownTimer'
 
 export default {
   name: 'Index',
-  methods: {
-    ...mapActions('competition', ['loadCompetitionData'])
-  },
-  async mounted () {
-    this.$nuxt.$loading.start()
-    await this.loadCompetitionData()
-    this.$nuxt.$loading.finish()
+  components: {
+    CountdownTimer
   },
   computed: {
     ...mapGetters('competition', {
@@ -190,9 +184,13 @@ export default {
       competitionEndTimestamp: 'getCompetitionEndTimestamp'
     })
   },
-  components: {
-    CountdownTimer,
-    RecentWafflesDisplay
+  async mounted () {
+    this.$nuxt.$loading.start()
+    await this.loadCompetitionData()
+    this.$nuxt.$loading.finish()
+  },
+  methods: {
+    ...mapActions('competition', ['loadCompetitionData'])
   }
 }
 </script>

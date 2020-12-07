@@ -1,6 +1,8 @@
 import { ActionTree } from 'vuex'
 import Web3 from 'web3'
 import { Drizzle } from '@drizzle/store'
+import { Harmony } from '@harmony-js/core'
+import { ChainType } from '@harmony-js/utils'
 import drizzleConfig from '~/drizzle-config'
 import Waffle from '~/database/Waffle'
 import { RootState } from '~/store/state'
@@ -56,10 +58,13 @@ const actions: ActionTree<RootState, RootState> = {
         })
       })
       .then(() => {
-        dispatch('dialogs/closeDialogs')
-        if (successCallback) {
-          successCallback()
-        }
+        setTimeout(() => {
+          dispatch('refreshFromCachedCalls')
+          dispatch('dialogs/closeDialogs')
+          if (successCallback) {
+            successCallback()
+          }
+        }, 1000)
       })
   }
 }

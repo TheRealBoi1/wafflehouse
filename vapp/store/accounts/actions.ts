@@ -26,7 +26,8 @@ const actions: ActionTree<AccountsState, RootState> = {
       commit('SET_DATA_KEY', { dataKey })
       commit('SET_ACCOUNT_WAFFLE_IDS', {
         ownedWaffleIds: profileInfo.ownedWaffleIds,
-        votedWaffleIds: profileInfo.votedWaffleIds
+        votedWaffleIds: profileInfo.votedWaffleIds,
+        canVote: profileInfo.canVote
       })
     }
     dispatch('refreshFromCachedCalls')

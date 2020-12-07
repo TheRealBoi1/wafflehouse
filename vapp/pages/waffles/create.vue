@@ -35,7 +35,7 @@
             </p>
           </v-row>
           <v-row>
-            <v-btn width="100%" height="50" outlined @click="createWaffle">
+            <v-btn width="100%" height="50" outlined tile @click="createWaffle">
               <h2>
                 Create Waffle
               </h2>

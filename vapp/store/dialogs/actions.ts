@@ -9,15 +9,15 @@ interface DisplayProcessPayload {
 interface DisplayConfirmationPayload{
   title?: string;
   body?: string;
-  affirmativeAction: Function;
+  affirmativeAction: any;
   affirmativeLabel?: string;
-  negativeAction?: Function;
+  negativeAction?: any;
   negativeLabel?: string;
 }
 interface SetErrorDataPayload {
   title?: string;
   body: string;
-  action?: Function;
+  action?: any;
   actionLabel?: string;
 }
 

@@ -8,6 +8,7 @@ interface SetActiveAccountPayload {
 interface SetAccountWaffleIdsPayload {
   ownedWaffleIds: number[];
   votedWaffleIds: number[];
+  canVote: boolean;
 }
 interface SetDataKeyPayload {
   dataKey: string;
@@ -18,9 +19,10 @@ const mutations: MutationTree<AccountsState> = {
     state.activeAccount = activeAccount
   },
 
-  SET_ACCOUNT_WAFFLE_IDS (state, { ownedWaffleIds, votedWaffleIds }: SetAccountWaffleIdsPayload) {
+  SET_ACCOUNT_WAFFLE_IDS (state, { ownedWaffleIds, votedWaffleIds, canVote }: SetAccountWaffleIdsPayload) {
     state.ownedWaffleIds = ownedWaffleIds
     state.votedWaffleIds = votedWaffleIds
+    state.canVote = canVote
   },
 
   SET_DATA_KEY (state, { dataKey }: SetDataKeyPayload) {

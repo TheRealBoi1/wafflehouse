@@ -2,12 +2,12 @@
   <v-dialog
     :value="showDialog"
     transition="fade-transition"
-    class="vh-center"
+    class="vh-center dialog"
     persistent
     no-click-animation
     fullscreen
   >
-    <v-card class="vh-center" color="#000000EE" flat>
+    <v-card class="vh-center" color="#000000FA" flat>
       <v-col class="content-wrapper">
         <v-row class="vh-center mb-5 waffle-text-border">
           <h1>
@@ -18,7 +18,7 @@
           {{ body }}
         </v-row>
         <v-row class="vh-center">
-          <v-btn outlined width="50%" @click="confirm">
+          <v-btn outlined width="50%" tile @click="confirm">
             {{ actionLabel }}
           </v-btn>
         </v-row>
@@ -29,7 +29,7 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
-import { DialogType } from '~/interfaces/enums'
+import { DialogType } from '~/enums'
 
 export default {
   name: 'ErrorDialog',
@@ -73,6 +73,10 @@ export default {
 </script>
 
 <style scoped>
+.dialog {
+  z-index: 1000;
+}
+
 .content-wrapper {
   max-width: 500px;
 }

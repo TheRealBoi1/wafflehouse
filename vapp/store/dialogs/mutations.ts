@@ -1,6 +1,6 @@
 import { MutationTree } from 'vuex'
 import { DialogsState } from '~/store/dialogs/state'
-import { DialogType } from '~/interfaces/enums'
+import { DialogType } from '~/enums'
 
 // ************ PAYLOADS *************
 interface SetProcessDataPayload {
@@ -9,15 +9,15 @@ interface SetProcessDataPayload {
 interface SetConfirmDataPayload {
   title?: string;
   body?: string;
-  affirmativeAction: Function;
+  affirmativeAction: any;
   affirmativeLabel?: string;
-  negativeAction?: Function;
+  negativeAction?: any;
   negativeLabel?: string;
 }
 interface SetErrorDataPayload {
   title?: string;
   body: string;
-  action?: Function;
+  action?: any;
   actionLabel?: string;
 }
 

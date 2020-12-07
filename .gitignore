@@ -1,3 +1,4 @@
 node_modules
 vapp/src/contracts
 package-lock.json
+.env

@@ -3,29 +3,83 @@
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="3cd41b40-5513-4840-87c0-a2355f305846" name="Default Changelist" comment="ESlint cleanup">
-      <change afterPath="$PROJECT_DIR$/vapp/store/accounts/actions.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vapp/store/accounts/getters.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vapp/store/accounts/mutations.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vapp/store/accounts/state.ts" afterDir="false" />
+    <list default="true" id="3cd41b40-5513-4840-87c0-a2355f305846" name="Default Changelist" comment="Transitioned project environment to support Harmony">
+      <change afterPath="$PROJECT_DIR$/.envSample" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/contracts/WrappedOne.sol" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/contracts/YFLink.sol" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/migrations/2_deploy_tokens.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/migrations/3_deploy_wafflemaker.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vapp/.envSample" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vapp/config/development.config.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vapp/config/index.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vapp/config/mainnet.config.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vapp/config/testnet.config.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vapp/interfaces/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/jsLinters/eslint.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/contracts/WaffleMaker.sol" beforeDir="false" afterPath="$PROJECT_DIR$/contracts/WaffleMaker.sol" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/2_deploy_contracts.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/truffle-config.js" beforeDir="false" afterPath="$PROJECT_DIR$/truffle-config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vapp/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/vapp/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/vapp/components/InventoryWaffle.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vapp/components/InventoryWaffle.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vapp/components/Teaser.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vapp/components/Teaser.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/vapp/components/WaffleDisplay.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vapp/components/WaffleDisplay.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/vapp/components/dialogs/ConfirmDialog.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vapp/components/dialogs/ConfirmDialog.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vapp/components/dialogs/ErrorDialog.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vapp/components/dialogs/ErrorDialog.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/vapp/components/dialogs/ProcessingDialog.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vapp/components/dialogs/ProcessingDialog.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vapp/components/layout/toolbar/Toolbar.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vapp/components/layout/toolbar/Toolbar.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vapp/contracts/Migrations.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vapp/contracts/WaffleMaker.json" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/vapp/database/Waffle/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/vapp/database/Waffle/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vapp/database/Waffle/store.ts" beforeDir="false" afterPath="$PROJECT_DIR$/vapp/database/Waffle/store.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vapp/interfaces/constants.ts" beforeDir="false" afterPath="$PROJECT_DIR$/vapp/interfaces/constants.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vapp/drizzle-config.js" beforeDir="false" afterPath="$PROJECT_DIR$/vapp/drizzle-config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vapp/interfaces/constants.ts" beforeDir="false" afterPath="$PROJECT_DIR$/vapp/constants/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vapp/interfaces/enums.ts" beforeDir="false" afterPath="$PROJECT_DIR$/vapp/enums/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vapp/nuxt.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/vapp/nuxt.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vapp/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/vapp/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/vapp/pages/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vapp/pages/index.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/vapp/pages/my-waffles.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vapp/pages/my-waffles.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vapp/pages/vote.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vapp/pages/vote.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/vapp/pages/waffles/_id/customize.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vapp/pages/waffles/_id/customize.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/vapp/pages/waffles/create.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vapp/pages/waffles/create.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vapp/store/accounts.ts" beforeDir="false" afterPath="$PROJECT_DIR$/vapp/store/accounts.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vapp/store/competition.ts" beforeDir="false" afterPath="$PROJECT_DIR$/vapp/store/competition.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vapp/store/dialogs.ts" beforeDir="false" afterPath="$PROJECT_DIR$/vapp/store/dialogs.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vapp/static/waffles/plates/black.png" beforeDir="false" afterPath="$PROJECT_DIR$/vapp/static/waffles/plates/black.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vapp/static/waffles/plates/blue.png" beforeDir="false" afterPath="$PROJECT_DIR$/vapp/static/waffles/plates/blue.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vapp/static/waffles/plates/glass.png" beforeDir="false" afterPath="$PROJECT_DIR$/vapp/static/waffles/plates/glass.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vapp/static/waffles/plates/gold.png" beforeDir="false" afterPath="$PROJECT_DIR$/vapp/static/waffles/plates/gold.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vapp/static/waffles/plates/orange.png" beforeDir="false" afterPath="$PROJECT_DIR$/vapp/static/waffles/plates/orange.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vapp/static/waffles/plates/pink.png" beforeDir="false" afterPath="$PROJECT_DIR$/vapp/static/waffles/plates/pink.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vapp/static/waffles/plates/plain.png" beforeDir="false" afterPath="$PROJECT_DIR$/vapp/static/waffles/plates/plain.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vapp/static/waffles/plates/purple.png" beforeDir="false" afterPath="$PROJECT_DIR$/vapp/static/waffles/plates/purple.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vapp/static/waffles/plates/red.png" beforeDir="false" afterPath="$PROJECT_DIR$/vapp/static/waffles/plates/red.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vapp/static/waffles/plates/yellow.png" beforeDir="false" afterPath="$PROJECT_DIR$/vapp/static/waffles/plates/yellow.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vapp/store/accounts/actions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/vapp/store/accounts/actions.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vapp/store/accounts/getters.ts" beforeDir="false" afterPath="$PROJECT_DIR$/vapp/store/accounts/getters.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vapp/store/accounts/mutations.ts" beforeDir="false" afterPath="$PROJECT_DIR$/vapp/store/accounts/mutations.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vapp/store/accounts/state.ts" beforeDir="false" afterPath="$PROJECT_DIR$/vapp/store/accounts/state.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vapp/store/actions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/vapp/store/actions.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vapp/store/dialogs/actions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/vapp/store/dialogs/actions.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vapp/store/dialogs/getters.ts" beforeDir="false" afterPath="$PROJECT_DIR$/vapp/store/dialogs/getters.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vapp/store/dialogs/mutations.ts" beforeDir="false" afterPath="$PROJECT_DIR$/vapp/store/dialogs/mutations.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vapp/store/dialogs/state.ts" beforeDir="false" afterPath="$PROJECT_DIR$/vapp/store/dialogs/state.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,10 +92,10 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="JavaScript File" />
-        <option value="Solidity Contract" />
         <option value="Vue Single File Component" />
         <option value="TypeScript File" />
+        <option value="JavaScript File" />
+        <option value="Solidity Contract" />
       </list>
     </option>
   </component>
@@ -55,6 +109,7 @@
     <auto-save>true</auto-save>
   </component>
   <component name="ProjectId" id="1ir4JbbMMtNfK1RqHdGgdqlKCf2" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -65,11 +120,11 @@
     <property name="javascript.nodejs.core.library.configured.version" value="12.18.3" />
     <property name="javascript.nodejs.core.library.typings.version" value="12.19.1" />
     <property name="js.linters.configure.manually.selectedeslint" value="true" />
-    <property name="last_opened_file_path" value="/app/node/bin/node" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.standard" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
-    <property name="node.js.path.for.package.eslint" value="/app/node/bin/node" />
+    <property name="node.js.path.for.package.eslint" value="$USER_HOME$/Downloads/node/bin/node" />
     <property name="node.js.path.for.package.standard" value="project" />
     <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
@@ -85,13 +140,19 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/vapp/enums" />
+      <recent name="$PROJECT_DIR$/vapp/constants" />
       <recent name="$PROJECT_DIR$/vapp/pages/waffles" />
       <recent name="$PROJECT_DIR$/vapp/components/dialogs" />
       <recent name="C:\Users\ypelletier\Desktop\Projects\WaffleHouse\vapp\components\helper" />
     </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/vapp" />
+    </key>
   </component>
   <component name="RunManager">
-    <configuration default="true" type="NodeJSConfigurationType" path-to-node="node">
+    <configuration default="true" type="NodeJSConfigurationType" path-to-node="/app/node/bin/node">
       <method v="2" />
     </configuration>
   </component>
@@ -127,7 +188,15 @@
       <workItem from="1606521215104" duration="1612000" />
       <workItem from="1606523463248" duration="577000" />
       <workItem from="1606524107366" duration="412000" />
-      <workItem from="1606524530205" duration="2587000" />
+      <workItem from="1606524530205" duration="31265000" />
+      <workItem from="1606694024584" duration="17028000" />
+      <workItem from="1606860532430" duration="2374000" />
+      <workItem from="1606867521626" duration="6975000" />
+      <workItem from="1607103986779" duration="27045000" />
+      <workItem from="1607146445688" duration="4963000" />
+      <workItem from="1607286302528" duration="227000" />
+      <workItem from="1607286544693" duration="1524000" />
+      <workItem from="1607380696561" duration="609000" />
     </task>
     <task id="LOCAL-00001" summary="Implemented waffle display">
       <created>1602652763796</created>
@@ -199,11 +268,37 @@
       <option name="project" value="LOCAL" />
       <updated>1606521130788</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="ESlint cleanup">
+      <created>1606527337509</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1606527337509</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Store typescript rework and implementation of dialog system">
+      <created>1606597396113</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1606597396113</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Implemented waffle display" />
@@ -218,50 +313,61 @@
     <MESSAGE value="Fixed drizzle flow, replace connect wallet page with a dialog, implemented basic waffle loading system, replace some requires with modifiers" />
     <MESSAGE value="Implemented add ingredient flow, implemented reactivity in my-waffles, reworked view waffle page" />
     <MESSAGE value="ESlint cleanup" />
-    <option name="LAST_COMMIT_MESSAGE" value="ESlint cleanup" />
+    <MESSAGE value="Store rework and implementation of dialog system" />
+    <MESSAGE value="Store typescript rework and implementation of dialog system" />
+    <MESSAGE value="Transitioned project environment to support Harmony" />
+    <option name="LAST_COMMIT_MESSAGE" value="Transitioned project environment to support Harmony" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="1868" y="169" width="719" height="801" key="#ESLint" timestamp="1606526930158">
+    <state x="1868" y="169" width="719" height="801" key="#ESLint" timestamp="1606694947871">
       <screen x="1024" y="0" width="2560" height="1080" />
     </state>
-    <state x="1868" y="169" width="719" height="801" key="#ESLint/1024.0.2560.1080/0.203.1024.768@1024.0.2560.1080" timestamp="1606526930158" />
+    <state x="1868" y="169" width="719" height="801" key="#ESLint/1024.0.2560.1080/0.203.1024.768@1024.0.2560.1080" timestamp="1606694947871" />
     <state x="2180" y="363" width="331" height="312" key="#ESLint/1024.0.2560.1080/0.27.1024.741@1024.0.2560.1080" timestamp="1606152312471" />
     <state x="2596" y="363" width="321" height="312" key="#ESLint/1440.0.2560.1080/0.153.1440.900@1440.0.2560.1080" timestamp="1605983196561" />
     <state x="2020" y="283" width="649" height="548" key="#Notifications" timestamp="1606222118240">
       <screen x="1024" y="0" width="2560" height="1080" />
     </state>
     <state x="2020" y="283" width="649" height="548" key="#Notifications/1024.0.2560.1080/0.203.1024.768@1024.0.2560.1080" timestamp="1606222118240" />
-    <state x="1607" y="69" width="1417" height="904" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1606524900187">
+    <state x="1607" y="69" width="1417" height="904" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1606867763190">
       <screen x="1024" y="0" width="2560" height="1080" />
     </state>
     <state x="1304" y="178" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.2560.1040@0.0.2560.1040" timestamp="1605420878838" />
-    <state x="1607" y="69" width="1417" height="904" key="#com.intellij.execution.impl.EditConfigurationsDialog/1024.0.2560.1080/0.203.1024.768@1024.0.2560.1080" timestamp="1606524900187" />
+    <state x="1607" y="69" width="1417" height="904" key="#com.intellij.execution.impl.EditConfigurationsDialog/1024.0.2560.1080/0.203.1024.768@1024.0.2560.1080" timestamp="1606867763190" />
+    <state x="2315" y="357" width="493" height="400" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1607115991654">
+      <screen x="0" y="27" width="3584" height="1053" />
+    </state>
+    <state x="2315" y="357" key="#com.intellij.fileTypes.FileTypeChooser/0.27.3584.1053@0.27.3584.1053" timestamp="1607115991654" />
+    <state x="1686" y="357" width="493" height="400" key="#com.intellij.fileTypes.FileTypeChooser/92.27.2468.1053@92.27.2468.1053" timestamp="1607106042029" />
     <state x="1725" y="235" key="#com.intellij.ide.util.MemberChooser" timestamp="1605429846939">
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
     <state x="1725" y="235" key="#com.intellij.ide.util.MemberChooser/0.0.2560.1040@0.0.2560.1040" timestamp="1605429846939" />
-    <state x="1650" y="266" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1605353403581">
-      <screen x="0" y="0" width="2560" height="1040" />
+    <state x="1683" y="296" width="524" height="508" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1607107975921">
+      <screen x="92" y="27" width="2468" height="1053" />
     </state>
     <state x="1650" y="266" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.2560.1040@0.0.2560.1040" timestamp="1605353403581" />
+    <state x="2674" y="276" width="524" height="508" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/1024.0.2560.1080/0.203.1024.768@1024.0.2560.1080" timestamp="1606876580792" />
+    <state x="1683" y="296" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/92.27.2468.1053@92.27.2468.1053" timestamp="1607107975921" />
     <state x="2042" y="337" width="605" height="439" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1" timestamp="1606353717629">
       <screen x="1024" y="0" width="2560" height="1080" />
     </state>
     <state x="2042" y="337" width="605" height="439" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/1024.0.2560.1080/0.203.1024.768@1024.0.2560.1080" timestamp="1606353717629" />
-    <state x="1613" y="27" width="1597" height="1053" key="CommitChangelistDialog2" timestamp="1606527223124">
+    <state x="1613" y="27" width="802" height="886" key="CommitChangelistDialog2" timestamp="1607286377165">
       <screen x="1024" y="0" width="2560" height="1080" />
     </state>
     <state x="1063" y="88" key="CommitChangelistDialog2/0.0.2560.1040@0.0.2560.1040" timestamp="1605551404156" />
-    <state x="1613" y="27" width="1597" height="1053" key="CommitChangelistDialog2/1024.0.2560.1080/0.203.1024.768@1024.0.2560.1080" timestamp="1606527223124" />
+    <state x="1613" y="27" width="1597" height="1053" key="CommitChangelistDialog2/1024.0.2560.1080/0.203.1024.768@1024.0.2560.1080" timestamp="1606597395942" />
+    <state x="1613" y="27" width="802" height="886" key="CommitChangelistDialog2/1024.0.2560.1080/0.27.1024.741@1024.0.2560.1080" timestamp="1607286377165" />
     <state x="2180" y="204" width="330" height="726" key="EnvironmentVariablesDialog" timestamp="1606522194806">
       <screen x="1024" y="0" width="2560" height="1080" />
     </state>
     <state x="2180" y="204" width="330" height="726" key="EnvironmentVariablesDialog/1024.0.2560.1080/0.203.1024.768@1024.0.2560.1080" timestamp="1606522194806" />
-    <state x="1551" y="186" width="530" height="655" key="FileChooserDialogImpl" timestamp="1606526926989">
+    <state x="2075" y="159" width="530" height="655" key="FileChooserDialogImpl" timestamp="1606694847423">
       <screen x="1024" y="0" width="2560" height="1080" />
     </state>
     <state x="1517" y="274" key="FileChooserDialogImpl/0.0.2560.1040@0.0.2560.1040" timestamp="1602738760433" />
-    <state x="1551" y="186" width="530" height="655" key="FileChooserDialogImpl/1024.0.2560.1080/0.203.1024.768@1024.0.2560.1080" timestamp="1606526926989" />
+    <state x="2075" y="159" width="530" height="655" key="FileChooserDialogImpl/1024.0.2560.1080/0.203.1024.768@1024.0.2560.1080" timestamp="1606694847423" />
     <state width="1234" height="279" key="GridCell.Tab.0.bottom" timestamp="1603700405274">
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
@@ -278,39 +384,51 @@
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
     <state width="1234" height="279" key="GridCell.Tab.0.right/0.0.2560.1040@0.0.2560.1040" timestamp="1603700405274" />
-    <state x="1737" y="101" width="1226" height="912" key="SettingsEditor" timestamp="1606523868269">
+    <state x="2709" y="248" width="495" height="617" key="RollbackChangesDialog" timestamp="1607123062590">
+      <screen x="0" y="27" width="3584" height="1053" />
+    </state>
+    <state x="2709" y="248" width="495" height="617" key="RollbackChangesDialog/0.27.3584.1053@0.27.3584.1053" timestamp="1607123062590" />
+    <state x="1737" y="101" width="1226" height="912" key="SettingsEditor" timestamp="1606694293618">
       <screen x="1024" y="0" width="2560" height="1080" />
     </state>
-    <state x="1737" y="101" width="1226" height="912" key="SettingsEditor/1024.0.2560.1080/0.203.1024.768@1024.0.2560.1080" timestamp="1606523868269" />
-    <state x="1910" y="238" width="1000" height="668" key="Vcs.Push.Dialog.v2" timestamp="1606521147993">
+    <state x="1737" y="101" width="1226" height="912" key="SettingsEditor/1024.0.2560.1080/0.203.1024.768@1024.0.2560.1080" timestamp="1606694293618" />
+    <state x="1556" y="192" width="1000" height="668" key="Vcs.Push.Dialog.v2" timestamp="1606597470664">
       <screen x="1024" y="0" width="2560" height="1080" />
     </state>
     <state x="1512" y="252" key="Vcs.Push.Dialog.v2/0.0.2560.1040@0.0.2560.1040" timestamp="1605359748532" />
-    <state x="1910" y="238" width="1000" height="668" key="Vcs.Push.Dialog.v2/1024.0.2560.1080/0.203.1024.768@1024.0.2560.1080" timestamp="1606521147993" />
-    <state x="1373" y="100" width="1094" height="847" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1603660120837">
-      <screen x="0" y="0" width="2560" height="1040" />
+    <state x="1556" y="192" width="1000" height="668" key="Vcs.Push.Dialog.v2/1024.0.2560.1080/0.203.1024.768@1024.0.2560.1080" timestamp="1606597470664" />
+    <state x="2450" y="127" width="1024" height="853" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog" timestamp="1607116303349">
+      <screen x="0" y="27" width="3584" height="1053" />
+    </state>
+    <state x="2450" y="127" width="1024" height="853" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog/0.27.3584.1053@0.27.3584.1053" timestamp="1607116303349" />
+    <state x="2397" y="104" width="1094" height="880" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1606871574828">
+      <screen x="1024" y="0" width="2560" height="1080" />
     </state>
     <state x="1373" y="100" width="1094" height="847" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.0.2560.1040@0.0.2560.1040" timestamp="1603660120837" />
-    <state x="2545" y="135" width="365" height="665" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1606525233647">
-      <screen x="1024" y="0" width="2560" height="1080" />
+    <state x="2397" y="104" width="1094" height="880" key="com.intellij.history.integration.ui.views.FileHistoryDialog/1024.0.2560.1080/0.203.1024.768@1024.0.2560.1080" timestamp="1606871574828" />
+    <state x="2129" y="159" width="365" height="665" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1607109659181">
+      <screen x="0" y="27" width="3584" height="1053" />
     </state>
     <state x="1521" y="130" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.2560.1040@0.0.2560.1040" timestamp="1605502360956" />
+    <state x="2129" y="159" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.27.3584.1053@0.27.3584.1053" timestamp="1607109659181" />
     <state x="2545" y="135" width="365" height="665" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/1024.0.2560.1080/0.203.1024.768@1024.0.2560.1080" timestamp="1606525233647" />
-    <state x="2761" y="454" width="466" height="236" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1606332314789">
-      <screen x="1024" y="0" width="2560" height="1080" />
+    <state x="2432" y="470" width="466" height="236" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1607138690109">
+      <screen x="0" y="27" width="3584" height="1053" />
     </state>
     <state x="1737" y="437" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.2560.1040@0.0.2560.1040" timestamp="1605712104542" />
-    <state x="2761" y="454" width="466" height="236" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/1024.0.2560.1080/0.203.1024.768@1024.0.2560.1080" timestamp="1606332314789" />
-    <state x="2649" y="206" width="672" height="874" key="find.popup" timestamp="1606504286009">
-      <screen x="1024" y="0" width="2560" height="1080" />
+    <state x="2432" y="470" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.27.3584.1053@0.27.3584.1053" timestamp="1607138690109" />
+    <state x="2761" y="454" width="466" height="236" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/1024.0.2560.1080/0.203.1024.768@1024.0.2560.1080" timestamp="1606871574466" />
+    <state x="2275" y="227" width="941" height="853" key="find.popup" timestamp="1607135704865">
+      <screen x="0" y="27" width="3584" height="1053" />
     </state>
     <state x="1625" y="243" width="587" height="534" key="find.popup/0.0.2560.1040@0.0.2560.1040" timestamp="1605701345967" />
-    <state x="2649" y="206" width="672" height="874" key="find.popup/1024.0.2560.1080/0.203.1024.768@1024.0.2560.1080" timestamp="1606504286009" />
+    <state x="2275" y="227" width="941" height="853" key="find.popup/0.27.3584.1053@0.27.3584.1053" timestamp="1607135704865" />
+    <state x="2649" y="206" width="672" height="874" key="find.popup/1024.0.2560.1080/0.203.1024.768@1024.0.2560.1080" timestamp="1606860805460" />
     <state x="3065" y="206" width="672" height="874" key="find.popup/1440.0.2560.1080/0.153.1440.900@1440.0.2560.1080" timestamp="1605978985607" />
-    <state x="2195" y="285" width="689" height="474" key="jetbrains.nodejs.interpreters-dialog" timestamp="1606526928806">
+    <state x="2195" y="285" width="689" height="474" key="jetbrains.nodejs.interpreters-dialog" timestamp="1606694863687">
       <screen x="1024" y="0" width="2560" height="1080" />
     </state>
-    <state x="2195" y="285" width="689" height="474" key="jetbrains.nodejs.interpreters-dialog/1024.0.2560.1080/0.203.1024.768@1024.0.2560.1080" timestamp="1606526928806" />
+    <state x="2195" y="285" width="689" height="474" key="jetbrains.nodejs.interpreters-dialog/1024.0.2560.1080/0.203.1024.768@1024.0.2560.1080" timestamp="1606694863687" />
     <state x="2611" y="253" width="672" height="704" key="run.anything.popup" timestamp="1606490018524">
       <screen x="1024" y="0" width="2560" height="1080" />
     </state>

@@ -63,7 +63,7 @@ import toppingList from '~/lists/waffle-toppings'
 import plateList from '~/lists/waffle-plates'
 import extraList from '~/lists/waffle-extras'
 import SelectField from '~/components/inputs/SelectField.vue'
-import { MAX_NAME_LENGTH, MAX_DESCRIPTION_LENGTH } from '~/interfaces/constants'
+import { MAX_NAME_LENGTH, MAX_DESCRIPTION_LENGTH } from '~/constants'
 
 export default {
   name: 'Customize',

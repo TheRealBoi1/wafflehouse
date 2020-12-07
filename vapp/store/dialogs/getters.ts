@@ -3,8 +3,8 @@ import { DialogsState } from '~/store/dialogs/state'
 import { RootState } from '~/store/state'
 
 const getters: GetterTree<DialogsState, RootState> = {
-  getDialogType (state) {
-    return state.dialogType
+  getDialogType ({ dialogType }) {
+    return dialogType
   },
 
   getDialogOptions (state) {

@@ -1,4 +1,4 @@
-import WaffleMaker from '~/contracts/WaffleMaker.json'
+import WaffleMaker from '~/artifacts/WaffleMaker.json'
 
 export default (provider) => {
   return {

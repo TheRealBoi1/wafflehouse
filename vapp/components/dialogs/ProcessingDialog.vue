@@ -2,13 +2,13 @@
   <v-dialog
     :value="showDialog"
     transition="fade-transition"
-    class="vh-center"
+    class="vh-center dialog"
     :overlay-opacity="0.95"
     persistent
     no-click-animation
   >
     <v-container class="page-container">
-      <v-card class="vh-center" height="80vh" color="#000000DD" flat>
+      <v-card class="vh-center" height="80vh" color="#000000FA" flat>
         <v-col class="waffle-text dialog-title">
           {{ title }}{{ dotDisplay }}
         </v-col>
@@ -19,7 +19,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import { DialogType } from '~/interfaces/enums'
+import { DialogType } from '~/enums'
 
 export default {
   name: 'ProcessingDialog',
@@ -67,6 +67,10 @@ export default {
 </script>
 
 <style scoped>
+.dialog {
+  z-index: 1000;
+}
+
 .dialog-title {
   font-size: 45px;
 }

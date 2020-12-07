@@ -50,7 +50,7 @@
         <v-row class="vh-center">
           <p>
             Looks like you haven’t made any waffles yet!
-            <br><br>
+            <br>
             Let’s fix that.
           </p>
         </v-row>
@@ -75,7 +75,7 @@
 import { mapGetters } from 'vuex'
 import Waffle from '~/database/Waffle'
 import InventoryWaffle from '~/components/InventoryWaffle'
-import { WaffleStatus } from '~/interfaces/enums'
+import { WaffleStatus } from '~/enums'
 
 export default {
   name: 'MyWaffles',

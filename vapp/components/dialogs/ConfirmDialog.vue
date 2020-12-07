@@ -2,12 +2,12 @@
   <v-dialog
     :value="showDialog"
     transition="fade-transition"
-    class="vh-center"
+    class="vh-center dialog"
     persistent
     no-click-animation
     fullscreen
   >
-    <v-card class="vh-center" color="#000000DD" flat>
+    <v-card class="vh-center" color="#000000FA" flat>
       <v-col class="content-wrapper">
         <v-row class="vh-center mb-5 waffle-text-border">
           <h1>
@@ -19,12 +19,12 @@
         </v-row>
         <v-row>
           <v-col cols="6" class="vh-center">
-            <v-btn outlined width="100%" color="red" @click="decline">
+            <v-btn outlined width="100%" color="red" tile @click="decline">
               {{ negativeLabel }}
             </v-btn>
           </v-col>
           <v-col cols="6" class="vh-center">
-            <v-btn outlined width="100%" color="green" @click="confirm">
+            <v-btn outlined width="100%" color="green" tile @click="confirm">
               {{ affirmativeLabel }}
             </v-btn>
           </v-col>
@@ -36,7 +36,7 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
-import { DialogType } from '~/interfaces/enums'
+import { DialogType } from '~/enums'
 
 export default {
   name: 'ConfirmDialog',
@@ -88,6 +88,10 @@ export default {
 </script>
 
 <style scoped>
+.dialog {
+  z-index: 1000;
+}
+
 .content-wrapper {
   max-width: 500px;
 }

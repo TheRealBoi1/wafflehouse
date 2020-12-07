@@ -17,7 +17,7 @@
             </v-row>
           </v-col>
           <v-col cols="12" md="4" class="px-5 vh-center">
-            <v-btn class="add-ingredient-button" :disabled="!waffle.isActionRequired(now)" width="100%" height="125" @click="advanceWaffleCustomizationStep(waffle.id)">
+            <v-btn class="add-ingredient-button" :disabled="!waffle.isActionRequired(now)" width="80%" height="125" @click="advanceWaffleCustomizationStep(waffle.id)">
               <v-col>
                 <v-row class="vh-center waffle-text mb-5">
                   <h1>
@@ -116,15 +116,19 @@
         </template>
         <template v-else-if="waffle.published">
           <v-row class="vh-center waffle-text-border-black">
-            Votes
+            <h1>
+              Votes
+            </h1>
           </v-row>
           <v-row class="vh-center waffle-text-border-black">
-            {{ waffle.votes }}
+            <h1>
+              {{ waffle.votes }}
+            </h1>
           </v-row>
         </template>
         <template v-else>
-          <v-row>
-            <v-btn @click="publishWaffle(waffle.id)">
+          <v-row class="vh-center">
+            <v-btn outlined tile @click="publishWaffle(waffle.id)">
               Publish
             </v-btn>
           </v-row>
@@ -139,7 +143,7 @@ import { mapGetters } from 'vuex'
 import CountdownTimer from '~/components/helper/CountdownTimer'
 import Waffle from '~/database/Waffle'
 import WaffleDisplay from '~/components/WaffleDisplay'
-import { WaffleStatus } from '~/interfaces/enums'
+import { WaffleStatus } from '~/enums'
 
 export default {
   name: 'InventoryWaffle',

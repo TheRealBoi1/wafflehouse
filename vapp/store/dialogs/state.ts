@@ -1,4 +1,4 @@
-import { DialogType } from '~/interfaces/enums'
+import { DialogType } from '~/enums'
 
 const state = () => {
   return {

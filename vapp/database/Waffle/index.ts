@@ -6,8 +6,8 @@ import {
   CUSTOMIZATION_STEP_WINDOWS,
   CUSTOMIZE_DURATION,
   MAX_WAFFLE_LAYERS
-} from '~/interfaces/constants'
-import { CustomizationStep, WaffleStatus } from '~/interfaces/enums'
+} from '~/constants'
+import { CustomizationStep, WaffleStatus } from '~/enums'
 
 export default class Waffle extends Model {
   static entity = 'waffles'
@@ -72,8 +72,6 @@ export default class Waffle extends Model {
         } else {
           return WaffleStatus.AddingLayer
         }
-      } else {
-        return WaffleStatus.Idle
       }
     } else if (this.customizationStep === CustomizationStep.DONE && now < this.processEnd) {
       return WaffleStatus.Customizing
@@ -90,6 +88,7 @@ export default class Waffle extends Model {
         return WaffleStatus.WaitingExtra
       }
     }
+    return WaffleStatus.Idle
   }
 
   statusLabel (now) {
@@ -126,5 +125,18 @@ export default class Waffle extends Model {
       status === WaffleStatus.WaitingBase ||
       status === WaffleStatus.WaitingTopping ||
       status === WaffleStatus.WaitingExtra
+  }
+
+  canBePublished (now) {
+    const status = this.status(now)
+    return status === WaffleStatus.Idle && this.customizationStep === CustomizationStep.DONE
+  }
+
+  get canBeCustomized () {
+    return this.customizationStep === CustomizationStep.NOT_CUSTOMIZED
+  }
+
+  get canAddLayer () {
+    return this.customizationStep === CustomizationStep.DONE
   }
 };

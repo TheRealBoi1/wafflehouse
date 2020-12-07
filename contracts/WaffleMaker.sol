@@ -1,6 +1,8 @@
 pragma solidity ^0.6.0;
 pragma experimental ABIEncoderV2;
 
+import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
+
 contract WaffleMaker {
     // ******************** CONSTANTS ***********************
     uint constant MAX_NAME_BYTES = 20;
@@ -20,11 +22,14 @@ contract WaffleMaker {
         120,//60 * 60 * 24,
         0
     ];
+    uint CREATE_WAFFLE_YFL_COST = 5000000000000000;
 
     // ******************** DATA ***********************
     // Static data
     address public admin; // Also the address to which the 10% dev fund is sent to
     uint public competitionEndTimestamp;
+    ERC20 yfl;
+    ERC20 wone;
 
     // Semi static data
     WaffleItem[] public toppings;
@@ -77,7 +82,7 @@ contract WaffleMaker {
         uint ownedWafflesCount;
         mapping(uint => uint) votedWaffles;
         uint votedWafflesCount;
-        uint publishedWafflesCount;
+        bool canVote;
     }
 
     // ******************** MODIFIERS ***********************
@@ -91,31 +96,38 @@ contract WaffleMaker {
         _;
     }
 
-    modifier waffleExists(uint waffleId) {
-        require(waffleId < waffles.length, "This waffle doesn't exist");
+    modifier waffleExists(uint _waffleId) {
+        require(_waffleId < waffles.length, "This waffle doesn't exist");
         _;
     }
 
-    modifier waffleIsPublished(bool positive, uint waffleId) {
-        require(waffles[waffleId].published == positive, "Invalid published state");
+    modifier waffleIsBeingProcessed(bool _positive, uint _waffleId) {
+        require((block.timestamp < waffles[_waffleId].processEnd) == _positive, "Waffle already being processed");
         _;
     }
 
-    modifier senderOwnsWaffle(bool positive, uint waffleId) {
+    modifier waffleIsPublished(bool _positive, uint _waffleId) {
+        require(waffles[_waffleId].published == _positive, "Invalid published state");
+        _;
+    }
+
+    modifier senderOwnsWaffle(bool _positive, uint _waffleId) {
         bool waffleOwned = false;
         for (uint i = 0; i < profiles[msg.sender].ownedWafflesCount; i++) {
-            if (profiles[msg.sender].ownedWaffles[i] == waffleId) {
+            if (profiles[msg.sender].ownedWaffles[i] == _waffleId) {
                 waffleOwned = true;
             }
         }
-        require(waffleOwned == positive, "Invalid waffle owner");
+        require(waffleOwned == _positive, "Invalid waffle owner");
         _;
     }
 
     // ******************** CONSTRUCTOR ***********************
-    constructor() public {
+    constructor(ERC20 _yfl, ERC20 _wone) public {
         admin = msg.sender;
         competitionEndTimestamp = block.timestamp + COMPETITION_DURATION;
+        yfl = _yfl;
+        wone = _wone;
 
         toppings.push(WaffleItem('Empty', 0));
         bases.push(WaffleItem('Empty', 0));
@@ -146,53 +158,85 @@ contract WaffleMaker {
     *   Add a new layer to the waffleId provided if the waffle is owned by the sender and if last
     *   layer has been customized
     **/
-    function bakeWaffleLayer(uint waffleId) external competitionIsOngoing waffleExists(waffleId) senderOwnsWaffle(true, waffleId) {
-        require(waffles[waffleId].customizationStep == CustomizationStep.DONE, "Last layer must be customized");
-        require(block.timestamp > waffles[waffleId].processEnd, "Waffle already being processed");
-        addWaffleLayer(waffleId);
-        waffles[waffleId].processEnd = block.timestamp + BAKE_DURATION;
+    function bakeWaffleLayer(uint _waffleId)
+        external
+        competitionIsOngoing
+        waffleExists(_waffleId)
+        senderOwnsWaffle(true, _waffleId)
+        waffleIsBeingProcessed(false, _waffleId)
+    {
+        require(waffles[_waffleId].customizationStep == CustomizationStep.DONE, "Last layer must be customized");
+        addWaffleLayer(_waffleId);
+        waffles[_waffleId].processEnd = block.timestamp + BAKE_DURATION;
     }
 
-    function submitWaffleCustomization(uint waffleId, string memory name, string memory description, uint baseId, uint toppingId, uint extraId, uint plateId) external competitionIsOngoing waffleExists(waffleId) senderOwnsWaffle(true, waffleId) {
-        require(waffles[waffleId].customizationStep == CustomizationStep.NOT_CUSTOMIZED, "Last layer must not already be customized");
+    function submitWaffleCustomization(
+        uint _waffleId,
+        string memory _name,
+        string memory _description,
+        uint _baseId,
+        uint _toppingId,
+        uint _extraId,
+        uint _plateId
+    )
+        external
+        competitionIsOngoing
+        waffleExists(_waffleId)
+        senderOwnsWaffle(true, _waffleId)
+        waffleIsBeingProcessed(false, _waffleId)
+    {
+        require(waffles[_waffleId].customizationStep == CustomizationStep.NOT_CUSTOMIZED, "Last layer must not already be customized");
 
-        if (waffles[waffleId].layersCount <= 1) {
-            require(stringIsNotEmpty(name), "Waffle name can't be empty");
-            require(stringSizeLowerOrEqual(name, MAX_NAME_BYTES), "Max name length exceeded");
-            require(stringSizeLowerOrEqual(description, MAX_DESCRIPTION_BYTES), "Max description length exceeded");
+        if (waffles[_waffleId].layersCount <= 1) {
+            require(stringIsNotEmpty(_name), "Waffle name can't be empty");
+            require(stringSizeLowerOrEqual(_name, MAX_NAME_BYTES), "Max name length exceeded");
+            require(stringSizeLowerOrEqual(_description, MAX_DESCRIPTION_BYTES), "Max description length exceeded");
 
-            waffles[waffleId].name = name;
-            waffles[waffleId].description = description;
-            waffles[waffleId].plateId = plateId;
-            waffles[waffleId].extraId = extraId;
+            waffles[_waffleId].name = _name;
+            waffles[_waffleId].description = _description;
+            waffles[_waffleId].plateId = _plateId;
+            waffles[_waffleId].extraId = _extraId;
         }
-        uint lastLayerIndex = waffles[waffleId].layersCount - 1;
-        waffles[waffleId].layers[lastLayerIndex].baseId = baseId;
-        waffles[waffleId].layers[lastLayerIndex].toppingId = toppingId;
-        waffles[waffleId].processEnd = block.timestamp + CUSTOMIZE_DURATION;
-        calculateNextWaffleCustomizationStep(waffleId);
+        uint lastLayerIndex = waffles[_waffleId].layersCount - 1;
+        waffles[_waffleId].layers[lastLayerIndex].baseId = _baseId;
+        waffles[_waffleId].layers[lastLayerIndex].toppingId = _toppingId;
+        waffles[_waffleId].processEnd = block.timestamp + CUSTOMIZE_DURATION;
+        calculateNextWaffleCustomizationStep(_waffleId);
     }
 
-    function advanceWaffleCustomizationStep(uint waffleId) external competitionIsOngoing waffleExists(waffleId) senderOwnsWaffle(true, waffleId) waffleIsPublished(false, waffleId)  {
-        require(waffles[waffleId].customizationStep < CustomizationStep.DONE, 'All customization steps done');
-        uint stepNumber = uint(waffles[waffleId].customizationStep);
-        uint processStart = waffles[waffleId].processEnd - CUSTOMIZE_DURATION;
+    function advanceWaffleCustomizationStep(uint _waffleId)
+        external
+        competitionIsOngoing
+        waffleExists(_waffleId)
+        senderOwnsWaffle(true, _waffleId)
+        waffleIsPublished(false, _waffleId)
+    {
+        require(waffles[_waffleId].customizationStep < CustomizationStep.DONE, 'All customization steps done');
+        uint stepNumber = uint(waffles[_waffleId].customizationStep);
+        uint processStart = waffles[_waffleId].processEnd - CUSTOMIZE_DURATION;
         uint customizationWindowEnd = processStart + CUSTOMIZATION_STEP_WINDOWS[stepNumber];
         uint customizationWindowStart = customizationWindowEnd - CUSTOMIZATION_STEP_WINDOW_DURATION;
         require(block.timestamp > customizationWindowStart, 'Not within the customization window');
         require(block.timestamp < customizationWindowEnd, 'Waffle burned');
 
-        calculateNextWaffleCustomizationStep(waffleId);
+        calculateNextWaffleCustomizationStep(_waffleId);
     }
 
     /**
     *   Makes a waffle available for voting and blocks further customization
     **/
-    function publishWaffle(uint waffleId) external competitionIsOngoing waffleExists(waffleId) senderOwnsWaffle(true, waffleId) waffleIsPublished(false, waffleId) {
-        require(waffles[waffleId].customizationStep == CustomizationStep.DONE, 'At least one layer must be customized');
-        waffles[waffleId].published = true;
-        publishedWaffles.push(waffleId);
-        profiles[msg.sender].publishedWafflesCount++;
+    function publishWaffle(uint _waffleId)
+        external
+        competitionIsOngoing
+        waffleExists(_waffleId)
+        senderOwnsWaffle(true, _waffleId)
+        waffleIsPublished(false, _waffleId)
+        waffleIsBeingProcessed(false, _waffleId)
+    {
+        require(waffles[_waffleId].customizationStep == CustomizationStep.DONE, 'At least one layer must be customized');
+        waffles[_waffleId].published = true;
+        publishedWaffles.push(_waffleId);
+        profiles[msg.sender].canVote = true;
     }
 
     /**
@@ -202,13 +246,19 @@ contract WaffleMaker {
     *
     *   No more than MAX_VOTES_PER_ACCOUNT votes can be cast per account.
     **/
-    function voteWaffle(uint waffleId) external competitionIsOngoing waffleExists(waffleId) senderOwnsWaffle(false, waffleId) waffleIsPublished(true, waffleId) {
-        require(profiles[msg.sender].publishedWafflesCount > 0, "Must have published at least one waffle to vote");
+    function voteWaffle(uint _waffleId)
+        external
+        competitionIsOngoing
+        waffleExists(_waffleId)
+        senderOwnsWaffle(false, _waffleId)
+        waffleIsPublished(true, _waffleId)
+    {
+        require(profiles[msg.sender].canVote, "Must have published at least one waffle to vote");
         require(profiles[msg.sender].votedWafflesCount < MAX_VOTES_PER_ACCOUNT, "Max votes on this account exceeded");
-        require(!accountHasVotedOnWaffle(msg.sender, waffleId), "Can't vote for the same waffle twice");
+        require(!addressHasVotedOnWaffle(msg.sender, _waffleId), "Can't vote for the same waffle twice");
 
-        waffles[waffleId].votes++;
-        profiles[msg.sender].votedWaffles[profiles[msg.sender].votedWafflesCount++] = waffleId;
+        waffles[_waffleId].votes++;
+        profiles[msg.sender].votedWaffles[profiles[msg.sender].votedWafflesCount++] = _waffleId;
     }
 
     /**
@@ -227,11 +277,57 @@ contract WaffleMaker {
     /**
     *   Returns the data of the waffle associated to a waffle id
     **/
-    function getWaffleInfo(uint waffleId) external view waffleExists(waffleId) returns (address owner, string memory name, string memory description, uint votes, uint extraId, uint plateId, uint processEnd, bool published, CustomizationStep customizationStep, WaffleLayer[] memory layers)  {
-        Waffle memory waffle = waffles[waffleId];
+    function getWaffleInfo(uint _waffleId)
+        external
+        view
+        waffleExists(_waffleId)
+        returns (
+            address owner,
+            string memory name,
+            string memory description,
+            uint votes,
+            uint extraId,
+            uint plateId,
+            uint processEnd,
+            bool published,
+            CustomizationStep
+            customizationStep,
+            WaffleLayer[] memory layers
+        )
+    {
+        Waffle memory waffle = waffles[_waffleId];
         WaffleLayer[] memory waffleLayers = new WaffleLayer[](waffle.layersCount);
         for (uint i = 0; i < waffle.layersCount; i++) {
-            waffleLayers[i] = waffles[waffleId].layers[i];
+            waffleLayers[i] = waffles[_waffleId].layers[i];
+        }
+        return (waffle.owner, waffle.name, waffle.description, waffle.votes, waffle.extraId, waffle.plateId, waffle.processEnd, waffle.published, waffle.customizationStep, waffleLayers);
+    }
+
+    /**
+    *   Returns the data of the waffle associated to a waffle id
+    **/
+    function getPublishedWaffleInfo(uint _waffleId)
+        external
+        view
+        waffleExists(_waffleId)
+        returns (
+            address owner,
+            string memory name,
+            string memory description,
+            uint votes,
+            uint extraId,
+            uint plateId,
+            uint processEnd,
+            bool published,
+            CustomizationStep
+            customizationStep,
+            WaffleLayer[] memory layers
+        )
+    {
+        Waffle memory waffle = waffles[_waffleId];
+        WaffleLayer[] memory waffleLayers = new WaffleLayer[](waffle.layersCount);
+        for (uint i = 0; i < waffle.layersCount; i++) {
+            waffleLayers[i] = waffles[_waffleId].layers[i];
         }
         return (waffle.owner, waffle.name, waffle.description, waffle.votes, waffle.extraId, waffle.plateId, waffle.processEnd, waffle.published, waffle.customizationStep, waffleLayers);
     }
@@ -239,57 +335,66 @@ contract WaffleMaker {
     /**
     *   Returns the profile data associated to an address
     **/
-    function getProfileInfo(address addr) external view returns (uint[] memory ownedWaffleIds, uint[] memory votedWaffleIds, uint publishedWafflesCount) {
-        uint[] memory profileOwnedWaffles = new uint[](profiles[addr].ownedWafflesCount);
-        for (uint i = 0; i < profiles[addr].ownedWafflesCount; i++) {
-            profileOwnedWaffles[i] = profiles[addr].ownedWaffles[i];
+    function getProfileInfo(address _addr)
+        external
+        view
+        returns (
+            uint[] memory ownedWaffleIds,
+            uint[] memory votedWaffleIds,
+            bool canVote
+        )
+    {
+        uint[] memory profileOwnedWaffles = new uint[](profiles[_addr].ownedWafflesCount);
+        for (uint i = 0; i < profiles[_addr].ownedWafflesCount; i++) {
+            profileOwnedWaffles[i] = profiles[_addr].ownedWaffles[i];
         }
 
-        uint[] memory profileVotedWaffles = new uint[](profiles[addr].votedWafflesCount);
-        for (uint i = 0; i < profiles[addr].votedWafflesCount; i++) {
-            profileVotedWaffles[i] = profiles[addr].votedWaffles[i];
+        uint[] memory profileVotedWaffles = new uint[](profiles[_addr].votedWafflesCount);
+        for (uint i = 0; i < profiles[_addr].votedWafflesCount; i++) {
+            profileVotedWaffles[i] = profiles[_addr].votedWaffles[i];
         }
-        return (profileOwnedWaffles, profileVotedWaffles, profiles[addr].publishedWafflesCount);
+        return (profileOwnedWaffles, profileVotedWaffles, profiles[_addr].canVote);
     }
 
     // ******************** INTERNAL FUNCTIONS ***********************
-    function stringIsNotEmpty(string memory str) internal returns(bool) {
-        bytes memory strBytes = bytes(str);
+    function stringIsNotEmpty(string memory _str) internal returns(bool) {
+        bytes memory strBytes = bytes(_str);
         return strBytes.length > 0;
     }
 
-    function stringSizeLowerOrEqual(string memory str, uint size) internal returns(bool) {
-        bytes memory strBytes = bytes(str);
-        return strBytes.length <= size;
+    function stringSizeLowerOrEqual(string memory _str, uint _size) internal returns(bool) {
+        bytes memory strBytes = bytes(_str);
+        return strBytes.length <= _size;
     }
 
-    function addWaffleLayer(uint waffleId) internal {
-        require(waffles[waffleId].layersCount < MAX_WAFFLE_LAYERS, "You cannot add more layers to this waffle");
-        waffles[waffleId].layers[waffles[waffleId].layersCount++] = WaffleLayer(0,0);
-        waffles[waffleId].customizationStep = CustomizationStep.NOT_CUSTOMIZED;
+    function addWaffleLayer(uint _waffleId) internal {
+        require(waffles[_waffleId].layersCount < MAX_WAFFLE_LAYERS, "You cannot add more layers to this waffle");
+        yfl.transferFrom(address(msg.sender), address(this), CREATE_WAFFLE_YFL_COST);
+        waffles[_waffleId].layers[waffles[_waffleId].layersCount++] = WaffleLayer(0,0);
+        waffles[_waffleId].customizationStep = CustomizationStep.NOT_CUSTOMIZED;
     }
 
-    function waffleCustomizationStepCanBeSkipped(uint waffleId) internal returns(bool) {
-        if (waffles[waffleId].layersCount == 1) {
-            if (waffles[waffleId].customizationStep == CustomizationStep.PLATE && waffles[waffleId].plateId == 0) {
+    function waffleCustomizationStepCanBeSkipped(uint _waffleId) internal returns(bool) {
+        if (waffles[_waffleId].layersCount == 1) {
+            if (waffles[_waffleId].customizationStep == CustomizationStep.PLATE && waffles[_waffleId].plateId == 0) {
                 return true;
-            } else if(waffles[waffleId].customizationStep == CustomizationStep.EXTRA && waffles[waffleId].extraId == 0) {
+            } else if(waffles[_waffleId].customizationStep == CustomizationStep.EXTRA && waffles[_waffleId].extraId == 0) {
                 return true;
-            } else if(waffles[waffleId].customizationStep == CustomizationStep.BASE && waffles[waffleId].layers[waffles[waffleId].layersCount - 1].baseId == 0) {
+            } else if(waffles[_waffleId].customizationStep == CustomizationStep.BASE && waffles[_waffleId].layers[waffles[_waffleId].layersCount - 1].baseId == 0) {
                 return true;
-            } else if(waffles[waffleId].customizationStep == CustomizationStep.TOPPING && waffles[waffleId].layers[waffles[waffleId].layersCount - 1].toppingId == 0) {
+            } else if(waffles[_waffleId].customizationStep == CustomizationStep.TOPPING && waffles[_waffleId].layers[waffles[_waffleId].layersCount - 1].toppingId == 0) {
                 return true;
             } else {
                 return false;
             }
         } else {
-            if (waffles[waffleId].customizationStep == CustomizationStep.PLATE) {
+            if (waffles[_waffleId].customizationStep == CustomizationStep.PLATE) {
                 return true;
-            } else if(waffles[waffleId].customizationStep == CustomizationStep.EXTRA) {
+            } else if(waffles[_waffleId].customizationStep == CustomizationStep.EXTRA) {
                 return true;
-            } else if(waffles[waffleId].customizationStep == CustomizationStep.BASE && waffles[waffleId].layers[waffles[waffleId].layersCount - 1].baseId == 0) {
+            } else if(waffles[_waffleId].customizationStep == CustomizationStep.BASE && waffles[_waffleId].layers[waffles[_waffleId].layersCount - 1].baseId == 0) {
                 return true;
-            } else if(waffles[waffleId].customizationStep == CustomizationStep.TOPPING && waffles[waffleId].layers[waffles[waffleId].layersCount - 1].toppingId == 0) {
+            } else if(waffles[_waffleId].customizationStep == CustomizationStep.TOPPING && waffles[_waffleId].layers[waffles[_waffleId].layersCount - 1].toppingId == 0) {
                 return true;
             } else {
                 return false;
@@ -297,16 +402,16 @@ contract WaffleMaker {
         }
     }
 
-    function calculateNextWaffleCustomizationStep(uint waffleId) internal {
+    function calculateNextWaffleCustomizationStep(uint _waffleId) internal {
         do {
-            uint newStepNumber = uint(waffles[waffleId].customizationStep) + 1;
-            waffles[waffleId].customizationStep = CustomizationStep(newStepNumber);
-        } while (waffleCustomizationStepCanBeSkipped(waffleId));
+            uint newStepNumber = uint(waffles[_waffleId].customizationStep) + 1;
+            waffles[_waffleId].customizationStep = CustomizationStep(newStepNumber);
+        } while (waffleCustomizationStepCanBeSkipped(_waffleId));
     }
 
-    function accountHasVotedOnWaffle(address account, uint waffleId) internal returns(bool) {
-        for (uint i = 0; i < profiles[account].votedWafflesCount; i++) {
-            if (profiles[account].votedWaffles[i] == waffleId) {
+    function addressHasVotedOnWaffle(address _addr, uint _waffleId) internal returns(bool) {
+        for (uint i = 0; i < profiles[_addr].votedWafflesCount; i++) {
+            if (profiles[_addr].votedWaffles[i] == _waffleId) {
                 return true;
             }
         }

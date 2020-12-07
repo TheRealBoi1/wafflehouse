@@ -1,4 +1,5 @@
 import colors from 'vuetify/es5/util/colors'
+import config from './config'
 
 export default {
   /*
@@ -53,9 +54,7 @@ export default {
   buildModules: [
     '@nuxt/typescript-build',
     '@nuxtjs/vuetify',
-    ['@nuxtjs/google-analytics', {
-      id: 'UA-178140091-1'
-    }]
+    '@nuxtjs/dotenv'
   ],
   /*
   ** Nuxt.js modules
@@ -96,6 +95,10 @@ export default {
   ** See https://nuxtjs.org/api/configuration-build/
   */
   build: {
+  },
+
+  env: {
+    ...config
   },
 
   loading: '~/components/Loader'

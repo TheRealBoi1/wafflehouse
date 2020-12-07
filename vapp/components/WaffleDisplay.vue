@@ -69,7 +69,7 @@ import baseList from '~/lists/waffle-bases'
 import toppingList from '~/lists/waffle-toppings'
 import plateList from '~/lists/waffle-plates'
 import extraList from '~/lists/waffle-extras'
-import { WaffleStatus } from '~/interfaces/enums'
+import { WaffleStatus } from '~/enums'
 
 const WH_RATIO = 2.5
 const LAYER_OFFSET = -30
