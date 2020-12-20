@@ -1,6 +1,7 @@
 import { ActionTree } from 'vuex'
 import { AccountsState } from '~/store/accounts/state'
 import { RootState } from '~/store/state'
+import { DialogsState } from '~/store/dialogs/state'
 
 // ************ PAYLOADS *************
 interface DisplayProcessPayload {
@@ -22,7 +23,7 @@ interface SetErrorDataPayload {
 }
 
 // ************ ACTIONS *************
-const actions: ActionTree<AccountsState, RootState> = {
+const actions: ActionTree<DialogsState, RootState> = {
   displayProcess ({ commit }, payload: DisplayProcessPayload) {
     commit('SET_PROCESS_DATA', payload)
   },

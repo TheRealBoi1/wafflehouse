@@ -6,7 +6,7 @@
       </v-row>
       <v-row>
         <v-col cols="12" md="6">
-          <v-card height="450" class="wafflemaker-container" color="#000000AA" tile>
+          <v-card min-height="450" class="wafflemaker-container" color="#000000AA" tile>
             <v-card-title class="vh-center wafflemaker-title waffle-text">
               Wafflemaker 9000
             </v-card-title>
@@ -67,6 +67,7 @@ import { MAX_NAME_LENGTH, MAX_DESCRIPTION_LENGTH } from '~/constants'
 
 export default {
   name: 'Customize',
+  middleware: 'forceHmyWalletConnected',
   components: { SelectField, WaffleDisplay },
   data () {
     return {
@@ -87,7 +88,7 @@ export default {
   },
   computed: {
     viewedWaffleId () {
-      return this.$route.params.id
+      return parseInt(this.$route.params.id)
     },
     modifiedViewedWaffle () {
       const newWaffle = this.viewedWaffle
@@ -144,7 +145,7 @@ export default {
   },
   async mounted () {
     if (this.viewedWaffleId != null) {
-      await Waffle.dispatch('setupCachedCalls', [this.viewedWaffleId])
+      await Waffle.dispatch('loadWaffles', [this.viewedWaffleId])
       this.viewedWaffle = Waffle.getters('getWafflebyId')(this.viewedWaffleId)
 
       this.loading = false

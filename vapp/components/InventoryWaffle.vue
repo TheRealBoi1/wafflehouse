@@ -17,7 +17,14 @@
             </v-row>
           </v-col>
           <v-col cols="12" md="4" class="px-5 vh-center">
-            <v-btn class="add-ingredient-button" :disabled="!waffle.isActionRequired(now)" width="80%" height="125" @click="advanceWaffleCustomizationStep(waffle.id)">
+            <v-btn
+              v-if="showAddIngredientButton"
+              class="add-ingredient-button"
+              :disabled="!waffle.isActionRequired(now)"
+              width="80%"
+              height="125"
+              @click="advanceWaffleCustomizationStep(waffle.id)"
+            >
               <v-col>
                 <v-row class="vh-center waffle-text mb-5">
                   <h1>
@@ -70,39 +77,26 @@
         </v-row>
         <v-row v-if="waffle.status(now) !== WaffleStatus.Burned && !waffle.published" class="px-5">
           <v-col cols="6" class="ma-0 pa-0">
-            <v-tooltip top transition="fade-transition">
-              <template v-slot:activator="{ on }">
-                <v-card
-                  :to="`/waffles/${waffle.id}/customize`"
-                  width="100%"
-                  height="65"
-                  flat
-                  class="vh-center waffle-text option-button left"
-                  v-on="on"
-                >
-                  Customize
-                </v-card>
-              </template>
-              <span>This waffle's top layer has already been customized</span>
-            </v-tooltip>
+            <v-card
+              width="100%"
+              height="65"
+              flat
+              class="vh-center waffle-text option-button left"
+              @click="customizeWaffle(waffle.id)"
+            >
+              Customize
+            </v-card>
           </v-col>
           <v-col cols="6" class="ma-0 pa-0">
-            <v-tooltip top transition="fade-transition">
-              <template v-slot:activator="{ on }">
-                <v-card
-                  :disabled="waffle.maxLayersReached"
-                  width="100%"
-                  height="65"
-                  flat
-                  class="vh-center waffle-text option-button right"
-                  @click="bakeWaffleLayer(waffle.id)"
-                  v-on="on"
-                >
-                  Add Layer
-                </v-card>
-              </template>
-              <span>Top layer must be customized before adding a new one</span>
-            </v-tooltip>
+            <v-card
+              width="100%"
+              height="65"
+              flat
+              class="vh-center waffle-text option-button right"
+              @click="bakeWaffleLayer(waffle.id)"
+            >
+              Add Layer
+            </v-card>
           </v-col>
         </v-row>
       </v-col>
@@ -141,9 +135,9 @@
 <script lang="ts">
 import { mapGetters } from 'vuex'
 import CountdownTimer from '~/components/helper/CountdownTimer'
+import { CustomizationStep, WaffleStatus } from '~/enums'
 import Waffle from '~/database/Waffle'
 import WaffleDisplay from '~/components/WaffleDisplay'
-import { WaffleStatus } from '~/enums'
 
 export default {
   name: 'InventoryWaffle',
@@ -162,27 +156,31 @@ export default {
   computed: {
     ...mapGetters({
       now: 'getNow'
-    })
+    }),
+
+    showAddIngredientButton () {
+      return this.waffle.customizationStep > CustomizationStep.NOT_CUSTOMIZED && this.waffle.customizationStep < CustomizationStep.DONE
+    }
   },
   methods: {
     publishWaffle (waffleId) {
-      this.$store.dispatch('dialogs/displayConfirmation', {
-        title: 'Publish this waffle?',
-        body: 'Your waffle will be open for voting, but you will no longer be able to do customize it further.',
-        affirmativeAction: () => {
-          Waffle.dispatch('publishWaffle', waffleId)
-        },
-        affirmativeLabel: 'Publish Waffle'
-      })
+      Waffle.dispatch('publishWaffleFlow', waffleId)
     },
     bakeWaffleLayer (waffleId) {
-      Waffle.dispatch('bakeWaffleLayer', waffleId)
+      Waffle.dispatch('bakeWaffleLayerFlow', waffleId)
     },
     advanceWaffleCustomizationStep (waffleId) {
       Waffle.dispatch('advanceWaffleCustomizationStep', waffleId)
     },
     customizeWaffle (waffleId) {
-      this.$router.push(`/waffle/${waffleId}/customize`)
+      if (this.waffle.customizationStep === CustomizationStep.NOT_CUSTOMIZED) {
+        this.$router.push(`/waffles/${waffleId}/customize`)
+      } else {
+        this.$store.dispatch('dialogs/displayError', {
+          title: 'Cannot Customize Waffle',
+          body: 'The top layer of your waffle is already customized'
+        })
+      }
     }
   }
 }

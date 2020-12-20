@@ -90,5 +90,5 @@ sw.*
 # Vim swap files
 *.swp
 
-# Truffle artifacts
-artifacts
+# Truffle compiled abis
+contracts

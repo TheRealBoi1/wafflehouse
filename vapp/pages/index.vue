@@ -23,10 +23,62 @@
     <v-row class="vh-center mb-10">
       <span class="mx-2">Time Left:</span><countdown-timer :end-timestamp="competitionEndTimestamp" />
     </v-row>
-    <v-row v-if="$vuetify.breakpoint.mdAndUp" class="waffle-text recent-waffles-label vh-center mt-12">
-      Recent Waffles
-    </v-row>
-    <!-- <recent-waffles-display /> -->
+
+    <template v-if="$vuetify.breakpoint.mdAndUp">
+      <v-row class="waffle-text vh-center">
+        <h1>
+          Recent Waffles
+        </h1>
+      </v-row>
+      <v-row class="waffle-text vh-center">
+        <v-col class="ma-0 pa-0">
+          <v-row class="recent-waffles-displays">
+            <v-container>
+              <v-row>
+                <v-col v-for="(waffle, index) in displayedWaffles" :key="index" cols="4" class="v-bottom-h-center">
+                  <waffle-display :waffle="waffle" />
+                </v-col>
+              </v-row>
+            </v-container>
+          </v-row>
+          <v-row class="recent-waffles-info">
+            <v-container>
+              <v-row>
+                <v-col v-for="(waffle, index) in displayedWaffles" :key="index" cols="4">
+                  <v-row class="vh-center waffle-text-border-black">
+                    <h1>
+                      {{ waffle.name }}
+                    </h1>
+                  </v-row>
+                  <v-row class="vh-center">
+                    <h2>
+                      Price: $4.12
+                    </h2>
+                  </v-row>
+                  <v-row class="mx-2">
+                    <v-col cols="6" class="vh-center ma-0 pa-2">
+                      <v-btn width="100%" height="65" class="vh-center text-center action-button" @click="viewWaffle(waffle.id)">
+                        <h2>
+                          View
+                        </h2>
+                      </v-btn>
+                    </v-col>
+                    <v-col cols="6" class="vh-center ma-0 pa-2">
+                      <v-btn width="100%" height="65" class="vh-center text-center action-button" @click="voteWaffle(waffle.id)">
+                        <h2>
+                          Vote
+                        </h2>
+                      </v-btn>
+                    </v-col>
+                  </v-row>
+                </v-col>
+              </v-row>
+            </v-container>
+          </v-row>
+        </v-col>
+      </v-row>
+    </template>
+
     <v-row class="faq-title-container waffle-text vh-center py-5">
       FAQ
     </v-row>
@@ -168,29 +220,68 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex'
+import { mapGetters } from 'vuex'
+import Waffle from '~/database/Waffle'
 import CountdownTimer from '~/components/helper/CountdownTimer'
+
+const SHOWN_WAFFLES_COUNT = 3
 
 export default {
   name: 'Index',
   components: {
     CountdownTimer
   },
+  data () {
+    return {
+      displayedWaffleIds: []
+    }
+  },
   computed: {
+    ...mapGetters('accounts', {
+      canVote: 'getCanVote',
+      votedWaffleIds: 'getVotedWaffleIds'
+    }),
     ...mapGetters('competition', {
       onePrize: 'getOnePrize',
       yflPrize: 'getYflPrize',
-      prizeValue: 'getPrizeValue',
-      competitionEndTimestamp: 'getCompetitionEndTimestamp'
-    })
+      competitionEndTimestamp: 'getCompetitionEndTimestamp',
+      publishedWafflesCount: 'getPublishedWafflesCount'
+    }),
+
+    displayedWaffles () {
+      return Waffle.getters('getWafflesbyIds')(this.displayedWaffleIds)
+    }
   },
   async mounted () {
-    this.$nuxt.$loading.start()
-    await this.loadCompetitionData()
-    this.$nuxt.$loading.finish()
+    if (this.$nuxt.$loading.start) {
+      this.$nuxt.$loading.start()
+    }
+    await this.$store.dispatch('competition/loadCompetitionData')
+    await this.loadRecentWaffles()
+    if (this.$nuxt.$loading.finish) {
+      this.$nuxt.$loading.finish()
+    }
   },
   methods: {
-    ...mapActions('competition', ['loadCompetitionData'])
+    async loadRecentWaffles () {
+      const waffleCount = Math.min(this.publishedWafflesCount, SHOWN_WAFFLES_COUNT)
+      const publishedWaffleIndices = []
+      for (let i = 1; i <= waffleCount; i++) {
+        publishedWaffleIndices.push(this.publishedWafflesCount - i)
+      }
+      this.displayedWaffleIds = await Waffle.dispatch('loadPublishedWaffles', publishedWaffleIndices)
+    },
+
+    viewWaffle (waffleId) {
+      this.$nuxt.$router.push({
+        query: {
+          view: waffleId
+        }
+      })
+    },
+    voteWaffle (waffleId) {
+      Waffle.dispatch('voteWaffleFlow', waffleId)
+    }
   }
 }
 </script>
@@ -215,8 +306,22 @@ export default {
     line-height: 45px !important;
   }
 
-  .recent-waffles-label {
-    font-size: 35px;
+  .recent-waffles-display {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .recent-waffles-displays {
+    background-color: #405875;
+    border-top: 3px black solid;
+  }
+  .recent-waffles-info {
+    background-color: #2C3A42;
+  }
+  .action-button {
+    border-radius: 50px;
+    border: 3px solid white;
   }
 
   .faq-title-container {

@@ -1,4 +1,4 @@
-# Wafflehouse frontend
+# Wafflehouse Frontend
 
 ## Build Setup
 

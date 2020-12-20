@@ -1,12 +1,13 @@
 <template>
   <v-app dark class="app-container">
-    <connect-dialog :value="!showApp" />
+    <requirements-dialog :value="!showApp" />
     <template v-if="showApp">
+      <waffle-viewer-dialog />
       <processing-dialog />
       <confirm-dialog />
       <error-dialog />
-      <toolbar :hide="hideNav" />
-      <v-main class="page-wrapper" :class="{'collapsed': hideNav}">
+      <toolbar />
+      <v-main class="page-wrapper">
         <nuxt />
       </v-main>
     </template>
@@ -15,8 +16,10 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import WaffleViewerDialog from '../components/dialogs/WaffleViewerDialog'
+import hmyWallet from '~/wallets/hmy'
 
-import ConnectDialog from '~/components/dialogs/ConnectDialog'
+import RequirementsDialog from '~/components/dialogs/RequirementsDialog'
 import ProcessingDialog from '~/components/dialogs/ProcessingDialog'
 import ConfirmDialog from '~/components/dialogs/ConfirmDialog'
 import ErrorDialog from '~/components/dialogs/ErrorDialog'
@@ -25,8 +28,9 @@ import Toolbar from '~/components/layout/toolbar/Toolbar'
 export default {
   name: 'Default',
   components: {
+    WaffleViewerDialog,
     ErrorDialog,
-    ConnectDialog,
+    RequirementsDialog,
     ProcessingDialog,
     ConfirmDialog,
     Toolbar
@@ -35,13 +39,12 @@ export default {
     ...mapGetters('accounts', ['isAccountActive']),
     ...mapGetters(['isDataLoading']),
 
-    hideNav () {
-      return this.$route.matched.map((r) => {
-        return (r.components.default.component ? r.components.default.options.hideNav : r.components.default.component.options.hideNav)
-      })[0]
+    isMobile () {
+      return this.$vuetify.breakpoint.smAndDown
     },
+
     showApp () {
-      return this.isAccountActive && !this.isDataLoading
+      return hmyWallet != null
     }
   }
 }
@@ -58,12 +61,6 @@ export default {
 
   .page-wrapper {
     width: 100%;
-    margin-top: 200px;
-    transition: margin-top .25s;
-  }
-
-  .page-wrapper.collapsed {
-    margin-top: 0px;
     transition: margin-top .25s;
   }
 

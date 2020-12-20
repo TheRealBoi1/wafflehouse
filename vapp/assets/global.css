@@ -38,6 +38,12 @@
     3px  3px 0 #00A3FF;
 }
 
+.v-bottom-h-center {
+  display: flex !important;
+  justify-content: center;
+  align-items: flex-end;
+}
+
 .vh-center {
   display: flex !important;
   justify-content: center;

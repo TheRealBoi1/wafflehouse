@@ -1,3 +1,16 @@
+export enum WalletType {
+  ONE,
+  MATH
+}
+
+export enum Environment {
+  Unknown = 'Unknown',
+  WindowsPhone = 'WindowsPhone',
+  Ios = 'Ios',
+  Android = 'Android',
+  Chromium = 'Chromium'
+}
+
 export enum DialogType {
   Closed,
   Process,

@@ -4,21 +4,17 @@
     :height="containerHeight"
     color="transparent"
     class="waffle-container"
-    :class="{'viewable': viewable}"
+    :class="{'expandable': expandable}"
     flat
     tile
+    @mouseleave="mouseLeave"
+    @mouseover="mouseEnter"
   >
-    <div v-if="viewable" style="position: absolute;" class="vh-center fill-both view-text waffle-text-border-black" @click="viewWaffle">
-      <span>
-        View
-      </span>
-    </div>
     <v-img
       :src="plate.image"
       :width="width"
       :height="height"
       contain
-      :style="waffleStyle(0)"
       class="waffle-plate vh-center"
       aspect-ratio="2.5"
     >
@@ -77,11 +73,6 @@ const EXPANDED_MULTIPLIER = 2.3
 
 export default {
   name: 'WaffleDisplay',
-  data () {
-    return {
-      WaffleStatus
-    }
-  },
   props: {
     waffle: {
       type: Waffle as Object,
@@ -92,11 +83,7 @@ export default {
       default: 300
     },
 
-    viewable: {
-      type: Boolean,
-      default: false
-    },
-    expanded: {
+    expandable: {
       type: Boolean,
       default: false
     },
@@ -112,6 +99,12 @@ export default {
     plateId: {
       type: Number,
       default: null
+    }
+  },
+  data () {
+    return {
+      expanded: false,
+      WaffleStatus
     }
   },
   computed: {
@@ -155,7 +148,7 @@ export default {
     waffleStyle () {
       return (index) => {
         const translateValueCalc = this.expanded ? LAYER_OFFSET * EXPANDED_MULTIPLIER : LAYER_OFFSET
-        const translateValueY = index * translateValueCalc
+        const translateValueY = index * translateValueCalc + 15
         return {
           transform: `translateY(${translateValueY}%)`,
           'z-index': index
@@ -164,10 +157,13 @@ export default {
     }
   },
   methods: {
-    viewWaffle () {
-      if (this.viewable) {
-        this.$nuxt.$router.push({ path: `/waffles/${this.waffle.id}` })
+    mouseEnter () {
+      if (this.expandable) {
+        this.expanded = true
       }
+    },
+    mouseLeave () {
+      this.expanded = false
     }
   }
 }
@@ -179,24 +175,8 @@ export default {
     user-select: none;
   }
 
-  .viewable {
+  .expandable {
     cursor: pointer;
-  }
-
-  .viewable:hover {
-    filter: drop-shadow(0px 0px 10px #ffdd00);
-  }
-
-  .viewable:hover .waffle-item {
-    filter: grayscale(100%);
-  }
-
-  .viewable:hover .waffle-plate {
-    filter: grayscale(100%);
-  }
-
-  .viewable:hover .waffle {
-    filter: grayscale(100%);
   }
 
   .view-text {
@@ -205,10 +185,6 @@ export default {
     transform: translateX(-5%);
     opacity: 0;
     z-index: 100;
-  }
-
-  .viewable:hover .view-text {
-    opacity: 1;
   }
 
   .waffle {

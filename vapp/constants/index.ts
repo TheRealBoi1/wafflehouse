@@ -1,3 +1,4 @@
+export const MAX_VOTES_PER_ACCOUNT = 3
 export const MAX_NAME_LENGTH = 20
 export const MAX_DESCRIPTION_LENGTH = 75
 export const MAX_WAFFLE_LAYERS = 5

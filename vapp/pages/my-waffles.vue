@@ -40,6 +40,9 @@
         <v-row class="vh-center mt-5">
           Tip: You can bake multiple waffles at once
         </v-row>
+        <v-row>
+          <v-checkbox v-model="hideBurnedWaffles" label="Hide Burned Waffles" />
+        </v-row>
       </v-col>
     </v-row>
     <v-row v-else>
@@ -82,9 +85,10 @@ export default {
   components: {
     InventoryWaffle
   },
-  middleware: 'loadAccountWaffles',
+  middleware: 'forceHmyWalletConnected',
   data () {
     return {
+      hideBurnedWaffles: false,
       WaffleStatus
     }
   },
@@ -93,21 +97,29 @@ export default {
       now: 'getNow'
     }),
     accountWaffles () {
-      return Waffle.getters('getActiveAccountWaffles')
+      const waffles = Waffle.getters('getActiveAccountWaffles')
+      if (this.hideBurnedWaffles) {
+        return waffles.filter((waffle) => {
+          return waffle.status(this.now) !== WaffleStatus.Burned
+        })
+      } else {
+        return waffles
+      }
     }
   },
-  methods: {
-    publishWaffle (waffleId) {
-      Waffle.dispatch('publishWaffle', waffleId)
-    },
-    bakeWaffleLayer (waffleId) {
-      Waffle.dispatch('bakeWaffleLayer', waffleId)
-    },
-    advanceWaffleCustomizationStep (waffleId) {
-      Waffle.dispatch('advanceWaffleCustomizationStep', waffleId)
-    },
-    customizeWaffle (waffleId) {
-      this.$router.push(`/waffle/${waffleId}/customize`)
+  watch: {
+    hideBurnedWaffles (value) {
+      localStorage.hideBurnedWaffles = value
+    }
+  },
+  async mounted () {
+    this.hideBurnedWaffles = localStorage.hideBurnedWaffles
+    if (this.$nuxt.$loading.start) {
+      this.$nuxt.$loading.start()
+    }
+    await Waffle.dispatch('loadAccountWaffles')
+    if (this.$nuxt.$loading.finish) {
+      this.$nuxt.$loading.finish()
     }
   }
 }

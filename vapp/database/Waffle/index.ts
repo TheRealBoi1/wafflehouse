@@ -39,9 +39,7 @@ export default class Waffle extends Model {
       processEnd: this.number(0),
       customizationStep: this.number(0),
 
-      layers: this.hasMany(WaffleLayer, 'waffleId'),
-
-      dataKey: this.string(null)
+      layers: this.hasMany(WaffleLayer, 'waffleId')
     }
   }
 

@@ -34,12 +34,15 @@
               Ready? Let’s get started.
             </p>
           </v-row>
-          <v-row>
+          <v-row class="text-center vh-center">
             <v-btn width="100%" height="50" outlined tile @click="createWaffle">
               <h2>
                 Create Waffle
               </h2>
             </v-btn>
+            <h4 class="mt-2">
+              Cost: 0.0005 YFL
+            </h4>
           </v-row>
         </v-col>
       </v-row>
@@ -53,6 +56,7 @@ import Waffle from '~/database/Waffle'
 
 export default {
   name: 'Create',
+  middleware: 'forceHmyWalletConnected',
   computed: {
     ...mapGetters('accounts', {
       ownedWaffleIds: 'getOwnedWaffleIds'

@@ -7,14 +7,11 @@
     "test": "test"
   },
   "scripts": {
+    "apply-registry": "apply-registry -i build/contracts -o vapp/contracts -n networks",
+    "compile": "truffle compile && npm run apply-registry",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": {
-    "name": "Amal Sudama",
-    "email": "amal@trufflesuite.com",
-    "url": "http://github.com/truffle-box/drizzle-vue-box"
-  },
   "license": "ISC",
   "dependencies": {
     "@harmony-js/core": "^0.1.56",
@@ -22,5 +19,8 @@
     "@openzeppelin/contracts": "^3.2.0",
     "dotenv": "^8.2.0",
     "tslib": "^2.0.3"
+  },
+  "devDependencies": {
+    "truffle-deploy-registry": "^0.5.1"
   }
 }

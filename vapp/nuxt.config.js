@@ -41,7 +41,10 @@ export default {
   ** https://nuxtjs.org/guide/plugins
   */
   plugins: [
-    '~/plugins/web3'
+    '~/plugins/injectWeb3Modal',
+    '~/plugins/injectWeb3',
+    '~/plugins/injectContracts',
+    '~/plugins/setupRefreshes'
   ],
   /*
   ** Auto import components

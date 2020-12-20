@@ -1,5 +1,5 @@
 <template>
-  <div class="vh-center toolbar" :class="{'hidden': hide}">
+  <div class="vh-center">
     <v-card width="100%" class="vh-center" tile color="transparent">
       <v-col class="pa-0 ma-0">
         <v-row class="vh-center button-container-background">
@@ -45,19 +45,6 @@ export default {
 </script>
 
 <style scoped>
-  .toolbar {
-    position: absolute;
-    width: 100%;
-    height: 200px;
-    top: 0;
-    transition: top .25s;
-  }
-
-  .toolbar.hidden {
-    top: -200px;
-    transition: top .25s;
-  }
-
   .button-container-background {
     background: url(../../../static/top-bar-background.png) repeat;
   }
